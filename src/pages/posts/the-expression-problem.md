@@ -1,59 +1,13 @@
 ---
+layout: "../../layouts/BlogLayout.astro"
 title: 'The Expression Problem'
-pubDate: 2023-02-04
+publishedDate: 2023-02-04
 description: 'An explanation on what the expression problem is, how to solve it, and how to not solve it'
 author: 'Daniel Velasquez'
 tags: ["Design Patterns", "Clojure", "Multiple Dispatch"]
 ---
 
-# Table of Contents
-
-1.  [The expression problem](#orgc3d6119)
-2.  [Terminology](#org6b0eb24)
-    1.  [Behavior](#org555a4eb)
-    2.  [Representation](#orgc1064c9)
-3.  [Example](#orgf922782)
-4.  [Non-Solutions](#orge63723b)
-    1.  [Using Sum Types in a Functional Language](#org73a23b4)
-        1.  [Base Package](#org461a63a)
-        2.  [Extending Behaviors](#orgfadf235)
-        3.  [Extending Representations](#org59d2177)
-        4.  [Evaluation](#orgef64b76)
-    2.  [Using Classes and Methods in an Object Oriented Language](#orgaa602c1)
-        1.  [Base Package](#org324aca2)
-        2.  [Extending Representations](#orgd6b3fb1)
-        3.  [Extending Behaviors](#org90291e0)
-        4.  [Evaluation](#orgaafc614)
-    3.  [Using Dynamic Type Checking in an Object Oriented Language](#org39e49dc)
-        1.  [Base Package](#orgfe7b69c)
-        2.  [Extending Behaviors](#orgd6a657d)
-        3.  [Extending Representations](#org4cf3203)
-        4.  [Evaluation](#org1bf953c)
-    4.  [The Visitor Pattern](#org93657a8)
-        1.  [Base Package](#orgffb9781)
-        2.  [Extending Behaviors](#org212f864)
-        3.  [Extending Representations](#orgeab2d79)
-        4.  [Evaluation](#org68f6729)
-        5.  [Re-visiting Extending Representations in The Visitor Pattern By Using Inheritance](#org330402c)
-        6.  [Evaluation](#org53b5bcd)
-    5.  [Multimethods in Clojure](#org477b3c1)
-        1.  [Base Package](#org99bca7b)
-        2.  [Extending Behaviors](#orgf9eb6ea)
-        3.  [Extending Representations](#orgb82b153)
-        4.  [Evaluation](#org2ea3ea6)
-    6.  [Protocols in Clojure](#org8719cab)
-        1.  [Base Package](#org1329bae)
-        2.  [Extending Behaviors](#orgb07c928)
-        3.  [Extending Representations](#orgf215b6c)
-        4.  [Evaluation](#orge9a44ff)
-5.  [Q+A with myself as I studied this topic](#orgc12fc47)
-6.  [Sources](#org111bbd8)
-
-
-
 <a id="orgc3d6119"></a>
-
-# The expression problem
 
 The expression problem is a design-pattern problem in Computer Science. A computer scientist named this issue after the subject matter in which they experienced it: they were trying to parse or evaluate expressions. Suppose there is a base package of representations. And suppose that these representations will be imported by downstream packages. The goal is to define the base package in such a way that downstream packages can extend the base package with both new behaviors and representations, without necessitating any modifications to the source of the base package, while using static types and without using separate compilation.
 
