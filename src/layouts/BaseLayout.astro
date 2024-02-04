@@ -1,6 +1,6 @@
 ---
 import Nav from '../components/Nav.astro';
-import '@fontsource-variable/rubik';
+import '@fontsource-variable/lora';
 
 interface Props {
 	title: string;
@@ -19,7 +19,7 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
     <title>{title}</title>
 	</head>
-	<body>
+	<body class="font-serif">
     <Nav />
 		<slot />
 	</body>
