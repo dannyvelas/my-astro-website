@@ -13,6 +13,7 @@
     "@astrojs/check": "^0.4.1",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource-variable/asap": "^5.0.19",
+    "@fontsource-variable/rubik": "^5.0.20",
     "@fontsource/corben": "^5.0.18",
     "@fontsource/dekko": "^5.0.18",
     "@fontsource/neuton": "^5.0.18",

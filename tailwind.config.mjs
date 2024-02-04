@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Asap Variable"', ...defaultTheme.fontFamily.sans],
+        sans: ['"Rubik Variable"', ...defaultTheme.fontFamily.sans],
       },
     },
   },
