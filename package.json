@@ -12,7 +12,13 @@
   "dependencies": {
     "@astrojs/check": "^0.4.1",
     "@astrojs/tailwind": "^5.1.0",
+    "@fontsource-variable/asap": "^5.0.19",
+    "@fontsource/corben": "^5.0.18",
+    "@fontsource/dekko": "^5.0.18",
     "@fontsource/neuton": "^5.0.18",
+    "@fontsource/rosarivo": "^5.0.18",
+    "@fontsource/salsa": "^5.0.18",
+    "@fontsource/varela-round": "^5.0.8",
     "astro": "^4.2.6",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"

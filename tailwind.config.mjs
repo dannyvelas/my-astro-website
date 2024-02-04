@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["Neuton", ...defaultTheme.fontFamily.serif]
+        sans: ['"Asap Variable"', ...defaultTheme.fontFamily.sans],
       },
     },
   },
