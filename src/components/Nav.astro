@@ -1,9 +1,14 @@
-<nav class="bg-neutral-200 py-4 px-2 sm:px-12">
+---
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1);
+---
+
+<nav class="py-4 px-2 sm:px-12 shadow-md">
     <div class="flex flex-row justify-between">
-      <a href="/">Danny Velasquez's Website</a>
+      <a class="font-bold" href="/">Danny Velasquez's Website</a>
       <div class="flex flex-row gap-4 text-center">
-        <a href="/about">About</a>
-        <a href="https://github.com/dannyvelas">Github</a>
+        <a class:list={["font-bold", (currentPath === "about") ? "text-slate-900": "text-slate-400"]} href="/about">About</a>
+        <a class="font-bold text-slate-400" href="https://github.com/dannyvelas">Github</a>
       </div>
     </div>
 </nav>
