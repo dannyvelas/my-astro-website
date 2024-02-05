@@ -7,33 +7,28 @@ author: 'Daniel Velasquez'
 tags: ["Design Patterns", "Clojure", "Multiple Dispatch"]
 ---
 
-<a id="orgc3d6119"></a>
 
 The expression problem is a design-pattern problem in Computer Science. A computer scientist named this issue after the subject matter in which they experienced it: they were trying to parse or evaluate expressions. Suppose there is a base package of representations. And suppose that these representations will be imported by downstream packages. The goal is to define the base package in such a way that downstream packages can extend the base package with both new behaviors and representations, without necessitating any modifications to the source of the base package, while using static types and without using separate compilation.
 
 
-<a id="org6b0eb24"></a>
 
 # Terminology
 
 For a reader to fully grasp this definition, they would need to fully understand the definition of the words "behavior" and "representation."
 
 
-<a id="org555a4eb"></a>
 
 ## Behavior
 
 By "behavior," I mean a unit of logic that takes input and returns some output. Usually a unit of logic is called a "function". However, a unit of logic could also be, for example, one branch of a "switch" statement. Of course, "unit" here is very vaguely defined. For now, we can satisfy ourselves with the idea that a "unit" can be anywhere from one line of code to thousands, such that the start of the unit takes in some form of input. And the end of the unit returns some form of output. Again, "input" and "output" here are very vague. "Input" can refer to one or more variables in scope, that are used inside of a unit of logic, or an argument, in the case that the unit of code is a function. "Output" can refer to the last variable (or variables) that are set at the end of a unit of logic, or a return value, in the case that the unit of code is a function. 
 
 
-<a id="orgc1064c9"></a>
 
 ## Representation
 
 By "Representation," I mean a collection of behaviors that conceptually represent an entity. In object-oriented languages, this is usually referred to as a "class", and each behavior is referred to as a "method." In functional programs, this is usually a module, which has several related functions that have some conceptual similarity.
 
 
-<a id="orgf922782"></a>
 
 # Example
 
@@ -108,19 +103,16 @@ We will show many different approaches to modeling this problem. Some approaches
 4.  Does this solution require separate compilation?
 
 
-<a id="orge63723b"></a>
 
 # Non-Solutions
 
 
-<a id="org73a23b4"></a>
 
 ## Using Sum Types in a Functional Language
 
 For our first approach we will model this problem using a functional language using sum types. We will see at the end if this approach satisfies all four criteria of solving the expression problem.
 
 
-<a id="org461a63a"></a>
 
 ### Base Package
 
@@ -147,7 +139,6 @@ Per this approach, the natural next step would be to use pattern matching functi
     | Spreadsheet -> ;; spreadsheet save behavior
 
 
-<a id="orgfadf235"></a>
 
 ### Extending Behaviors
 
@@ -171,14 +162,12 @@ Now that we've established an idea of the base package looks like, let's see how
 With this approach, our new package, which imports the base package, adds new behaviors to the base package. And, no new modifications to the base package were required.
 
 
-<a id="org59d2177"></a>
 
 ### Extending Representations
 
 With this simple and idiomatic approach we've taken, if we wanted to add a new mode type, like "Picture", our approach would require us to modify the base package. This is because the simplest way to add a new representation of the "Picture" mode would be to add a new "Picture" branch to the "mode" type. Once we add this branch, we would also need to modify all of the pattern matching functions of the base package. This is because the "load", "edit", and "save" functions won't compile if their pattern matching expression is not exhaustive of all of the mode types. So, we would need to add one new "Picture" branch to each of those functions as well.
 
 
-<a id="orgef64b76"></a>
 
 ### Evaluation
 
@@ -233,14 +222,12 @@ In this approach, it was very easy to add columns to the table (behaviors) witho
 </table>
 
 
-<a id="orgaa602c1"></a>
 
 ## Using Classes and Methods in an Object Oriented Language
 
 Now, lets model our problem using classes and methods in an object oriented language and see how many criteria this approach passes.
 
 
-<a id="org324aca2"></a>
 
 ### Base Package
 
@@ -263,7 +250,6 @@ In an object oriented language, if we used classes and methods to represent mode
     }
 
 
-<a id="orgd6b3fb1"></a>
 
 ### Extending Representations
 
@@ -286,7 +272,6 @@ This abstraction makes it very easy to add new mode representations, without mod
     }
 
 
-<a id="org90291e0"></a>
 
 ### Extending Behaviors
 
@@ -295,7 +280,6 @@ With this approach, it is very difficult to add a new behavior, like "export", t
 This approach would require us to add a new "export" method to the "Prose/Whiteboard/Spreadsheet" classes. It's impossible to add a new method to these classes in a statically-typed way without editing the files where these classes are defined.
 
 
-<a id="orgaafc614"></a>
 
 ### Evaluation
 
@@ -350,7 +334,6 @@ In this approach, it was very easy to add rows to the table without modifying th
 </table>
 
 
-<a id="org39e49dc"></a>
 
 ## Using Dynamic Type Checking in an Object Oriented Language
 
@@ -359,7 +342,6 @@ We can use an abstraction that makes it easy to add behaviors to a class, outsid
 If we extend this idea to work for multiple classes, the type of the first parameter of this function would be a base class. This would allow us to pass instances of derived classes to our function. We can then use a control statement to define branches of behavior, and associate each branch to a derived class. The control statement would dynamically check the type of the instance and dispatch the corresponding branch.
 
 
-<a id="orgfe7b69c"></a>
 
 ### Base Package
 
@@ -382,7 +364,6 @@ If we were to take this approach to define our base package, it would look somet
     }
 
 
-<a id="orgd6a657d"></a>
 
 ### Extending Behaviors
 
@@ -400,14 +381,12 @@ The behavior functions in this solution resemble the approach above where we use
     }
 
 
-<a id="org4cf3203"></a>
 
 ### Extending Representations
 
 Unfortunately, it is difficult to add a new class. If we were to add a `Picture` class, for example, we would need to go to the `load`, `edit`, and `save` functions in the Behaviors class of our base package, and add a new branch to each function for our new `Picture` mode class.
 
 
-<a id="org1bf953c"></a>
 
 ### Evaluation
 
@@ -469,14 +448,12 @@ This approach passes only 2 of 4 criteria:
 </table>
 
 
-<a id="org93657a8"></a>
 
 ## The Visitor Pattern
 
 If we want to separate the behaviors of class from its definition, it is a much better approach to use the visitor pattern. The visitor pattern also allows us to define a function in a downstream package and associate them to an imported class. It is a better approach than using dynamic type checking because the visitor pattern allows your code to dispatch behavior functions in constant time, instead of linear. Also, the visitor pattern doesn't prescribe dynamic type checking. So, your compiler can guide you to make sure all behavior functions are implemented.
 
 
-<a id="orgffb9781"></a>
 
 ### Base Package
 
@@ -539,7 +516,6 @@ With this in place, one can call the behavior of a mode like so:
 In contrast to the approach where we used dynamic type checking, the loading function of the `Whiteboard` instance on line 6 and the loading function of the `Prose` instance on line 7 both dispatch instantly.
 
 
-<a id="org212f864"></a>
 
 ### Extending Behaviors
 
@@ -562,14 +538,12 @@ With the visitor pattern, we can easily extend the behavior of representations i
     }
 
 
-<a id="orgeab2d79"></a>
 
 ### Extending Representations
 
 Unfortunately, with this approach, we can't extend the representations of the base package, without modifying it. For example, if we add a `Picture` class and if we want it to have `load`, `edit`, and `save` functionality, we will need to modify the `LoadVisitor`, `EditVisitor`, or `SaveVisitor` classes of the base package.
 
 
-<a id="org68f6729"></a>
 
 ### Evaluation
 
@@ -624,7 +598,6 @@ In essence, this approach is very similar to the pattern matching approach becau
 </table>
 
 
-<a id="org330402c"></a>
 
 ### Re-visiting Extending Representations in The Visitor Pattern By Using Inheritance
 
@@ -662,7 +635,6 @@ Our `Picture` class would look something like this:
     }
 
 
-<a id="org53b5bcd"></a>
 
 ### Evaluation
 
@@ -719,14 +691,12 @@ Notice that the `accept` method of the `Picture` class must have an argument of 
 </table>
 
 
-<a id="org477b3c1"></a>
 
 ## Multimethods in Clojure
 
 In Clojure, we can try to use multimethods to solve the expression problem. Since Clojure is a dynamically typed language, similar to the previous approach, this approach will also pass all criteria except for the one about static type checking. In contrast to the previous approach, this approach is much more simple and elegant.
 
 
-<a id="org99bca7b"></a>
 
 ### Base Package
 
@@ -750,7 +720,6 @@ In Clojure we can define our `Mode` types as records, and our functionalities as
     ;; definitions of edit and save multimethods look the same to load. They are omitted for brevity
 
 
-<a id="orgf9eb6ea"></a>
 
 ### Extending Behaviors
 
@@ -768,7 +737,6 @@ It's straightforward to add new behaviors in downstream packages, like `export`:
     )
 
 
-<a id="orgb82b153"></a>
 
 ### Extending Representations
 
@@ -786,7 +754,6 @@ It's also straightforward to add new representations in downstream packages, lik
     )
 
 
-<a id="org2ea3ea6"></a>
 
 ### Evaluation
 
@@ -841,14 +808,12 @@ As mentioned before, multi-methods in Clojure solve 3 of 4 criteria:
 </table>
 
 
-<a id="org8719cab"></a>
 
 ## Protocols in Clojure
 
 In addition to using multimethods in Clojure, we can also try to use protocols to solve the expression problem. Of course, we will not passing the static type checking criterion. But, it is interesting and instructional to see how we can easily pass the other three criteria.
 
 
-<a id="org1329bae"></a>
 
 ### Base Package
 
@@ -874,7 +839,6 @@ Just as before, we can define our `Mode` types as records. For behaviors, instea
     ;; definitions of edit and save multimethods look the same to load. They are omitted for brevity
 
 
-<a id="orgb07c928"></a>
 
 ### Extending Behaviors
 
@@ -892,7 +856,6 @@ We can add a new behavior in a downstream packages, like `export`, by defining a
       (export [_] (comment "spreadsheet export impl here")))
 
 
-<a id="orgf215b6c"></a>
 
 ### Extending Representations
 
@@ -907,7 +870,6 @@ It's also straightforward to add new representations in downstream packages. If 
       (save [_] (comment "picture edit impl here")))
 
 
-<a id="orge9a44ff"></a>
 
 ### Evaluation
 
@@ -962,13 +924,12 @@ As mentioned before, protocols in Clojure solve 3 of 4 criteria:
 </table>
 
 
-<a id="orgc12fc47"></a>
 
 # Q+A with myself as I studied this topic
 
 -   Why use a multimethod in Clojure? Isn't this equivalent to using a pattern matching function?
-    -   first of all, there's no such thing as native pattern matching functionality in clojure. at least, not in the way it exists in typed functional languages like OCaml or Haskell. The closest thing is `cond` or `condp`.
-    -   You could use these functions instead of multimethods but there is one big advantage to multimethods: the branches of multimethods can be extended in downstream files. The branches of `cond` expressions cannot. This means that multimethods can be used to solve the expression problem in clojure (if we ignore the restriction of using static types)
+    -   first of all, there's no such thing as native pattern matching functionality in Clojure. at least, not in the way it exists in typed functional languages like OCaml or Haskell. The closest thing is `cond` or `condp`.
+    -   You could use these functions instead of multimethods but there is one big advantage to multimethods: the branches of multimethods can be extended in downstream files. The branches of `cond` expressions cannot. This means that multimethods can be used to solve the expression problem in Clojure (if we ignore the restriction of using static types)
 -   Why use the visitor pattern in object oriented languages? Isn't this equivalent to using a switch statement?
     -   Answered: it is not. it dispatches a behavior function in constant time, unlike a switch statement.
 -   I know that in an object-oriented language, the visitor pattern allows one to add behaviors to a class in a base package without modifying the class by adding a method to it. You can add behaviors in downstream packages and associate those behaviors to that class. But, that's only one part of the solution expression problem. A complete solution to the expression problem must define a way for one to add new classes in a downstream package as well. Is it possible to define a new class `D` in a downstream package and have a visitor class that has some visitMethods for the behaviors of a base class, and other visit methods for the behaviors of `D`?
@@ -977,10 +938,9 @@ As mentioned before, protocols in Clojure solve 3 of 4 criteria:
     -   probably not, you can use pattern matching instead
 -   So far, in my example, I've assumed that 3 modes and 3 behaviors exist: Prose,Whiteboard,Spreadsheet and load,edit,save respectively, in the base package. I've stated the expression problem as a way to make it possible to add modes and behaviors without modifying the base package. However, logically it seems like this is an impossible task, regardless of the pattern or language feature: if one were to add a new mode outside of the base package, and if they wanted that mode to support loading, editing, and saving, they will need to modify the base package. They will need to change the load, edit, and save functions in the base package to accommodate for the new mode. Perhaps I posed the expression problem incorrectly or too strictly?
     -   First of all, it's not an impossible task. If you were using an object-oriented language for example, you would be able to easily add a new mode by creating a new class outside of the base package and adding 3 methods to it: one for load, another for edit, another for save. This might be impossible if you're using a pattern matching approach. In this case, you would have to edit the load, edit, and save pattern matching functions in the base package.
-    -   You defined the expression problem correctly. It may seem impossible, but its not. It's just difficult. There are solution to it after all. There is a solution using type classes in Haskell. There are even solutions in clojure, but of course these do not have static type checking.
+    -   You defined the expression problem correctly. It may seem impossible, but its not. It's just difficult. There are solution to it after all. There is a solution using type classes in Haskell. There are even solutions in Clojure, but of course these do not have static type checking.
 
 
-<a id="org111bbd8"></a>
 
 # Sources
 
