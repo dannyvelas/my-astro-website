@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 
 interface Props {
 	title: string;
+  frontmatter: Record<string,any>;
 }
 
 const toFriendlyDate = (s: string) => (
