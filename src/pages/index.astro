@@ -3,9 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Danny Velasquez's Base Posts">
-	<main>
-    <ul>
-      <li><a href="/posts/the-expression-problem/">The Expression Problem</a></li>
-    </ul>
-	</main>
+  <header class="flex flex-col gap-4 my-8 items-center">
+    <h1 class="text-4xl">Posts</h1>
+  </header>
+  <ul>
+    <li><a href="/posts/the-expression-problem/">The Expression Problem</a></li>
+  </ul>
 </BaseLayout>
