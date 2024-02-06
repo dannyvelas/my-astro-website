@@ -944,11 +944,10 @@ As mentioned before, protocols in Clojure solve 3 of 4 criteria:
 
 # Sources
 
--   <https://journal.stuffwithstuff.com/2010/10/01/solving-the-expression-problem/>
--   <https://www.youtube.com/watch?v=FWW87fvBKJg>
--   <https://eli.thegreenplace.net/2016/the-expression-problem-and-its-solutions/>
--   <https://eli.thegreenplace.net/2018/more-thoughts-on-the-expression-problem-in-haskell/>
-
+- [Stuff with Stuff](https://journal.stuffwithstuff.com/2010/10/01/solving-the-expression-problem/)
+- [Dr. Ralf Laemmel Advanced FP - The Expression Problem](https://www.youtube.com/watch?v=FWW87fvBKJg)
+- [Eli Bendersky: The Expression Problem and its solutions](https://eli.thegreenplace.net/2016/the-expression-problem-and-its-solutions/)
+- [Eli Bendersky: More thoughts on the Expression Problem in Haskell](https://eli.thegreenplace.net/2018/more-thoughts-on-the-expression-problem-in-haskell/)
 
 # Footnotes
 
