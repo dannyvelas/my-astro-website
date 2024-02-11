@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const allPosts = await Astro.glob("../pages/posts/*.md");
 ---
 
 <BaseLayout title="Danny Velasquez's Base Posts">
@@ -11,10 +13,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </p>
   <h2 class="text-2xl mt-8 mb-4">Posts</h2>
   <ul>
-    <li>
-      <a class="hover:underline" href="/posts/the-expression-problem/">
-        The Expression Problem
-      </a>
-    </li>
+    {
+      allPosts.map((post) => (
+        <li>
+          <a class="hover:underline" href={post.url}>
+            {post.frontmatter.title}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </BaseLayout>
