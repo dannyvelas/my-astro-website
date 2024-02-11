@@ -91,7 +91,7 @@ This problem statement comes with a restriction: whenever we add a new mode, the
 
 This problem statement comes with one more restriction: we should use language features that don't require separate compilation.
 
-We will show many different non-solutions to modeling this problem. Some approaches will be in a functional language, others will be in an object-oriented language. We will measure each approach against four criteria to gauge its effectiveness in solving the expression problem. The more criteria an approach satisfies, the closer it is at solving the problem. If an approach satisfies all criteria, the approach effectively solves the expression problem. The four criteria are:
+We will show many different non-solutions to modeling this problem. Some approaches will be in a functional language, others will be in an object-oriented language. We will measure each approach against four criteria to gauge its effectiveness in solving the expression problem. These criteria are based on the criteria from [Dr. Ralf Laemmel's lecture on The Expression Problem](https://www.youtube.com/watch?v=FWW87fvBKJg). The more criteria an approach satisfies, the closer it is at solving the problem. If an approach satisfies all criteria, the approach effectively solves the expression problem. The four criteria are:
 
 1.  Is it easy to add new representations in downstream packages without modifying the base package?
 2.  Is it easy to add new behaviors in downstream packages without modifying the base package?
@@ -663,7 +663,7 @@ Notice that the `accept` method of the `Picture` class must have an argument of 
 
 ## Multimethods in Clojure
 
-In Clojure, we can try to use multimethods to solve the expression problem. Since Clojure is a dynamically typed language, similar to the previous approach, this approach will also pass all criteria except for the one about static type checking. In contrast to the previous approach, this approach is much more simple and elegant.
+[According to Eli Bendersky](https://eli.thegreenplace.net/2016/the-expression-problem-and-its-solutions/), we can try to use multimethods to solve the expression problem. Since Clojure is a dynamically typed language, similar to the previous approach, this approach will also pass all criteria except for the one about static type checking. In contrast to the previous approach, this approach is much more simple and elegant.
 
 
 ### Base Package
@@ -900,14 +900,6 @@ As mentioned before, protocols in Clojure solve 3 of 4 criteria:
     -   You defined the expression problem correctly. It may seem impossible, but its not. It's just difficult. There are solution to it after all. There is a solution using type classes in Haskell. There are even solutions in clojure, but of course these do not have static type checking.
 
 
-## Sources
-
--   [Bob Nystrom: Solving the Expression Problem](https://journal.stuffwithstuff.com/2010/10/01/solving-the-expression-problem/)
--   [Dr. Ralf Laemmel Advanced FP - The Expression Problem](https://www.youtube.com/watch?v=FWW87fvBKJg)
--   [Eli Bendersky: The Expression Problem and its solutions](https://eli.thegreenplace.net/2016/the-expression-problem-and-its-solutions/)
--   [Eli Bendersky: More thoughts on the Expression Problem in Haskell](https://eli.thegreenplace.net/2018/more-thoughts-on-the-expression-problem-in-haskell/)
-
-
-# Footnotes
+## Footnotes
 
 <sup><a id="fn.1" href="#fnr.1">1</a></sup> One might ask if we could use switch statements to dispatch the branch corresponding to a mode in constant time. But the answer is no. For a switch statement to dispatch the correct branch in constant time, the compiler must make the switch statement behave like a jump table. A jump table needs the switch argument to be a variable with a type that can be used to index a set of cases. Characters and integers are the only types that satisfy this criteria, not strings. Since we use string names for modes, we had to resort to using an if/else-if statement instead. In other object-oriented languages like Java (as of version 7) and Go, there is support for switch statements that take an input of type string. But compilers for these languages don't dispatch the correct case in constant. Instead, they search for the correct case linearly or with binary search. There are some object-oriented languages with support for sum types, like Rust and Scala (and maybe even C++). In these languages, it would be possible to implement a behavior function as a pattern matching function that dispatches the branch corresponding to a mode in constant time.
