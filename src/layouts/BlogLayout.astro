@@ -2,13 +2,8 @@
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {
-	title: string;
   frontmatter: Record<string,any>;
 }
-
-const toFriendlyDate = (s: string) => (
-  new Date(s).toLocaleDateString("en-us", {month: "long", day: "2-digit", year: "numeric"})
-)
 
 const { frontmatter } = Astro.props;
 ---
