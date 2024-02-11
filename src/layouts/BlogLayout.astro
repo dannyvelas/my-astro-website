@@ -1,8 +1,8 @@
 ---
-import BaseLayout from './BaseLayout.astro';
+import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
-  frontmatter: Record<string,any>;
+  frontmatter: Record<string, any>;
 }
 
 const { frontmatter } = Astro.props;
@@ -13,4 +13,3 @@ const { frontmatter } = Astro.props;
     <slot />
   </article>
 </BaseLayout>
-
