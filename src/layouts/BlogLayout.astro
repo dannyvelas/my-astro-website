@@ -1,6 +1,5 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import './blog.css';
 
 interface Props {
 	title: string;
@@ -15,11 +14,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout title={frontmatter.title}>
-  <article>
-    <header class="flex flex-col gap-4 my-8 items-center">
-      <h1 class="text-4xl text-center">{frontmatter.title}</h1>
-      <h2 class="text-lg text-slate-600">{toFriendlyDate(frontmatter.publishedDate)}</h2>
-    </header>
+  <article class="prose">
     <slot />
   </article>
 </BaseLayout>

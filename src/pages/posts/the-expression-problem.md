@@ -8,6 +8,8 @@ tags: ["Design Patterns", "Clojure", "Multiple Dispatch"]
 ---
 
 
+# The expression problem
+
 The expression problem is a design-pattern problem in Computer Science. A computer scientist named this issue after the subject matter in which they experienced it: they were trying to parse or evaluate expressions. Suppose there is a base package of representations. And suppose that these representations will be imported by downstream packages. The goal is to define the base package in such a way that downstream packages can extend the base package with both new behaviors and representations, without necessitating any modifications to the source of the base package, while using static types and without using separate compilation.
 
 
@@ -887,17 +889,12 @@ As mentioned before, protocols in Clojure solve 3 of 4 criteria:
 ## Q+A with myself as I studied this topic
 
 -   Why use a multimethod in Clojure? Isn't this equivalent to using a pattern matching function?
-    -   first of all, there's no such thing as native pattern matching functionality in clojure. at least, not in the way it exists in typed functional languages like OCaml or Haskell. The closest thing is `cond` or `condp`.
-    -   You could use these functions instead of multimethods but there is one big advantage to multimethods: the branches of multimethods can be extended in downstream files. The branches of `cond` expressions cannot. This means that multimethods can be used to solve the expression problem in clojure (if we ignore the restriction of using static types)
+    -   There's no such thing as native pattern matching functionality in clojure. at least, not in the way it exists in typed functional languages like OCaml or Haskell. The closest thing is `cond` or `condp`.
+    -   You could use these functions instead of multimethods but there is one big advantage to multimethods: the branches of multimethods can be extended in downstream files. The branches of `cond` expressions cannot. This means that multimethods can be used to solve the expression problem in clojure (if we ignore the restriction of using static types).
 -   Why use the visitor pattern in object oriented languages? Isn't this equivalent to using a switch statement?
-    -   Answered: it is not. it dispatches a behavior function in constant time, unlike a switch statement.
--   I know that in an object-oriented language, the visitor pattern allows one to add behaviors to a class in a base package without modifying the class by adding a method to it. You can add behaviors in downstream packages and associate those behaviors to that class. But, that's only one part of the solution expression problem. A complete solution to the expression problem must define a way for one to add new classes in a downstream package as well. Is it possible to define a new class `D` in a downstream package and have a visitor class that has some visitMethods for the behaviors of a base class, and other visit methods for the behaviors of `D`?
-    -   it is possible through method overriding, however it would violate our static type checking criteria
+    -   Answered: it is not. It dispatches a behavior function in constant time, unlike a switch statement.
 -   In languages with support for Sum types, like Rust/Scala, is there a need for the visitor pattern?
-    -   probably not, you can use pattern matching instead
--   So far, in my example, I've assumed that 3 modes and 3 behaviors exist: Prose,Whiteboard,Spreadsheet and load,edit,save respectively, in the base package. I've stated the expression problem as a way to make it possible to add modes and behaviors without modifying the base package. However, logically it seems like this is an impossible task, regardless of the pattern or language feature: if one were to add a new mode outside of the base package, and if they wanted that mode to support loading, editing, and saving, they will need to modify the base package. They will need to change the load, edit, and save functions in the base package to accommodate for the new mode. Perhaps I posed the expression problem incorrectly or too strictly?
-    -   First of all, it's not an impossible task. If you were using an object-oriented language for example, you would be able to easily add a new mode by creating a new class outside of the base package and adding 3 methods to it: one for load, another for edit, another for save. This might be impossible if you're using a pattern matching approach. In this case, you would have to edit the load, edit, and save pattern matching functions in the base package.
-    -   You defined the expression problem correctly. It may seem impossible, but its not. It's just difficult. There are solution to it after all. There is a solution using type classes in Haskell. There are even solutions in clojure, but of course these do not have static type checking.
+    -   Probably not, you can use pattern matching instead.
 
 
 ## Footnotes
