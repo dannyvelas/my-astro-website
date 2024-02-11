@@ -6,10 +6,10 @@ const currentPath = pathname.slice(1);
 <nav class="py-4 px-2 sm:px-12 shadow-md">
     <div class="flex flex-row justify-between">
       <a class="sm:hidden" href="/">Danny Velasquez</a>
-      <a class="hidden sm:inline sm:text-lg" href="/">Danny Velasquez's Website</a>
+      <a class="hidden sm:inline sm:text-lg hover:underline" href="/">Danny Velasquez's Website</a>
       <div class="flex flex-row gap-4 text-center">
-        <a class={(currentPath === "about") ? "text-slate-900": "text-slate-400"} href="/about">About</a>
-        <a class="text-slate-400" href="https://github.com/dannyvelas">Github</a>
+        <a class:list={["hover:underline", (currentPath === "about") ? "text-slate-900": "text-slate-400"]} href="/about">About</a>
+        <a class="hover:underline text-slate-400" href="https://github.com/dannyvelas">Github</a>
       </div>
     </div>
 </nav>
