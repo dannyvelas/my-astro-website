@@ -20,7 +20,7 @@ For a reader to fully grasp this definition, they would need to fully understand
 
 ### Behavior
 
-By "behavior," I mean a unit of logic that takes input and returns some output. Usually a unit of logic is called a "function". However, a unit of logic could also be, for example, one branch of a "switch" statement. Of course, "unit" here is very vaguely defined. For now, we can satisfy ourselves with the idea that a "unit" can be anywhere from one line of code to thousands, such that the start of the unit takes in some form of input. And the end of the unit returns some form of output. Again, "input" and "output" here are very vague. "Input" can refer to one or more variables in scope, that are used inside of a unit of logic, or an argument, in the case that the unit of code is a function. "Output" can refer to the last variable (or variables) that are set at the end of a unit of logic, or a return value, in the case that the unit of code is a function. 
+By "behavior," I mean a unit of logic that takes input and returns some output. Usually a unit of logic is called a "function". However, a unit of logic could also be, for example, one branch of a "switch" statement. Of course, "unit" here is very vaguely defined. For now, we can satisfy ourselves with the idea that a "unit" can be anywhere from one line of code to thousands, such that the start of the unit takes in some form of input. And the end of the unit returns some form of output. Again, "input" and "output" here are very vague. "Input" can refer to one or more variables in scope, that are used inside of a unit of logic, or an argument, in the case that the unit of code is a function. "Output" can refer to the last variable (or variables) that are set at the end of a unit of logic, or a return value, in the case that the unit of code is a function.
 
 
 ### Representation
@@ -36,54 +36,11 @@ Suppose we're developing a note-taking application. The application will be rele
 
 We can think of modes as representations and functionalities as behaviors. Imagine a table where each column symbolizes a behavior, and each row symbolizes a representation that implements those behaviors. The implementation of the behavior of a representation will be symbolized by an `x` at the intersection of a row with a column. In the first release of our application, our note-taking app will have a base package that looks something like this:
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">&#xa0;</th>
-<th scope="col" class="org-left">Loading</th>
-<th scope="col" class="org-left">Editing</th>
-<th scope="col" class="org-left">Saving</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td class="org-left">Prose</td>
-<td class="org-left">x</td>
-<td class="org-left">x</td>
-<td class="org-left">x</td>
-</tr>
-</tbody>
-
-<tbody>
-<tr>
-<td class="org-left">Whiteboard</td>
-<td class="org-left">x</td>
-<td class="org-left">x</td>
-<td class="org-left">x</td>
-</tr>
-</tbody>
-
-<tbody>
-<tr>
-<td class="org-left">Spreadsheet</td>
-<td class="org-left">x</td>
-<td class="org-left">x</td>
-<td class="org-left">x</td>
-</tr>
-</tbody>
-</table>
+|             | Loading | Editing | Saving |
+|----------- |------- |------- |------ |
+| Prose       | x       | x       | x      |
+| Whiteboard  | x       | x       | x      |
+| Spreadsheet | x       | x       | x      |
 
 When we work on the second release, we would like to add both rows and columns to this table. There is one important restriction we must follow: the code of the first release will live in a base package. After the first release, any modification to this base package is off-limits. When we work on the second release, we would need to add new modes and new functionalities to each mode without touching the base package. The code of the second release must be separate.
 
@@ -110,45 +67,51 @@ For our first approach we will model this problem using a functional language us
 
 If we used sum types to model the problem in our first release, the "mode" type would look something like this in the base package:
 
-    type mode = Prose | WhiteBoard | Spreadsheet
+```ocaml
+type mode = Prose | WhiteBoard | Spreadsheet
+```
 
 Per this approach, the natural next step would be to use pattern matching functions for functionalities. Each branch of a pattern matching function would correspond to a branch of the "mode" type. The code for functionalities in the base package would look something like this:
 
-    let load = function
-    | Prose ->       ;; prose load behavior
-    | Whiteboard ->  ;; whiteboard load behavior 
-    | Spreadsheet -> ;; spreadsheet load behavior
-    
-    
-    let edit = function
-    | Prose ->       ;; prose edit behavior
-    | Whiteboard ->  ;; whiteboard edit behavior 
-    | Spreadsheet -> ;; spreadsheet edit behavior
-    
-    let save = function
-    | Prose ->       ;; prose save behavior
-    | Whiteboard ->  ;; whiteboard save behavior 
-    | Spreadsheet -> ;; spreadsheet save behavior
+```ocaml
+let load = function
+| Prose ->       ;; prose load behavior
+| Whiteboard ->  ;; whiteboard load behavior 
+| Spreadsheet -> ;; spreadsheet load behavior
+
+
+let edit = function
+| Prose ->       ;; prose edit behavior
+| Whiteboard ->  ;; whiteboard edit behavior 
+| Spreadsheet -> ;; spreadsheet edit behavior
+
+let save = function
+| Prose ->       ;; prose save behavior
+| Whiteboard ->  ;; whiteboard save behavior 
+| Spreadsheet -> ;; spreadsheet save behavior
+```
 
 
 ### Extending Behaviors
 
 Now that we've established an idea of the base package looks like, let's see how we can extend the behaviors of the base package without modifying it. The simplest approach would be to import the base package to another module. In that module, we can create one pattern matching function for each functionality we would like to add. Here are the definitions for export, format, and select in a module that imports the base package:
 
-    let export = function
-    | BasePackage.Prose ->       ;; prose export behavior
-    | BasePackage.Whiteboard ->  ;; whiteboard export behavior 
-    | BasePackage.Spreadsheet -> ;; spreadsheet export behavior
-    
-    let format = function
-    | BasePackage.Prose ->       ;; prose format behavior
-    | BasePackage.Whiteboard ->  ;; whiteboard format behavior 
-    | BasePackage.Spreadsheet -> ;; spreadsheet format behavior
-    
-    let select = function
-    | BasePackage.Prose ->       ;; prose select behavior
-    | BasePackage.Whiteboard ->  ;; whiteboard select behavior 
-    | BasePackage.Spreadsheet -> ;; spreadsheet select behavior
+```ocaml
+let export = function
+| BasePackage.Prose ->       ;; prose export behavior
+| BasePackage.Whiteboard ->  ;; whiteboard export behavior 
+| BasePackage.Spreadsheet -> ;; spreadsheet export behavior
+
+let format = function
+| BasePackage.Prose ->       ;; prose format behavior
+| BasePackage.Whiteboard ->  ;; whiteboard format behavior 
+| BasePackage.Spreadsheet -> ;; spreadsheet format behavior
+
+let select = function
+| BasePackage.Prose ->       ;; prose select behavior
+| BasePackage.Whiteboard ->  ;; whiteboard select behavior 
+| BasePackage.Spreadsheet -> ;; spreadsheet select behavior
+```
 
 With this approach, our new package, which imports the base package, adds new behaviors to the base package. And, no new modifications to the base package were required.
 
@@ -162,53 +125,12 @@ With this simple and idiomatic approach we've taken, if we wanted to add a new m
 
 In this approach, it was very easy to add columns to the table (behaviors) without modifying the base package. Yet it was impossible to add rows (representations) without modifying the base package. In total, this approach passed 3 out of 4 of our criteria:
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Criteria</th>
-<th scope="col" class="org-left">Pass</th>
-<th scope="col" class="org-left">Fail</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td class="org-left">Extensible Representations</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">x</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Extensible Behaviors</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Static Type Checking</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-
-<tr>
-<td class="org-left">No Separate Compilation</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
+| Criteria                   | Pass | Fail |
+|-------------------------- |---- |---- |
+| Extensible Representations |      | x    |
+| Extensible Behaviors       | x    |      |
+| Static Type Checking       | x    |      |
+| No Separate Compilation    | x    |      |
 
 
 ## Using Classes and Methods in an Object Oriented Language
@@ -220,42 +142,46 @@ Now, lets model our problem using classes and methods in an object oriented lang
 
 In an object oriented language, if we used classes and methods to represent modes and functionalities, respectively, the base package would look something like this:
 
-    class Prose {
-      public void load() { /* prose load behavior */ }
-      public void edit() { /* prose edit behavior */ }
-      public void save() { /* prose save behavior */ }
-    }
-    class Whiteboard {
-      public void load() { /* whiteboard load behavior */ }
-      public void edit() { /* whiteboard edit behavior */ }
-      public void save() { /* whiteboard save behavior */ }
-    }
-    class Spreadsheet {
-      public void load() { /* spreadsheet load behavior */ }
-      public void edit() { /* spreadsheet edit behavior */ }
-      public void save() { /* spreadsheet save behavior */ }
-    }
+```java
+class Prose {
+  public void load() { /* prose load behavior */ }
+  public void edit() { /* prose edit behavior */ }
+  public void save() { /* prose save behavior */ }
+}
+class Whiteboard {
+  public void load() { /* whiteboard load behavior */ }
+  public void edit() { /* whiteboard edit behavior */ }
+  public void save() { /* whiteboard save behavior */ }
+}
+class Spreadsheet {
+  public void load() { /* spreadsheet load behavior */ }
+  public void edit() { /* spreadsheet edit behavior */ }
+  public void save() { /* spreadsheet save behavior */ }
+}
+```
 
 
 ### Extending Representations
 
 This abstraction makes it very easy to add new mode representations, without modifying the base package. In another file, we can create new classes:
 
-    class Picture {
-      public void load() { /* picture load behavior */ }
-      public void edit() { /* picture edit behavior */ }
-      public void save() { /* picture save behavior */ }
-    }
-    class Video {
-      public void load() { /* video load behavior */ }
-      public void edit() { /* video edit behavior */ }
-      public void save() { /* video save behavior */ }
-    }
-    class Voice {
-      public void load() { /* voice load behavior */ }
-      public void edit() { /* voice edit behavior */ }
-      public void save() { /* voice save behavior */ }
-    }
+```java
+class Picture {
+  public void load() { /* picture load behavior */ }
+  public void edit() { /* picture edit behavior */ }
+  public void save() { /* picture save behavior */ }
+}
+class Video {
+  public void load() { /* video load behavior */ }
+  public void edit() { /* video edit behavior */ }
+  public void save() { /* video save behavior */ }
+}
+class Voice {
+  public void load() { /* voice load behavior */ }
+  public void edit() { /* voice edit behavior */ }
+  public void save() { /* voice save behavior */ }
+}
+```
 
 
 ### Extending Behaviors
@@ -269,53 +195,12 @@ This approach would require us to add a new "export" method to the "Prose/Whiteb
 
 In this approach, it was very easy to add rows to the table without modifying the base package, but it was impossible to add behaviors without modifying the base package. In total, this approach passed 3 out of 4 of our criteria:
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Criteria</th>
-<th scope="col" class="org-left">Pass</th>
-<th scope="col" class="org-left">Fail</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td class="org-left">Extensible Representations</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Extensible Behaviors</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">x</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Static Type Checking</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-
-<tr>
-<td class="org-left">No Separate Compilation</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
+| Criteria                   | Pass | Fail |
+|-------------------------- |---- |---- |
+| Extensible Representations | x    |      |
+| Extensible Behaviors       |      | x    |
+| Static Type Checking       | x    |      |
+| No Separate Compilation    | x    |      |
 
 
 ## Using Dynamic Type Checking in an Object Oriented Language
@@ -329,37 +214,41 @@ If we extend this idea to work for multiple classes, the type of the first param
 
 If we were to take this approach to define our base package, it would look something like this:
 
-    class Mode { }
-    class Prose extends Mode       { }
-    class Whiteboard extends Mode  { }
-    class Spreadsheet extends Mode { }
-    
-    class Behaviors {
-      void load(Mode mode) {
-        if (mode instanceof Prose)            { /* prose load behavior */       }
-        else if (mode instanceof Whiteboard)  { /* whiteboard load behavior */  }
-        else if (mode instanceof Spreadsheet) { /* spreadsheet load behavior */ }
-        else { throw new ArgumentException(); }
-      }
-      void edit(Mode mode) { /* omitted for brevity */ }
-      void save(Mode mode) { /* omitted for brevity */ }
-    }
+```java
+class Mode { }
+class Prose extends Mode       { }
+class Whiteboard extends Mode  { }
+class Spreadsheet extends Mode { }
+
+class Behaviors {
+  void load(Mode mode) {
+    if (mode instanceof Prose)            { /* prose load behavior */       }
+    else if (mode instanceof Whiteboard)  { /* whiteboard load behavior */  }
+    else if (mode instanceof Spreadsheet) { /* spreadsheet load behavior */ }
+    else { throw new ArgumentException(); }
+  }
+  void edit(Mode mode) { /* omitted for brevity */ }
+  void save(Mode mode) { /* omitted for brevity */ }
+}
+```
 
 
 ### Extending Behaviors
 
 The behavior functions in this solution resemble the approach above where we used pattern matching functions when modeling this problem in a functional language. We can easily extend the behaviors of Modes by adding a new function that will take a mode as an argument:
 
-    class MoreBehaviors extends Behaviors {
-      void export(Mode mode) {
-        if (mode instanceof Prose)            { /* prose export behavior */ }
-        else if (mode instanceof Whiteboard)  { /* whiteboard export behavior */ }
-        else if (mode instanceof Spreadsheet) { /* spreadsheet export behavior */ }
-        else { throw new ArgumentException(); }
-      }
-      void format(Mode mode) { /* omitted for brevity */ }
-      void select(Mode mode) { /* omitted for brevity */ }
-    }
+```java
+class MoreBehaviors extends Behaviors {
+  void export(Mode mode) {
+    if (mode instanceof Prose)            { /* prose export behavior */ }
+    else if (mode instanceof Whiteboard)  { /* whiteboard export behavior */ }
+    else if (mode instanceof Spreadsheet) { /* spreadsheet export behavior */ }
+    else { throw new ArgumentException(); }
+  }
+  void format(Mode mode) { /* omitted for brevity */ }
+  void select(Mode mode) { /* omitted for brevity */ }
+}
+```
 
 
 ### Extending Representations
@@ -371,60 +260,18 @@ Unfortunately, it is difficult to add a new class. If we were to add a `Picture`
 
 This approach resembles the approach where we used pattern matching functions. As such, this approach similarly does not solve the expression problem. This approach made it easier to add behaviors in downstream packages and simultaneously made it harder to add representations.
 
-There's another concern with this approach; the behavior functions in this solution have a performance issue that the pattern matching functions don't have. The behavior functions here have a time complexity of O(n) to find the branch that corresponds to the input mode. If we have `n` modes, a behavior function will need to execute `n` checks before it finds the branch that corresponds to the last mode. This can be very slow for large `n`. In contrast, a 
-pattern matching function will dispatch the branch corresponding to a mode in constant time, as long as it it's argument is a sum type.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
+There's another concern with this approach; the behavior functions in this solution have a performance issue that the pattern matching functions don't have. The behavior functions here have a time complexity of O(n) to find the branch that corresponds to the input mode. If we have `n` modes, a behavior function will need to execute `n` checks before it finds the branch that corresponds to the last mode. This can be very slow for large `n`. In contrast, a pattern matching function will dispatch the branch corresponding to a mode in constant time, as long as it it's argument is a sum type.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
 
 This solution is also different to the pattern matching solution in that it sacrifices static type safety. As we develop our program and add Mode classes, we may occasionally forget to add a new branch to every control statement. In this case, our compiler won't be able to tell us. We'll simply get a runtime ArgumentException.
 
 This approach passes only 2 of 4 criteria:
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Criteria</th>
-<th scope="col" class="org-left">Pass</th>
-<th scope="col" class="org-left">Fail</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td class="org-left">Extensible Representations</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">x</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Extensible Behaviors</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Static Type Checking</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">x</td>
-</tr>
-
-
-<tr>
-<td class="org-left">No Separate Compilation</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
+| Criteria                   | Pass | Fail |
+|-------------------------- |---- |---- |
+| Extensible Representations |      | x    |
+| Extensible Behaviors       | x    |      |
+| Static Type Checking       |      | x    |
+| No Separate Compilation    | x    |      |
 
 
 ## The Visitor Pattern
@@ -436,59 +283,65 @@ If we want to separate the behaviors of class from its definition, it is a much 
 
 In the visitor pattern, you define one class for each behavior. These classes are called "visitors". Going back to our example, we can have three visitors: a loading visitor, an editing visitor, and a saving visitor. Visitors behave like columns in our table. Every visitor will have one method for each representation. In our example, every visitor will have the following methods: "visitProse", "visitWhiteboard", and "visitSpreadsheet". Visitor methods behave like rows in our table. If the base package from our example had been implemented using this pattern, our visitors would look something like this:
 
-    public interface Visitor {
-      void visitProse(Prose mode);
-      void visitWhiteboard(Whiteboard mode);
-      void visitSpreadsheet(Spreadsheet mode);
-    }
-    
-    class LoadVisitor implements Visitor {
-      public void visitProse(Prose mode)             { /* prose load behavior       */ }
-      public void visitWhiteboard(Whiteboard mode)   { /* whiteboard load behavior  */ }
-      public void visitSpreadsheet(Spreadsheet mode) { /* spreadsheet load behavior */ }
-    }
-    class EditVisitor implements Visitor {
-      public void visitProse(Prose mode)             { /* prose edit behavior       */ }
-      public void visitWhiteboard(Whiteboard mode)   { /* whiteboard edit behavior  */ }
-      public void visitSpreadsheet(Spreadsheet mode) { /* spreadsheet edit behavior */ }
-    }
-    class SaveVisitor implements Visitor {
-      public void visitProse(Prose mode)             { /* prose save behavior       */ }
-      public void visitWhiteboard(Whiteboard mode)   { /* whiteboard save behavior  */ }
-      public void visitSpreadsheet(Spreadsheet mode) { /* spreadsheet save behavior */ }
-    }
+```java
+public interface Visitor {
+  void visitProse(Prose mode);
+  void visitWhiteboard(Whiteboard mode);
+  void visitSpreadsheet(Spreadsheet mode);
+}
+
+class LoadVisitor implements Visitor {
+  public void visitProse(Prose mode)             { /* prose load behavior       */ }
+  public void visitWhiteboard(Whiteboard mode)   { /* whiteboard load behavior  */ }
+  public void visitSpreadsheet(Spreadsheet mode) { /* spreadsheet load behavior */ }
+}
+class EditVisitor implements Visitor {
+  public void visitProse(Prose mode)             { /* prose edit behavior       */ }
+  public void visitWhiteboard(Whiteboard mode)   { /* whiteboard edit behavior  */ }
+  public void visitSpreadsheet(Spreadsheet mode) { /* spreadsheet edit behavior */ }
+}
+class SaveVisitor implements Visitor {
+  public void visitProse(Prose mode)             { /* prose save behavior       */ }
+  public void visitWhiteboard(Whiteboard mode)   { /* whiteboard save behavior  */ }
+  public void visitSpreadsheet(Spreadsheet mode) { /* spreadsheet save behavior */ }
+}
+```
 
 Each `Mode` type must have an `accept` method:
 
-    class Mode {
-      @Override
-      public void accept(Visitor visitor) {
-        throw new ArgumentException();
-      }
-    }
-    class Prose extends Mode { 
-      @Override
-      public void accept(Visitor visitor) {
-        return visitor.visitProse(this);
-      }
-    }
-    class Whiteboard extends Mode { 
-      @Override
-      public void accept(Visitor visitor) {
-        return visitor.visitWhiteboard(this);
-      }
-    }
-    class Spreadsheet extends Mode { /* omitted for brevity */ }
+```java
+class Mode {
+  @Override
+  public void accept(Visitor visitor) {
+    throw new ArgumentException();
+  }
+}
+class Prose extends Mode { 
+  @Override
+  public void accept(Visitor visitor) {
+    return visitor.visitProse(this);
+  }
+}
+class Whiteboard extends Mode { 
+  @Override
+  public void accept(Visitor visitor) {
+    return visitor.visitWhiteboard(this);
+  }
+}
+class Spreadsheet extends Mode { /* omitted for brevity */ }
+```
 
 With this in place, one can call the behavior of a mode like so:
 
-    Visitor loadVisitor = new LoadVisitor();
-    
-    Mode whiteboard = new Whiteboard();
-    Mode prose = new Prose();
-    
-    whiteboard.accept(loadVisitor); 
-    prose.accept(loadVisitor);
+```java
+Visitor loadVisitor = new LoadVisitor();
+
+Mode whiteboard = new Whiteboard();
+Mode prose = new Prose();
+
+whiteboard.accept(loadVisitor); 
+prose.accept(loadVisitor);
+```
 
 In contrast to the approach where we used dynamic type checking, the loading function of the `Whiteboard` instance on line 6 and the loading function of the `Prose` instance on line 7 both dispatch instantly.
 
@@ -497,21 +350,23 @@ In contrast to the approach where we used dynamic type checking, the loading fun
 
 With the visitor pattern, we can easily extend the behavior of representations in downstream packages, in way that is similar to the control statement approach, or the pattern matching approach. All we need to do is define new visitors:
 
-    class ExportVisitor implements Visitor {
-      public void visitProse(Prose mode)             { /* prose export behavior       */ }
-      public void visitWhiteboard(Whiteboard mode)   { /* whiteboard export behavior  */ }
-      public void visitSpreadsheet(Spreadsheet mode) { /* spreadsheet export behavior */ }
-    }
-    class FormatVisitor implements Visitor {
-      public void visitProse(Prose mode)             { /* prose format behavior       */ }
-      public void visitWhiteboard(Whiteboard mode)   { /* whiteboard format behavior  */ }
-      public void visitSpreadsheet(Spreadsheet mode) { /* spreadsheet format behavior */ }
-    }
-    class SelectVisitor implements Visitor {
-      public void visitProse(Prose mode)             { /* prose select behavior       */ }
-      public void visitWhiteboard(Whiteboard mode)   { /* whiteboard select behavior  */ }
-      public void visitSpreadsheet(Spreadsheet mode) { /* spreadsheet select behavior */ }
-    }
+```java
+class ExportVisitor implements Visitor {
+  public void visitProse(Prose mode)             { /* prose export behavior       */ }
+  public void visitWhiteboard(Whiteboard mode)   { /* whiteboard export behavior  */ }
+  public void visitSpreadsheet(Spreadsheet mode) { /* spreadsheet export behavior */ }
+}
+class FormatVisitor implements Visitor {
+  public void visitProse(Prose mode)             { /* prose format behavior       */ }
+  public void visitWhiteboard(Whiteboard mode)   { /* whiteboard format behavior  */ }
+  public void visitSpreadsheet(Spreadsheet mode) { /* spreadsheet format behavior */ }
+}
+class SelectVisitor implements Visitor {
+  public void visitProse(Prose mode)             { /* prose select behavior       */ }
+  public void visitWhiteboard(Whiteboard mode)   { /* whiteboard select behavior  */ }
+  public void visitSpreadsheet(Spreadsheet mode) { /* spreadsheet select behavior */ }
+}
+```
 
 
 ### Extending Representations
@@ -523,53 +378,12 @@ Unfortunately, with this approach, we can't extend the representations of the ba
 
 In essence, this approach is very similar to the pattern matching approach because we were able to extend behaviors but not representations. This approach was better than the approach where we used dynamic type casting because we did not incur performance costs when dispatching behavior functions and we maintained static type safety. This approach passed 3 out of 4 criteria:
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Criteria</th>
-<th scope="col" class="org-left">Pass</th>
-<th scope="col" class="org-left">Fail</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td class="org-left">Extensible Representations</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">x</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Extensible Behaviors</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Static Type Checking</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-
-<tr>
-<td class="org-left">No Separate Compilation</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
+| Criteria                   | Pass | Fail |
+|-------------------------- |---- |---- |
+| Extensible Representations |      | x    |
+| Extensible Behaviors       | x    |      |
+| Static Type Checking       | x    |      |
+| No Separate Compilation    | x    |      |
 
 
 ### Re-visiting Extending Representations in The Visitor Pattern By Using Inheritance
@@ -580,32 +394,36 @@ I wrote that if we wanted to add, say, the `Picture` class in a downstream packa
 
 We could associate our new `Picture` class with loading, editing, and saving behavior by creating three new visitor classes that inherit the behaviors of `LoadVisitor`, `EditVisitor`, and `SaveVisitor`. We're not allowed to touch the original `Visitor` definition, since it's in the base package. But, we can define a `VisitorWithPicture` interface that extends it.
 
-    public interface VisitorWithPicture extends Visitor {
-      void visitPicture(Picture mode);
-    }
-    
-    class LoadVisitorWithPicture extends LoadVisitor implements VisitorWithPicture {
-      public void visitPicture(Picture mode) { /* picture load behavior */ }
-    }
-    class EditVisitorWithPicture extends EditVisitor implements VisitorWithPicture {
-      public void visitPicture(Picture mode) { /* picture edit behavior */ }
-    }
-    class SaveVisitorWithPicture extends SaveVisitor implements VisitorWithPicture {
-      public void visitPicture(Picture mode) { /* picture save behavior */ }
-    }
+```java
+public interface VisitorWithPicture extends Visitor {
+  void visitPicture(Picture mode);
+}
+
+class LoadVisitorWithPicture extends LoadVisitor implements VisitorWithPicture {
+  public void visitPicture(Picture mode) { /* picture load behavior */ }
+}
+class EditVisitorWithPicture extends EditVisitor implements VisitorWithPicture {
+  public void visitPicture(Picture mode) { /* picture edit behavior */ }
+}
+class SaveVisitorWithPicture extends SaveVisitor implements VisitorWithPicture {
+  public void visitPicture(Picture mode) { /* picture save behavior */ }
+}
+```
 
 Our `Picture` class would look something like this:
 
-    class Picture extends Mode { 
-      @Override
-      public void accept(Visitor visitor) {
-        if(visitor instanceof VisitorWithPicture) {
-          VisitorWithPicture visitorWithPicture = (VisitorWithPicture) visitor;
-          return visitorWithPicture.visitPicture(this);
-        }
-        throw new ArgumentException();
-      }
+```java
+class Picture extends Mode { 
+  @Override
+  public void accept(Visitor visitor) {
+    if(visitor instanceof VisitorWithPicture) {
+      VisitorWithPicture visitorWithPicture = (VisitorWithPicture) visitor;
+      return visitorWithPicture.visitPicture(this);
     }
+    throw new ArgumentException();
+  }
+}
+```
 
 
 ### Evaluation
@@ -614,53 +432,12 @@ In this way, were were able to adapt the Visitor pattern to pass the first crite
 
 Notice that the `accept` method of the `Picture` class must have an argument of type `Visitor` to properly extend the `Mode` class. We needed to cast this visitor to be of type `VisitorWithPicture` to make this approach work. All in all, this approach passed 3 of 4 criteria:
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Criteria</th>
-<th scope="col" class="org-left">Pass</th>
-<th scope="col" class="org-left">Fail</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td class="org-left">Extensible Representations</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Extensible Behaviors</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Static Type Checking</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">x</td>
-</tr>
-
-
-<tr>
-<td class="org-left">No Separate Compilation</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
+| Criteria                   | Pass | Fail |
+|-------------------------- |---- |---- |
+| Extensible Representations | x    |      |
+| Extensible Behaviors       | x    |      |
+| Static Type Checking       |      | x    |
+| No Separate Compilation    | x    |      |
 
 
 ## Multimethods in Clojure
@@ -672,107 +449,72 @@ Notice that the `accept` method of the `Picture` class must have an argument of 
 
 In Clojure we can define our `Mode` types as records, and our functionalities as methods:
 
-    (defrecord Prose)
-    (defrecord Whiteboard)
-    (defrecord Spreadsheet)
-    
-    (defmulti load- class)
-    (defmethod load Prose []
-      ;; prose load behavior
-    )
-    (defmethod load- Whiteboard []
-      ;; whiteboard load behavior
-    )
-    (defmethod load- Spreadsheet []
-      ;; spreadsheet load behavior
-    )
-    
-    ;; definitions of edit and save multimethods look the same to load. They are omitted for brevity
+```clojure
+(defrecord Prose)
+(defrecord Whiteboard)
+(defrecord Spreadsheet)
+
+(defmulti load- class)
+(defmethod load Prose []
+  ;; prose load behavior
+)
+(defmethod load- Whiteboard []
+  ;; whiteboard load behavior
+)
+(defmethod load- Spreadsheet []
+  ;; spreadsheet load behavior
+)
+
+;; definitions of edit and save multimethods look the same to load. They are omitted for brevity
+```
 
 
 ### Extending Behaviors
 
 It's straightforward to add new behaviors in downstream packages, like `export`:
 
-    (defmulti export class)
-    (defmethod export Prose []
-      ;; prose export behavior
-    )
-    (defmethod export Whiteboard []
-      ;; whiteboard export behavior
-    )
-    (defmethod export Spreadsheet []
-      ;; spreadsheet export behavior
-    )
+```clojure
+(defmulti export class)
+(defmethod export Prose []
+  ;; prose export behavior
+)
+(defmethod export Whiteboard []
+  ;; whiteboard export behavior
+)
+(defmethod export Spreadsheet []
+  ;; spreadsheet export behavior
+)
+```
 
 
 ### Extending Representations
 
 It's also straightforward to add new representations in downstream packages, like `Picture`:
 
-    (defrecord Picture)
-    (defmethod load Picture []
-      ;; picture load behavior
-    )
-    (defmethod edit Picture []
-      ;; picture edit behavior
-    )
-    (defmethod save Picture []
-      ;; picture save behavior
-    )
+```clojure
+(defrecord Picture)
+(defmethod load Picture []
+  ;; picture load behavior
+)
+(defmethod edit Picture []
+  ;; picture edit behavior
+)
+(defmethod save Picture []
+  ;; picture save behavior
+)
+```
 
 
 ### Evaluation
 
-As mentioned before, multi-methods in Clojure solve 3 of 4 criteria: 
+As mentioned before, multi-methods in Clojure solve 3 of 4 criteria:
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Criteria</th>
-<th scope="col" class="org-left">Pass</th>
-<th scope="col" class="org-left">Fail</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td class="org-left">Extensible Representations</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Extensible Behaviors</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Static Type Checking</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">x</td>
-</tr>
-
-
-<tr>
-<td class="org-left">No Separate Compilation</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
+| Criteria                   | Pass | Fail |
+|-------------------------- |---- |---- |
+| Extensible Representations | x    |      |
+| Extensible Behaviors       | x    |      |
+| Static Type Checking       |      | x    |
+| No Separate Compilation    | x    |      |
 
 
 ## Protocols in Clojure
@@ -784,119 +526,83 @@ In addition to using multimethods in Clojure, we can also try to use protocols t
 
 Just as before, we can define our `Mode` types as records. For behaviors, instead of using multimethods, we can use `defprotocol` to define a `Loadable` protocol with one method, `load`.
 
-    (defrecord Prose)
-    (defrecord Whiteboard)
-    (defrecord Spreadsheet)
-    
-    (defprotocol Loadable
-      (load [this]))
-    
-    (defmethod load Prose []
-      ;; prose load behavior
-    )
-    (defmethod load Whiteboard []
-      ;; whiteboard load behavior
-    )
-    (defmethod load Spreadsheet []
-      ;; spreadsheet load behavior
-    )
-    
-    ;; definitions of edit and save multimethods look the same to load. They are omitted for brevity
+```clojure
+(defrecord Prose)
+(defrecord Whiteboard)
+(defrecord Spreadsheet)
+
+(defprotocol Loadable
+  (load [this]))
+
+(defmethod load Prose []
+  ;; prose load behavior
+)
+(defmethod load Whiteboard []
+  ;; whiteboard load behavior
+)
+(defmethod load Spreadsheet []
+  ;; spreadsheet load behavior
+)
+
+;; definitions of edit and save multimethods look the same to load. They are omitted for brevity
+```
 
 
 ### Extending Behaviors
 
 We can add a new behavior in a downstream packages, like `export`, by defining a new protocol with `defprotocol` and making sure that the base types implement this new protocol by using `extend-protocol`:
 
-    (defprotocol Export
-      (export [this]))
-    
-    (extend-protocol Export
-      Prose
-      (export [_] (comment "prose export impl here"))
-      Whiteboard
-      (export [_] (comment "whiteboard export impl here"))
-      Spreadsheet
-      (export [_] (comment "spreadsheet export impl here")))
+```clojure
+(defprotocol Export
+  (export [this]))
+
+(extend-protocol Export
+  Prose
+  (export [_] (comment "prose export impl here"))
+  Whiteboard
+  (export [_] (comment "whiteboard export impl here"))
+  Spreadsheet
+  (export [_] (comment "spreadsheet export impl here")))
+```
 
 
 ### Extending Representations
 
 It's also straightforward to add new representations in downstream packages. If we want to add a new `Picture`, we can simply do it by making sure that we implement the base protocols:
 
-    (deftype Picture []
-      Loadable
-      Editable
-      Saveable
-      (load- [_] (comment "picture load impl here"))
-      (edit [_] (comment "picture edit impl here"))
-      (save [_] (comment "picture edit impl here")))
+```clojure
+(deftype Picture []
+  Loadable
+  Editable
+  Saveable
+  (load- [_] (comment "picture load impl here"))
+  (edit [_] (comment "picture edit impl here"))
+  (save [_] (comment "picture edit impl here")))
+```
 
 
 ### Evaluation
 
-As mentioned before, protocols in Clojure solve 3 of 4 criteria: 
+As mentioned before, protocols in Clojure solve 3 of 4 criteria:
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Criteria</th>
-<th scope="col" class="org-left">Pass</th>
-<th scope="col" class="org-left">Fail</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td class="org-left">Extensible Representations</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Extensible Behaviors</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Static Type Checking</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">x</td>
-</tr>
-
-
-<tr>
-<td class="org-left">No Separate Compilation</td>
-<td class="org-left">x</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
+| Criteria                   | Pass | Fail |
+|-------------------------- |---- |---- |
+| Extensible Representations | x    |      |
+| Extensible Behaviors       | x    |      |
+| Static Type Checking       |      | x    |
+| No Separate Compilation    | x    |      |
 
 
 ## Q+A with myself as I studied this topic
 
 -   Why use a multimethod in Clojure? Isn't this equivalent to using a pattern matching function?
-    -   There's no such thing as native pattern matching functionality in clojure. at least, not in the way it exists in typed functional languages like OCaml or Haskell. The closest thing is `cond` or `condp`.
+    -   There's no such thing as native pattern matching functionality in clojure. At least, not in the way it exists in typed functional languages like OCaml or Haskell. The closest thing is `cond` or `condp`.
     -   You could use these functions instead of multimethods but there is one big advantage to multimethods: the branches of multimethods can be extended in downstream files. The branches of `cond` expressions cannot. This means that multimethods can be used to solve the expression problem in clojure (if we ignore the restriction of using static types).
 -   Why use the visitor pattern in object oriented languages? Isn't this equivalent to using a switch statement?
-    -   Answered: it is not. It dispatches a behavior function in constant time, unlike a switch statement.
+    -   It is not. It dispatches a behavior function in constant time, unlike a switch statement.
 -   In languages with support for Sum types, like Rust/Scala, is there a need for the visitor pattern?
     -   Probably not, you can use pattern matching instead.
 
-
 ## Footnotes
 
-<sup><a id="fn.1" href="#fnr.1">1</a></sup> One might ask if we could use switch statements to dispatch the branch corresponding to a mode in constant time. But the answer is no. For a switch statement to dispatch the correct branch in constant time, the compiler must make the switch statement behave like a jump table. A jump table needs the switch argument to be a variable with a type that can be used to index a set of cases. Characters and integers are the only types that satisfy this criteria, not strings. Since we use string names for modes, we had to resort to using an if/else-if statement instead. In other object-oriented languages like Java (as of version 7) and Go, there is support for switch statements that take an input of type string. But compilers for these languages don't dispatch the correct case in constant. Instead, they search for the correct case linearly or with binary search. There are some object-oriented languages with support for sum types, like Rust and Scala (and maybe even C++). In these languages, it would be possible to implement a behavior function as a pattern matching function that dispatches the branch corresponding to a mode in constant time.
+<sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> One might ask if we could use switch statements to dispatch the branch corresponding to a mode in constant time. But the answer is no. For a switch statement to dispatch the correct branch in constant time, the compiler must make the switch statement behave like a jump table. A jump table needs the switch argument to be a variable with a type that can be used to index a set of cases. Characters and integers are the only types that satisfy this criteria, not strings. Since we use string names for modes, we had to resort to using an if/else-if statement instead. In other object-oriented languages like Java (as of version 7) and Go, there is support for switch statements that take an input of type string. But compilers for these languages don't dispatch the correct case in constant. Instead, they search for the correct case linearly or with binary search. There are some object-oriented languages with support for sum types, like Rust and Scala (and maybe even C++). In these languages, it would be possible to implement a behavior function as a pattern matching function that dispatches the branch corresponding to a mode in constant time.
