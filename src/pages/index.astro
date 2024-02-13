@@ -2,6 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import _ from "lodash/fp";
 
+const prettyDate = (d) =>
+  d.toLocaleDateString("en-us", { month: "short", day: "2-digit" });
+
 const posts = await Astro.glob("../pages/posts/*.md");
 const years = _.flow(
   _.map((x) => ({ ...x, date: new Date(x.frontmatter.publishedDate) })),
@@ -31,7 +34,8 @@ const years = _.flow(
           <hr />
           <ul class="my-4">
             {year.posts.map((post) => (
-              <li class="my-2">
+              <li class="my-2 flex flex-row gap-4">
+                <p class="w-24 text-xs">{prettyDate(post.date)}</p>
                 <a class="hover:underline" href={post.url}>
                   {post.frontmatter.title}
                 </a>
