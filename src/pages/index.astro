@@ -5,10 +5,12 @@ import _ from "lodash/fp";
 const posts = await Astro.glob("../pages/posts/*.md");
 const years = _.flow(
   _.map((x) => ({ ...x, date: new Date(x.frontmatter.publishedDate) })),
-  _.groupBy((x) => x.date.getFullYear()),
+  _.groupBy((post) => post.date.getFullYear()),
   _.values,
-  _.map((x) => ({ year: x[0].date.getFullYear(), posts: x })),
-  _.map((x) => ({ ...x, posts: x.posts })),
+  _.map((posts) => ({
+    year: posts[0].date.getFullYear(),
+    posts: _.orderBy((post) => post.date.getTime())("desc")(posts),
+  })),
   _.orderBy(_.iteratee("year"))("desc")
 )(posts);
 ---
