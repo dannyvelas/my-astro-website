@@ -3,7 +3,7 @@
 ✓ add syntax coloring to code
 ✓ add date to each post
 ✓ add tags to each post
-* make tags page title more user friendly, like: https://journal.stuffwithstuff.com/category/game-dev/
+✓ add support for tags
 * remove nav component
+* make tags page title more user friendly, like: https://journal.stuffwithstuff.com/category/game-dev/
 * make expression problem post more friendly
-* add support for tags
