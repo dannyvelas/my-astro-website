@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/BlogLayout.astro"
 title: 'The expression problem'
-publishedDate: 2023-02-04
+publishedDate: 2023-11-01
 description: 'An explanation on what the expression problem is, how to solve it, and how to not solve it'
 author: 'Daniel Velasquez'
 tags: ["design-patterns", "clojure", "polymorphism"]
