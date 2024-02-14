@@ -9,6 +9,18 @@ tags: ["design-patterns", "clojure", "polymorphism"]
 
 # The expression problem
 
+When I was a university student, my favorite class was a graduate class called "Compiler Construction." It was also the hardest class I've ever taken. Back in those days, I would track my time using [Toggl](https://toggl.com/). And, I realized that I spent somewhere between 30 to 40h per week, just on that one class. Although it was very time consuming, I enjoyed every minute of it. We had a capstone project of building our own compiler within teams of three. Our compiler would read a language very similar to a subset of Python with static typing and emit RISC V assembly code. I remember going to sleep at late hours, crunching out some final lines of code for that project with sheer excitement about waking up early to go to my team standup first thing in the morning. I can't pinpoint exactly why I was so excited but I think it was a mix of being proud about the code I wrote and being very interested in the subject matter. I think this made me eager to share my updates and come up with new plans in standup.
+
+I think I was interested in low-level development and programming languages before I took that class. But I think that class kind of cemented my interest in these topics because of how much fun I had. Nowadays, I'm trying to see how I can work on projects that gravitate around these interests either personally or professionally.
+
+As I was working on my compiler I realized that I needed some way to recursively descend a syntax tree when doing type analysis and when generating assembly code. Thanks to [Bob Nystrom's Crafting Interpreters](https://craftinginterpreters.com/), I realized I could use the visitor pattern for this. 
+
+Before explaining what the visitor pattern is, [Nystrom writes about why we need it](https://craftinginterpreters.com/representing-code.html#the-expression-problem). He writes that each language has a certain "grain" to it. Functional languages make it easy to add functions (behaviors), object oriented languages make it easy to add classes (representations). If you try to extend representations in functional languages or behaviors in object-oriented languages...well, good luck. It's not so easy to do. This is the expression problem.
+
+Back then I had pressing deadlines so I didn't really delve deep on what this really meant. It's not that intuitive. In fact, if you google "stackoverflow the expression problem", you'll find [answers that are outright wrong about what it actually is](https://stackoverflow.com/a/22180495/11587741).
+
+I always remained curious in the back of my mind about it. Recently, I had some extra time on my hands so I decided to take a crack at understanding it. One of the best ways for me to learn things is to document them as a way to teach others. So, that's what this article is: it's me explaining to you what the expression problem is. 
+
 The expression problem is a design-pattern problem in Computer Science. A computer scientist named this issue after the subject matter in which they experienced it: they were trying to parse or evaluate expressions. Suppose there is a base package of representations. And suppose that these representations will be imported by downstream packages. The goal is to define the base package in such a way that downstream packages can extend the base package with both new behaviors and representations, without necessitating any modifications to the source of the base package, while using static types and without using separate compilation.
 
 
@@ -29,7 +41,7 @@ By "Representation," I mean a collection of behaviors that conceptually represen
 
 ## Example
 
-To demonstrate this problem, I'm going to present [an example problem, similar to one originally presented in a post by Bob Nystrom](https://journal.stuffwithstuff.com/2010/10/01/solving-the-expression-problem/). To solve this problem, we would effectively solve the expression problem. I will present many non-solutions to this problem before showing real solutions.
+To demonstrate this problem, I'm going to present [an example problem, similar to one originally presented in a post by Bob Nystrom](https://journal.stuffwithstuff.com/2010/10/01/solving-the-expression-problem/). To solve this problem, we would effectively solve the expression problem. I will present many non-solutions to this problem. In the end, I will show the one and only real solution that I've found to this problem.
 
 Suppose we're developing a note-taking application. The application will be released for the first time with support for three modes: prose mode, whiteboard mode, and spreadsheet mode. Each mode has three core functionalities: users can load, edit, and save a file in each mode. After it is released, we will need to make a second release. The second release should have support for a few more modes: picture mode, video mode, and voice mode. The second release should also have support for more functionalities in each mode; users want to export, format, and select regions, in every mode.
 
