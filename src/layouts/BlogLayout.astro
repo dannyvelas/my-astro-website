@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import { monthDayYear } from "../util/time.ts";
 
 interface Props {
   frontmatter: Record<string, any>;
@@ -10,6 +11,8 @@ const { frontmatter } = Astro.props;
 
 <BaseLayout title={frontmatter.title}>
   <article class="prose">
+    <h1>{frontmatter.title}</h1>
+    <p class="text-xs">{monthDayYear(new Date(frontmatter.publishedDate))}</p>
     <slot />
   </article>
 </BaseLayout>
