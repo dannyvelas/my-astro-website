@@ -10,9 +10,26 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout title={frontmatter.title}>
+  <header class="mb-4">
+    <div class="flex flex-row justify-between items-center">
+      <p class="text-xs text-gray-400">
+        {monthDayYear(new Date(frontmatter.publishedDate))}
+      </p>
+      <div class="flex flex-row gap-4">
+        {
+          frontmatter.tags.map((tag) => (
+            <a
+              class="text-xs text-gray-400 hover:underline"
+              href={`/category/${tag}`}
+            >
+              {tag}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </header>
   <article class="prose">
-    <h1>{frontmatter.title}</h1>
-    <p class="text-xs">{monthDayYear(new Date(frontmatter.publishedDate))}</p>
     <slot />
   </article>
 </BaseLayout>

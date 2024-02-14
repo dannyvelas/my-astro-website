@@ -4,9 +4,10 @@ title: 'The expression problem'
 publishedDate: 2023-02-04
 description: 'An explanation on what the expression problem is, how to solve it, and how to not solve it'
 author: 'Daniel Velasquez'
-tags: ["Design Patterns", "Clojure", "Multiple Dispatch"]
+tags: ["design-patterns", "clojure", "multiple-dispatch"]
 ---
 
+# The expression problem
 
 The expression problem is a design-pattern problem in Computer Science. A computer scientist named this issue after the subject matter in which they experienced it: they were trying to parse or evaluate expressions. Suppose there is a base package of representations. And suppose that these representations will be imported by downstream packages. The goal is to define the base package in such a way that downstream packages can extend the base package with both new behaviors and representations, without necessitating any modifications to the source of the base package, while using static types and without using separate compilation.
 
