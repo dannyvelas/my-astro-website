@@ -1,5 +1,4 @@
 ---
-import Nav from "../components/Nav.astro";
 import "@fontsource-variable/lora";
 
 interface Props {
@@ -23,7 +22,21 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="font-serif">
-    <Nav />
+    <nav class="py-4 px-2 sm:px-12">
+      <div class="flex flex-row justify-between">
+        <a class="sm:hidden" href="/">Danny Velasquez</a>
+        <a class="hidden sm:inline sm:text-lg hover:underline" href="/">
+          Danny Velasquez's Website
+        </a>
+        <div class="flex flex-row gap-4 text-center">
+          <a
+            class="hover:underline text-slate-400"
+            href="https://github.com/dannyvelas">Github</a
+          >
+        </div>
+      </div>
+    </nav>
+
     <main class="mx-auto px-4 my-8 sm:px-0 sm:max-w-xl md:max-w-prose">
       <slot />
     </main>
