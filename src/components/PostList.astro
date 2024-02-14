@@ -1,0 +1,36 @@
+---
+import { minimalDate } from "../util/time.ts";
+import _ from "lodash/fp";
+
+const { posts } = Astro.props;
+
+const years = _.flow(
+  _.map((x) => ({ ...x, date: new Date(x.frontmatter.publishedDate) })),
+  _.groupBy((post) => post.date.getFullYear()),
+  _.values,
+  _.map((posts) => ({
+    year: posts[0].date.getFullYear(),
+    posts: _.orderBy((post) => post.date.getTime())("desc")(posts),
+  })),
+  _.orderBy(_.iteratee("year"))("desc")
+)(posts);
+---
+
+{
+  years.map((year) => (
+    <>
+      <h3 class="text-gray-700">{year.year}</h3>
+      <hr />
+      <ul class="my-4">
+        {year.posts.map((post) => (
+          <li class="my-2 flex flex-row gap-4">
+            <p class="w-24 text-xs">{minimalDate(post.date)}</p>
+            <a class="hover:underline" href={post.url}>
+              {post.frontmatter.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  ))
+}

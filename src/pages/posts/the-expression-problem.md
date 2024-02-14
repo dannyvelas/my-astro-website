@@ -4,7 +4,7 @@ title: 'The expression problem'
 publishedDate: 2023-02-04
 description: 'An explanation on what the expression problem is, how to solve it, and how to not solve it'
 author: 'Daniel Velasquez'
-tags: ["design-patterns", "clojure", "multiple-dispatch"]
+tags: ["design-patterns", "clojure", "polymorphism"]
 ---
 
 # The expression problem
