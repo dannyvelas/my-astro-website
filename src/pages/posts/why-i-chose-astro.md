@@ -118,6 +118,6 @@ Aside from Astro, I believe there are other static site generators that I could 
 
 The main tool I would have used instead of Astro would have been to use [SvelteKit](https://kit.svelte.dev/) in [SSG mode](https://kit.svelte.dev/docs/glossary#ssg). I have experience building a full application with Svelte and I've liked it quite a lot. I believe Svelte would have worked well for my case. The only reason I chose Astro over Svelte is that Astro was built with a focus on static site generation, whereas SvelteKit was developed with a feature of allowing static site generating, giving primary focus instead to server side generation. This piece of information might be minor or insignificant. But, it made me worry that as a result, in very specific cases SvelteKit might have more small bugs or more of an awkward API than Astro. 
 
-NextJS would probably also work. But like SvelteKit, it's main use case is server side rendering, not static site generation. So it might lack some optimizations that Astro has. Also, I feel like SvelteKit more than NextJS because it seems to me to be simpler and smaller.
+[NextJS](https://nextjs.org/) would probably also work. But like SvelteKit, it's main use case is server side rendering, not static site generation. So it might lack some optimizations that Astro has. Also, I feel like SvelteKit more than NextJS because it seems to me to be simpler and smaller.
 
-I have not looked into any other static site generators like Eleventy or Hugo or Jekyll, etc. But they may also do the job just as well.
+I have not looked into any other static site generators like [Eleventy](https://www.11ty.dev/) or [Zola](https://www.getzola.org/). But I believe these might do the job just as well.
