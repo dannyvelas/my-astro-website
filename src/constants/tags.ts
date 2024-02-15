@@ -1,11 +1,5 @@
-const tags: Record<string, string> = {
-  "design-patterns": "design patterns",
-  clojure: "clojure",
-  polymorphism: "polymorphism",
-};
+const tags = ["design-patterns", "clojure", "polymorphism", "web-frameworks"];
 
-export const getTags = () => Object.keys(tags);
+export const getTags = () => structuredClone(tags);
 
-export const tagToPrettyName = (tag: string) => {
-  return tags[tag];
-};
+export const tagToPrettyName = (tag: string) => tag.replace(/-/g, " ");
