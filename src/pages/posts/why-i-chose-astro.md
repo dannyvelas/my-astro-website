@@ -17,7 +17,9 @@ This time was different. After failing twice, I sat down and defined what the pl
 
 I'll describe what the platonic ideal of a blog-building tool looks like for me and then I'll show how the first two tools that I chose shared little similarities with this platonic ideal. Finally, I'll show how Astro shares many similarities with this platonic ideal.
 
-## Why Not Wix and Wordpress
+Note, I could simply have created my own tool to generate this blog. But I opted not to. It would be a cool and interesting exercise. But it also would have been a big time commitment with very slow results, and I'm at a point where I want to post things on my website quickly. But who knows, maybe one day I'll get bored and create my own blog-site generating tool, like [Bob Nystrom did](https://github.com/munificent/journal).
+
+## Why not Wix and Wordpress
 
 Before I get started, I'll note that I won't write about non-technical website builders like Wix or Wordpress here, I'll only talk about client side web frameworks. This is for a few reasons. 
 
@@ -39,7 +41,7 @@ The last reason is laziness. I realize that I could probably become a Wix/Wordpr
 
 5. The tool I choose does not need to generate a site with a virtual DOM. There's no need for my blogging website to make dynamic changes to the DOM. There's no need for my blogging website to download and execute a large JavaScript bundle at startup. This feels like unnecessary overhead.
 
-## First Attempt: Elm
+## First attempt: Elm
 
 The first time I tried was in 2020. At that point I had just learned Elm and I was obsessed with purely functional programming. I had also already written the entire front-end of app for a startup that I was working at in Elm. So, it seemed natural to just use Elm for a basic blogging website.
 
@@ -49,6 +51,7 @@ Lets see how it stacks up against the criteria above:
 | Ability to create posts list | x    |      |
 | Dynamic routes               | x    |      |
 | Markdown support             |      | x    |
+| Tailwind support             | x    |      |
 | No virtual dom               |      | x    |
 
 Since Elm was designed to be used for building Single Page Applications, I believe one could use it to create a page with a list of posts. I know for a fact it has support for dynamic routes.
@@ -78,6 +81,43 @@ Second of all, I was writing my site in Elm in such a way that I was not using M
 
 Finally, as I mentioned previously, since Elm was designed to make Single Page Applications, my blogging site was rendering on client devices with a JS file that needed to be downloaded and executed, which caused unnecessary slowness/complexity.
 
-## Second Attempt: SSG5
+## Second attempt: ssg
+
+After this headache, I realized I should use a static site generator. I went to the polar opposite extreme and chose to use the simplest possible tool to create my site, a shell script called [ssg](https://www.romanzolotarev.com/ssg.html).
+
+`ssg` is cool because it's only 180 lines of shell code, auto-includes a header and footer on every page, translates `.md` files to `.html`, and generates a nifty `sitemap.xml` file.
+
+Criteria-wise it's better than my Elm approach:
+| Criteria                     | Pass | Fail |
+|----------------------------- |----- |----- |
+| Ability to create posts list | /    |      |
+| Dynamic routes               |      | x    |
+| Markdown support             | x    |      |
+| Tailwind support             | /    |      |
+| No virtual dom               | x    |      |
+
+The problem issue I had with ssg is that it was a bit too simple. I could (probably) do some hacking and change the source code of ssg to make it meet the first criterion. I could also (probably) change the ssg source code to translate my tailwind classes to their CSS equivalents. Up to here, ssg seems fine.
+
+However, changing the source of code of ssg to add support for dynamic routes would be non-trivial. It may even be so complex as to require a completely new script or tool. If I ever wanted any other cool new things on my blog I would have to hope I could somehow code it into the ssg source code or just go without it. And, that felt a bit too limiting.
+
+On the bright side, what it did, it did well. So I was actually able to publish the first iteration of my website using ssg and I used it for some time.
+
+## Current attempt: Astro
+
+Finally, I found Astro. I like Astro because it meets all the criteria:
+- I can create my list of posts with [globbing](https://docs.astro.build/en/tutorial/5-astro-api/1/).
+- It has support for [dynamic routing](https://docs.astro.build/en/guides/routing/#dynamic-routes).
+- I can use it to write [posts in Markdown](https://docs.astro.build/en/tutorial/2-pages/2/). 
+- It has [support for tailwind](https://docs.astro.build/en/guides/integrations-guide/tailwind/#_top).
+- It was [built for content driven sites](https://docs.astro.build/en/concepts/why-astro/#content-driven), not Single Page applications.
 
 
+## Honorable mentions
+
+Aside from Astro, I believe there are other static site generators that I could have used that equally get the job done.
+
+The main tool I would have used instead of Astro would have been to use [SvelteKit](https://kit.svelte.dev/) in [SSG mode](https://kit.svelte.dev/docs/glossary#ssg). I have experience building a full application with Svelte and I've liked it quite a lot. I believe Svelte would have worked well for my case. The only reason I chose Astro over Svelte is that Astro was built with a focus on static site generation, whereas SvelteKit was developed with a feature of allowing static site generating, giving primary focus instead to server side generation. This piece of information might be minor or insignificant. But, it made me worry that as a result, in very specific cases SvelteKit might have more small bugs or more of an awkward API than Astro. 
+
+NextJS would probably also work. But like SvelteKit, it's main use case is server side rendering, not static site generation. So it might lack some optimizations that Astro has. Also, I feel like SvelteKit more than NextJS because it seems to me to be simpler and smaller.
+
+I have not looked into any other static site generators like Eleventy or Hugo or Jekyll, etc. But they may also do the job just as well.
