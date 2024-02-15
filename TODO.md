@@ -13,3 +13,10 @@
 ✓ finish add article about why you chose astro
 * add haskell solution to expression problem and a conclusion
 * add page that lists of all of your tags
+* add good things when managing post
+* add post about the 5 things that you look for in a career
+* add post about the difference between static site generation and server side rendering and single page applications
+* add way to track how many people see a post
+-- not sure if want to do:
+* add sitemap
+* add rss feed
