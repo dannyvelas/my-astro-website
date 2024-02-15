@@ -4,6 +4,12 @@
 ✓ add date to each post
 ✓ add tags to each post
 ✓ add support for tags
-* remove nav component
-* make tags page title more user friendly, like: https://journal.stuffwithstuff.com/category/game-dev/
-* make expression problem post more friendly
+✓ remove nav component
+✓ make tags page title more user friendly, like: https://journal.stuffwithstuff.com/category/game-dev/
+✓ remove expression problem post from Notes
+✓ change expression problem date to be when it was created
+✓ make expression problem post more friendly
+✓ add section to index page linking to source code and an article saying why you chose Astro over other sites
+✓ finish add article about why you chose astro
+* add haskell solution to expression problem and a conclusion
+* add page that lists of all of your tags
