@@ -11,12 +11,13 @@
 ✓ make expression problem post more friendly
 ✓ add section to index page linking to source code and an article saying why you chose Astro over other sites
 ✓ finish add article about why you chose astro
+* add post about the 5 things that you look for in a career
 * add haskell solution to expression problem and a conclusion
 * add page that lists of all of your tags
-* add good things when managing post
-* add post about the 5 things that you look for in a career
 * add post about the difference between static site generation and server side rendering and single page applications
+-- lower priority
 * add way to track how many people see a post
 -- not sure if want to do:
+* add good things when managing post
 * add sitemap
 * add rss feed
