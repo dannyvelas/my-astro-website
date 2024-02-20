@@ -11,11 +11,11 @@ tags: ["career"]
 
 * Bad reasons for being an entrepreneur
 For a long time, almost every day after work, I would spend hours trying to build my own income-generating business. I sacrificed time with my girlfriend, personal interests, time talking to family, etc. in doing so. I did this because I thought that the only job that would suit me is being an entrepreneur. I had several reasons:
-- [Tr] Entrepreneurs (in some cases) have more some freedom with when and how they want to work.
-- [F] Entrepreneurs get better financial returns relative to the amount of work that they put in. 
-- [B] Starting and running a business is almost universally regarded as a difficult thing to do. So, if I could do this, other people become impressed and might even feel some sense of admiration towards me.
-- [Tr] Accomplishing big goals is more exciting and more motivating when one is an entrepreneur than when one is an employee.
-- [F] It would be easier for me to get paid for doing what I love as an entrepreneur rather than as an employee.
+- Starting and running a business is almost universally regarded as a difficult thing to do. So, if I could do this, other people become impressed and might even feel some sense of admiration towards me.
+- Entrepreneurs get better financial returns relative to the amount of work that they put in. 
+- It would be easier for me to get paid for doing what I love as an entrepreneur rather than as an employee.
+- Entrepreneurs (in some cases) have more some freedom with when and how they want to work.
+- Accomplishing big goals is more exciting and more motivating when one is an entrepreneur than when one is an employee.
 
 I had two earnest attempts. In my second attempt, I worked with two friends. We worked together for roughly six months before deciding to disband. Afterward, I met up for drinks with one of the friends to catch up and reflect on our time working together. As we reflected, my friend pressed me about why I decided in the first place that I wanted to do entrepreneurship. I gave him the reasons above. But, he made me realize that, for me specifically, two of these reasons are false, one of these reasons is a bad reason, and only two of them are valid. The two that are valid, of course, come with difficult trade-offs. So, they would only be good reasons if I would be willing to make sacrifices. I'll analyze each reason to show why.
 
@@ -55,7 +55,7 @@ I believed that entrepreneurs have more freedom with their working conditions be
 
 This is obviously all really nice but there's a flip side. My friends' parents would come home at 6pm with the freedom to completely forget everything about work. My dad did not have this luxury. He was responsible for the operation of a business. If things didn't go well, it would be very bad news for him and all the people that depended on a salary from his company. So, he would often think about work and have to jump on calls, sometimes late afternoons, weekends, or in vacations.
 
-It is true that as an entrepreneur, I'd have a certain level of greater freedom because I wouldn't be held accountable by a boss and I wouldn't be forced to work 9-5. But, it comes with a cost. I'd be forced to hold myself accountable which can be very difficult. It also means I may end up working more than an average employee. And, I won't have a built-in schedule that defines when I can take time off and relax without needing to worry about work. Actually, I believe one of the podcast hosts that I mentioned earlier would agree. In an episode, [[https://pca.st/fGVr#t=2157.0][he spoke about how he needed to work 6 days a week, sometimes 7]]. And, how it's been very difficult for him to take a vacation [[https://pca.st/fGVr#t=3425.0][because it has always felt like he can do more work]].
+It is true that as an entrepreneur, I'd have a certain level of greater freedom because I wouldn't be held accountable by a boss and I wouldn't be forced to work 9-5. But, I'd also be forced to hold myself accountable which can be very difficult. It also means I may end up working more than an average employee. And, I won't have a built-in schedule that defines when I can take time off and relax without needing to worry about work. Actually, I believe one of the podcast hosts that I mentioned earlier would agree. In an episode, [[https://pca.st/fGVr#t=2157.0][he spoke about how he needed to work 6 days a week, sometimes 7]]. And, how it's been very difficult for him to take a vacation [[https://pca.st/fGVr#t=3425.0][because it has always felt like he can do more work]].
 
 *** Accomplishing big goals is more exciting and more motivating when one is an entrepreneur than when one is an employee
 This point might be true. But, similar to the former point, it comes with a trade-off. 
@@ -65,4 +65,4 @@ Suppose there are two hypothetical people, who are both separately building thei
 So, in sum, it seems like the highs for me would feel higher, but the stress, work, and risks are higher too.
 
 ** Reflection
-The reason I wanted to be an entrepreneur is that I thought it would be the way to obtain my dream job. This conversation made me realize that I may have decided that I wanted to be an entrepreneur, and tried to retroactively fit that image to be my dream job. Instead, it might make more sense to list qualities that a job would have be and from there, see what jobs I would like. I speak more about the idea of a "dream job" in my next post *TODO: link here*.
+The reason I wanted to be an entrepreneur is that I thought it would be the way to obtain my dream job. This conversation made me realize that I may have decided that I wanted to be an entrepreneur, and tried to retroactively fit that image to be my dream job. Instead, it might make more sense to list qualities that a job would have be and from there, see what jobs I would like. I'll speak more about the idea of a "dream job" in my next post.

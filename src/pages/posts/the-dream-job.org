@@ -37,4 +37,14 @@ I've always been someone with a lot of side projects. The goal of my side projec
 
 As such, I've spent a lot of time trying to figure out how I could somehow determine what job would suit my interests and skills.
 
-*TODO: talk about 5 things that i've found that i care about*
+At first, I thought that entrepreneurship was obviously the answer. But after some reflection, (*TODO cite*), I realized that it makes more sense to start by creating a list of qualities that I would desire in a job. The idea is that I could use this list as a guide to navigate my career.
+
+It would be an oversimplification to treat this list as a checklist, and qualify a given job by the amount of items that it shares with my quality list. The answer of whether a given job shares a quality with my list is not binary. It is a sliding scale. If two of my list qualities are "being easy to commute to" and "being interesting," a job might meet score a 40% at first criterion and an 85% at the other.
+
+In this post I'll share the first draft of the top five qualities I seek in a job, in no particular order.
+
+** First quality: working on things that are technically interesting to me
+** Second quality: working with talented people
+** Third quality: the opportunity to learn and grow
+** Fourth quality: working on a product that I am passionate about
+** Fifth quality: bragging rights
