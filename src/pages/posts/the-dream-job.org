@@ -48,7 +48,7 @@ I've always been a very curious person and I've been very interested in learning
 
 I feel strongly about these interests because learning these things is just fun to me and I feel like I can get good at them, which is also fun.
 
-This isn't on must list just because of fun though. I'm also motivated by fear. I've seen how many people older than me, who at one point were developers like me, at a certain age left behind their days of learning technical details to transition into leadership and design roles. This makes me worry that my time to learn technical things has a deadline. I worry that too soon, I will become too old and too disinterested in learning technical things.
+This isn't on my list just because of fun though. I'm also motivated by fear. I've seen how many people older than me, who at one point were developers like me, at a certain age left behind their days of learning technical details to transition into leadership and design roles. This makes me worry that my time to learn technical things has a deadline. I worry that too soon, I will become too old and too disinterested in learning technical things.
 
 Also, it seems like at around the age of 30-40, [[https://www.scientificamerican.com/podcast/episode/cognitive-decline-sets-in-around-ag-12-01-08/][the brain starts to gradually become worse]] at learning new things. So, I'd like to learn as much and as fast as possible while I still can.
 
@@ -62,7 +62,7 @@ Right now, I am extremely lucky to work with someone that constantly makes me fe
 ** Working on a product that I am passionate about
 I believe that in an ideal job, I'd be building a product or service that I genuinely care about. Maybe I'll care because I love the domain, or because it solves a problem I personally find important and relate to, or because its for a group of people that I genuinely care about.
 
-To be honest, I'm not quite sure what this would passion would be yet, because so far I've optimized my personal projects and professional experience to revolved around technical learnings over interest in a domain. I guess it would be cool to be passionate not only about how I learn to build things but also about what gets built as a result.
+To be honest, I'm not quite sure what this would passion would be yet, because so far I've optimized my personal projects and professional experience to revolve around technical learnings over interest in a domain. I guess it would be cool to be passionate not only about how I learn to build things but also about what gets built as a result.
 
 I do know that I've gotten a lot of enjoyment from my limited experiences tutoring and teaching others how to do things. So right now I believe that if I were to work on a product that helps others learn, I might become passionate about the product. But, I'm not totally sure right now.
 
