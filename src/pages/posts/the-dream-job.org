@@ -41,10 +41,29 @@ At first, I thought that entrepreneurship was obviously the answer. But after so
 
 It would be an oversimplification to treat this list as a checklist, and qualify a given job by the amount of items that it shares with my quality list. The answer of whether a given job shares a quality with my list is not binary. It is a sliding scale. If two of my list qualities are "being easy to commute to" and "being interesting," a job might meet score a 40% at first criterion and an 85% at the other.
 
-In this post I'll share the first draft of the top five qualities I seek in a job, in no particular order.
+Below are the top three qualities I seek in a job, in no particular order. If I'm being honest, having a job that gives a really high income or comes with bragging rights would be nice too. But vanity aside, I think these are better reasons:
 
-** First quality: working on things that are technically interesting to me
-** Second quality: working with talented people
-** Third quality: the opportunity to learn and grow
-** Fourth quality: working on a product that I am passionate about
-** Fifth quality: bragging rights
+** The ability to learn and grow in things that are practically and technically interesting to me
+I've always been a very curious person and I've been very interested in learning technical things in the realm of computer science. I've also been interested in practical things that are useful in my career.
+
+I feel strongly about these interests because learning these things is just fun to me and I feel like I can get good at them, which is also fun.
+
+This isn't on must list just because of fun though. I'm also motivated by fear. I've seen how many people older than me, who at one point were developers like me, at a certain age left behind their days of learning technical details to transition into leadership and design roles. This makes me worry that my time to learn technical things has a deadline. I worry that too soon, I will become too old and too disinterested in learning technical things.
+
+Also, it seems like at around the age of 30-40, [[https://www.scientificamerican.com/podcast/episode/cognitive-decline-sets-in-around-ag-12-01-08/][the brain starts to gradually become worse]] at learning new things. So, I'd like to learn as much and as fast as possible while I still can.
+
+** Working with talented people
+This point might be largely related to the first point, because more often than not, to get learn and grow in a domain, you will need to work with people that are talented and can help you grow.
+
+But, I'll mention it here for emphasis. I like to constantly put myself in rooms where I have tons of things to learn from others. It feels like this would be a very effective way to constantly find ways in which I'm doing things wrong and improve on them.
+
+Right now, I am extremely lucky to work with someone that constantly makes me feel like a novice. My experience and accomplishments might seem nice in isolation, but they pale in comparison to theirs. Because they've constantly shown me ways in which I can improve, I've been able to learn and accomplish things really quickly.
+
+** Working on a product that I am passionate about
+I believe that in an ideal job, I'd be building a product or service that I genuinely care about. Maybe I'll care because I love the domain, or because it solves a problem I personally find important and relate to, or because its for a group of people that I genuinely care about.
+
+To be honest, I'm not quite sure what this would passion would be yet, because so far I've optimized my personal projects and professional experience to revolved around technical learnings over interest in a domain. I guess it would be cool to be passionate not only about how I learn to build things but also about what gets built as a result.
+
+I do know that I've gotten a lot of enjoyment from my limited experiences tutoring and teaching others how to do things. So right now I believe that if I were to work on a product that helps others learn, I might become passionate about the product. But, I'm not totally sure right now.
+
+Right now, I get a lot of satisfaction from the building part alone.
