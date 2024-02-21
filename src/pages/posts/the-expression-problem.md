@@ -71,7 +71,7 @@ We will show many different non-solutions to modeling this problem. Some approac
 
 ## Using Sum Types in a Functional Language
 
-For our first approach we will model this problem using a functional language using sum types. We will see at the end if this approach satisfies all four criteria of solving the expression problem.
+For our first approach we will model this problem using a functional language using sum types. We will see at the end if this approach satisfies all four criteria for solving the expression problem.
 
 
 ### Base Package
@@ -105,7 +105,7 @@ let save = function
 
 ### Extending Behaviors
 
-Now that we've established an idea of the base package looks like, let's see how we can extend the behaviors of the base package without modifying it. The simplest approach would be to import the base package to another module. In that module, we can create one pattern matching function for each functionality we would like to add. Here are the definitions for export, format, and select in a module that imports the base package:
+Now that we've established an idea of what the base package looks like, let's see how we can extend the behaviors of the base package without modifying it. The simplest approach would be to import the base package to another module. In that module, we can create one pattern matching function for each functionality we would like to add. Here are the definitions for export, format, and select in a module that imports the base package:
 
 ```ocaml
 let export = function
@@ -129,7 +129,7 @@ With this approach, our new package, which imports the base package, adds new be
 
 ### Extending Representations
 
-With this simple and idiomatic approach we've taken, if we wanted to add a new mode type, like "Picture", our approach would require us to modify the base package. This is because the simplest way to add a new representation of the "Picture" mode would be to add a new "Picture" branch to the "mode" type. Once we add this branch, we would also need to modify all of the pattern matching functions of the base package. This is because the "load", "edit", and "save" functions won't compile if their pattern matching expression is not exhaustive of all of the mode types. So, we would need to add one new "Picture" branch to each of those functions as well.
+With this simple and idiomatic approach, if we wanted to add a new mode type, like "Picture", our approach would require us to modify the base package. This is because the simplest way to add a new representation of the "Picture" mode would be to add a new "Picture" branch to the "mode" type. Once we add this branch, we would also need to modify all of the pattern matching functions of the base package. This is because the "load", "edit", and "save" functions won't compile if their pattern matching expression is not exhaustive of all of the mode types. So, we would need to add one new "Picture" branch to each of those functions as well.
 
 
 ### Evaluation
@@ -145,8 +145,7 @@ In this approach, it was very easy to add columns to the table (behaviors) witho
 
 
 ## Using Classes and Methods in an Object Oriented Language
-
-Now, lets model our problem using classes and methods in an object oriented language and see how many criteria this approach passes.
+Now, let's model our problem using classes and methods in an object oriented language and see how many criteria this approach passes.
 
 
 ### Base Package
@@ -199,7 +198,7 @@ class Voice {
 
 With this approach, it is very difficult to add a new behavior, like "export", to the original modes without modifying the base package.
 
-This approach would require us to add a new "export" method to the "Prose/Whiteboard/Spreadsheet" classes. It's impossible to add a new method to these classes in a statically-typed way without editing the files where these classes are defined.
+This approach would require us to add a new "export" method to the "Prose/Whiteboard/Spreadsheet" classes. It's impossible to add a new method to these classes in a statically typed way without editing the files where these classes are defined.
 
 
 ### Evaluation
@@ -218,7 +217,7 @@ In this approach, it was very easy to add rows to the table without modifying th
 
 We can use an abstraction that makes it easy to add behaviors to a class, outside of its definition by defining a function outside of a class. The first parameter of this function would be an instance of the class. The body of the function will be the definition of the behavior.
 
-If we extend this idea to work for multiple classes, the type of the first parameter of this function would be a base class. This would allow us to pass instances of derived classes to our function. We can then use a control statement to define branches of behavior, and associate each branch to a derived class. The control statement would dynamically check the type of the instance and dispatch the corresponding branch.
+If we extend this idea to work for multiple classes, the type of the first parameter of this function would be a base class. This would allow us to pass instances of derived classes to our function. We can then use a control statement to define branches of behavior and associate each branch to a derived class. The control statement would dynamically check the type of the instance and dispatch the corresponding branch.
 
 
 ### Base Package
@@ -271,9 +270,9 @@ Unfortunately, it is difficult to add a new class. If we were to add a `Picture`
 
 This approach resembles the approach where we used pattern matching functions. As such, this approach similarly does not solve the expression problem. This approach made it easier to add behaviors in downstream packages and simultaneously made it harder to add representations.
 
-There's another concern with this approach; the behavior functions in this solution have a performance issue that the pattern matching functions don't have. The behavior functions here have a time complexity of O(n) to find the branch that corresponds to the input mode. If we have `n` modes, a behavior function will need to execute `n` checks before it finds the branch that corresponds to the last mode. This can be very slow for large `n`. In contrast, a pattern matching function will dispatch the branch corresponding to a mode in constant time, as long as it it's argument is a sum type.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
+There's another concern with this approach; the behavior functions in this solution have a performance issue that the pattern matching functions don't have. The behavior functions here have a time complexity of O(n) to find the branch that corresponds to the input mode. If we have `n` modes, a behavior function will need to execute `n` checks before it finds the branch that corresponds to the last mode. This can be very slow for large `n`. In contrast, a pattern matching function will dispatch the branch corresponding to a mode in constant time, as long as its argument is a sum type.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
 
-This solution is also different to the pattern matching solution in that it sacrifices static type safety. As we develop our program and add Mode classes, we may occasionally forget to add a new branch to every control statement. In this case, our compiler won't be able to tell us. We'll simply get a runtime ArgumentException.
+This solution is also different from the pattern matching solution in that it sacrifices static type safety. As we develop our program and add Mode classes, we may occasionally forget to add a new branch to every control statement. In this case, our compiler won't be able to tell us. We'll simply get a runtime ArgumentException.
 
 This approach passes only 2 of 4 criteria:
 
@@ -287,7 +286,7 @@ This approach passes only 2 of 4 criteria:
 
 ## The Visitor Pattern
 
-If we want to separate the behaviors of class from its definition, it is a much better approach to use the visitor pattern. The visitor pattern also allows us to define a function in a downstream package and associate them to an imported class. It is a better approach than using dynamic type checking because the visitor pattern allows your code to dispatch behavior functions in constant time, instead of linear. Also, the visitor pattern doesn't prescribe dynamic type checking. So, your compiler can guide you to make sure all behavior functions are implemented.
+If we want to separate the behaviors of class from its definition, it is a much better approach to use the visitor pattern. The visitor pattern also allows us to define a function in a downstream package and associate it to an imported class. It is a better approach than using dynamic type checking because the visitor pattern allows your code to dispatch behavior functions in constant time, instead of linear. Also, the visitor pattern doesn't prescribe dynamic type checking. So, your compiler can guide you to make sure all behavior functions are implemented.
 
 
 ### Base Package
@@ -359,7 +358,7 @@ In contrast to the approach where we used dynamic type checking, the loading fun
 
 ### Extending Behaviors
 
-With the visitor pattern, we can easily extend the behavior of representations in downstream packages, in way that is similar to the control statement approach, or the pattern matching approach. All we need to do is define new visitors:
+With the visitor pattern, we can easily extend the behavior of representations in downstream packages, in a way that is similar to the control statement approach, or the pattern matching approach. All we need to do is define new visitors:
 
 ```java
 class ExportVisitor implements Visitor {
@@ -439,7 +438,7 @@ class Picture extends Mode {
 
 ### Evaluation
 
-In this way, were were able to adapt the Visitor pattern to pass the first criterion, but unfortunately, to do this, we had to resort to use dynamic casting.
+In this way, were were able to adapt the Visitor pattern to pass the first criterion, but unfortunately, to do this, we had to resort to using dynamic casting.
 
 Notice that the `accept` method of the `Picture` class must have an argument of type `Visitor` to properly extend the `Mode` class. We needed to cast this visitor to be of type `VisitorWithPicture` to make this approach work. All in all, this approach passed 3 of 4 criteria:
 
@@ -530,7 +529,7 @@ As mentioned before, multi-methods in Clojure solve 3 of 4 criteria:
 
 ## Protocols in Clojure
 
-In addition to using multimethods in Clojure, we can also try to use protocols to solve the expression problem. Of course, we will not passing the static type checking criterion. But, it is interesting and instructional to see how we can easily pass the other three criteria.
+In addition to using multimethods in Clojure, we can also try to use protocols to solve the expression problem. Of course, this approach will not pass the static-type checking criterion. But, it is interesting and instructional to see how we can easily pass the other three criteria.
 
 
 ### Base Package
@@ -561,7 +560,7 @@ Just as before, we can define our `Mode` types as records. For behaviors, instea
 
 ### Extending Behaviors
 
-We can add a new behavior in a downstream packages, like `export`, by defining a new protocol with `defprotocol` and making sure that the base types implement this new protocol by using `extend-protocol`:
+We can add a new behavior in downstream packages, like `export`, by defining a new protocol with `defprotocol` and making sure that the base types implement this new protocol by using `extend-protocol`:
 
 ```clojure
 (defprotocol Export
@@ -608,7 +607,7 @@ As mentioned before, protocols in Clojure solve 3 of 4 criteria:
 
 -   Why use a multimethod in Clojure? Isn't this equivalent to using a pattern matching function?
     -   There's no such thing as native pattern matching functionality in clojure. At least, not in the way it exists in typed functional languages like OCaml or Haskell. The closest thing is `cond` or `condp`.
-    -   You could use these functions instead of multimethods but there is one big advantage to multimethods: the branches of multimethods can be extended in downstream files. The branches of `cond` expressions cannot. This means that multimethods can be used to solve the expression problem in clojure (if we ignore the restriction of using static types).
+    -   You could use these functions instead of multimethods but there is one big advantage to multimethods: the branches of multimethods can be extended in downstream files. The branches of `cond` expressions cannot. This means that multimethods can be used to solve the expression problem in Clojure (if we ignore the restriction of using static types).
 -   Why use the visitor pattern in object oriented languages? Isn't this equivalent to using a switch statement?
     -   It is not. It dispatches a behavior function in constant time, unlike a switch statement.
 -   In languages with support for Sum types, like Rust/Scala, is there a need for the visitor pattern?
@@ -616,4 +615,4 @@ As mentioned before, protocols in Clojure solve 3 of 4 criteria:
 
 ## Footnotes
 
-<sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> One might ask if we could use switch statements to dispatch the branch corresponding to a mode in constant time. But the answer is no. For a switch statement to dispatch the correct branch in constant time, the compiler must make the switch statement behave like a jump table. A jump table needs the switch argument to be a variable with a type that can be used to index a set of cases. Characters and integers are the only types that satisfy this criteria, not strings. Since we use string names for modes, we had to resort to using an if/else-if statement instead. In other object-oriented languages like Java (as of version 7) and Go, there is support for switch statements that take an input of type string. But compilers for these languages don't dispatch the correct case in constant. Instead, they search for the correct case linearly or with binary search. There are some object-oriented languages with support for sum types, like Rust and Scala (and maybe even C++). In these languages, it would be possible to implement a behavior function as a pattern matching function that dispatches the branch corresponding to a mode in constant time.
+<sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> One might ask if we could use switch statements to dispatch the branch corresponding to a mode in constant time. But the answer is no. For a switch statement to dispatch the correct branch in constant time, the compiler must make the switch statement behave like a jump table. A jump table needs the switch argument to be a variable with a type that can be used to index a set of cases. Characters and integers are the only types that satisfy this criterion, not strings. Since we use string names for modes, we had to resort to using an if/else-if statement instead. In other object-oriented languages like Java (as of version 7) and Go, there is support for switch statements that take an input of type string. But compilers for these languages don't dispatch the correct case in constant. Instead, they search for the correct case linearly or with a binary search. There are some object-oriented languages with support for sum types, like Rust and Scala (and maybe even C++). In these languages, it would be possible to implement a behavior function as a pattern matching function that dispatches the branch corresponding to a mode in constant time.
