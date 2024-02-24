@@ -1,12 +1,5 @@
 import type { Config, Context } from "@netlify/edge-functions";
 import { createClient } from "@supabase/supabase-js";
-import { createLogger, format, transports } from "npm:winston";
-
-export const logger = createLogger({
-  level: "http",
-  format: format.combine(format.json(), format.timestamp()),
-  transports: [new transports.Console()],
-});
 
 const supabaseUrl = "https://yntmmqxawtjigczxvoas.supabase.co";
 const supabaseKey = process.env.SUPABASE_PRIVATE_KEY;
@@ -23,7 +16,7 @@ export default async function (
   try {
     reqBody = await req.json();
   } catch (err) {
-    logger.http(`no body or malformed body`, { error: err });
+    console.log(`warning: no body or malformed body: ${err}`);
     return new Response("no body or malformed body");
   }
 
@@ -33,7 +26,7 @@ export default async function (
       ? "missing ip"
       : null;
   if (message) {
-    logger.http("missing fields", { error: message });
+    console.log(`warning: ${message}`);
     return new Response(message);
   }
 
@@ -45,13 +38,13 @@ export default async function (
       country: context.geo.country?.name,
     });
     if (error) {
-      logger.info(`psql error inserting into supabase`, { error });
+      console.log(`psql error inserting into supabase: ${error}`);
       return new Response("internal server error");
     }
 
     return new Response("ok");
   } catch (err) {
-    logger.info(`exception inserting into supabase`, { error: err });
+    console.log(`exception inserting into supabase: ${err}.`);
     return new Response("internal server error");
   }
 }
