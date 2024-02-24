@@ -11,9 +11,12 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
+    "@astrojs/netlify": "^5.1.2",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource-variable/lora": "^5.0.9",
     "@fontsource-variable/rubik": "^5.0.20",
+    "@netlify/edge-functions": "^2.3.1",
+    "@supabase/supabase-js": "^2.39.7",
     "astro": "^4.2.6",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
