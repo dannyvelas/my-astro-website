@@ -1,11 +1,15 @@
 import type { Context } from "@netlify/functions";
-import type { ServiceAccount } from "firebase-admin/app";
 import { initializeApp, cert } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
-import serviceAccount from "./tiny-blog-database-e4e6d46e92f3.json";
+import "dotenv/config";
+
+const creds = process.env.FIREBASE_CREDS;
+if (!creds) {
+  throw Error("internal server error");
+}
 
 initializeApp({
-  credential: cert(serviceAccount as ServiceAccount),
+  credential: cert(creds),
 });
 
 const db = getFirestore();
