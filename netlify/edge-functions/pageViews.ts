@@ -7,4 +7,4 @@ export default async function (
   return new Response("Hello world");
 }
 
-export const config: Config = { path: "/test" };
+export const config: Config = { path: "/pageViews" };
