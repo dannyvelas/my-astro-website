@@ -11,8 +11,8 @@
 ✓ make expression problem post more friendly
 ✓ add section to index page linking to source code and an article saying why you chose Astro over other sites
 ✓ finish add article about why you chose astro
+✓ add way to track how many people see a post
 * add footer
-* add way to track how many people see a post
 * add post about the new language you want to create
 * add post about the 5 things that you look for in a career
 * add haskell solution to expression problem and a conclusion
