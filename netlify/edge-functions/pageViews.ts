@@ -24,24 +24,22 @@ export default async function (
       return new Response(message);
     }
 
-    return new Response(
-      JSON.stringify({
-        path: reqBody.path,
-        ip: context.ip,
-        city: context.geo.city,
-        country: context.geo.country,
-      })
-    );
+    const { error } = await supabase.from("page_views").insert({
+      path: reqBody.path,
+      ip: context.ip,
+      city: context.geo.city,
+      country: context.geo.country?.name,
+    });
+    if (error) {
+      console.log(`error writing to supabase: ${error}`);
+      return new Response("internal server error");
+    }
+
+    return new Response("ok");
   } catch (err) {
     console.log(`error in handler: ${err}.`);
     return new Response("internal server error");
   }
-  //const { data, error } = await supabase.from("page_views").insert({
-  //  path:
-  //});
-  //if (error) {
-  //  return new Response("internal server error reading from page_views");
-  //}
 }
 
 export const config: Config = { path: "/pageViews" };
