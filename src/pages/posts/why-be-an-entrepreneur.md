@@ -39,7 +39,7 @@ So, in short, this is a bad reason that also does not justify being an entrepren
 
 I think this reason is straight-up false most of the time. It might be true for a small portion of entrepreneurs, those that have become wildly successful. But even then, this is most likely true for those who are very lucky, or for those who have spent many difficult years working much harder and stressing out much more than their employee counterparts.
 
-A podcast host of [a show I listen to](https://www.relay.fm/cortex), hosted by two entrepreneurs, [once spoke about how](https://pca.st/KqpS#t=5112.0) to become a successful entrepreneur, he had to work so hard that for years, he sacrificed the entirety of his social life and his sleep, to be able to start his business. I could be wrong, but I believe that to this day he and his co-host work probably around the same as the average employee. But, this is after many years of a lot more work.
+A podcast host of [a show I listen to](https://www.relay.fm/cortex), hosted by two entrepreneurs, [once spoke about how](https://pca.st/KqpS#t=5112.0) to become a successful entrepreneur, he had to work so hard that for years, he sacrificed a lot of sleep and the entirety of his social life, to be able to start his business. I could be wrong, but I believe that to this day he and his co-host work probably around the same as the average employee. But, this is after many years of a lot more work.
 
 So, I believe this is often a false reason that does not justify being an entrepreneur.
 
@@ -58,7 +58,7 @@ At least to me right now, it seems like these interests are a bit difficult to c
 
 There's probably a better chance of someone being able to build and commercialize a product with knowledge of systems development. But a successful product would most likely come from an expert who made some bleeding-edge discovery in the field...aka not me. I'm at the very beginning of my path of learning systems development. So at least right now, I would more likely be able to get paid as an entry-level systems developer at a company than be pushing [the frontier of knowledge](https://paulgraham.com/getideas.html).
 
-The remaining interests that I listed is of a slightly different category. This is more of a "domain," rather than a technical, interest. If I wanted to make my career about teaching people things, I could either join a company with a product that specializes in teaching others. Or, I could create a product or service to do so. It seems to me like doing the first would probably be much, much easier.
+The remaining interests that I listed are of a slightly different category. This is more of a "domain," rather than a technical, interest. If I wanted to make my career about teaching people things, I could either join a company with a product that specializes in teaching others. Or, I could create a product or service to do so. It seems to me like doing the first would probably be much, much easier.
 
 
 ## Valid reasons
