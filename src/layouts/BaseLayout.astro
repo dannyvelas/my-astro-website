@@ -9,23 +9,13 @@ const { title } = Astro.props;
 ---
 
 <script>
-  // increment page view for this user
-  const response = await fetch("/pageViews", {
+  fetch("/pageViews", {
     method: "POST",
     referrerPolicy: "same-origin",
     body: JSON.stringify({
       path: encodeURIComponent(window.location.pathname),
     }),
   });
-  if (!response.ok) {
-    const responseText = await response.text();
-    console.error(
-      `error fetching count. text: ${responseText}. status: ${response.status}.`
-    );
-  } else {
-    const joke = await response.text();
-    console.log(`joke is: ${joke}.`);
-  }
 </script>
 
 <html lang="en">
