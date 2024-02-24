@@ -1,4 +1,4 @@
-import type { Config, Context } from "@netlify/functions";
+import type { Context } from "@netlify/functions";
 import { initializeApp, cert } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 import fs from "fs/promises";
@@ -25,5 +25,3 @@ export default async function (
 
   return new Response(JSON.stringify(content.data()));
 }
-
-export const config: Config = { path: "/pageViews" };
