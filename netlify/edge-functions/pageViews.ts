@@ -12,18 +12,25 @@ export default async function (
   req: Request,
   context: Context
 ): Promise<Response> {
+  let reqBody: any;
   try {
-    const reqBody = await req.json();
-    const message = !reqBody.path
-      ? "error: path not found"
-      : !context.ip
-        ? "error: missing ip"
-        : null;
-    if (message) {
-      console.log(message);
-      return new Response(message);
-    }
+    reqBody = await req.json();
+  } catch (err) {
+    console.log(`warning: no body or malformed body: ${err}`);
+    return new Response("no body or malformed body");
+  }
 
+  const message = !reqBody.path
+    ? "path not found"
+    : !context.ip
+      ? "missing ip"
+      : null;
+  if (message) {
+    console.log(`warning: ${message}`);
+    return new Response(message);
+  }
+
+  try {
     const { error } = await supabase.from("page_views").insert({
       path: reqBody.path,
       ip: context.ip,
@@ -31,13 +38,13 @@ export default async function (
       country: context.geo.country?.name,
     });
     if (error) {
-      console.log(`error writing to supabase: ${error}`);
+      console.log(`psql error inserting into supabase: ${error}`);
       return new Response("internal server error");
     }
 
     return new Response("ok");
   } catch (err) {
-    console.log(`error in handler: ${err}.`);
+    console.log(`exception inserting into supabase: ${err}.`);
     return new Response("internal server error");
   }
 }
