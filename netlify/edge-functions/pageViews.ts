@@ -1,20 +1,29 @@
 import type { Config, Context } from "@netlify/edge-functions";
+import { initializeApp, cert } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
+import fs from "fs/promises";
 
-const jokes = [
-  "My New Years resolution is to stop leaving things so late.",
-  "Child: Dad, make me a sandwich. Dad: Poof! You're a sandwich.",
-  "The invention of the wheel was what got things rolling",
-  "What kind of music do mummies like? Rap",
-  "What do you get when you cross a chicken with a skunk? A fowl smell!",
-];
+const serviceAccount = await fs.readFile(
+  "../../tiny-blog-database-e4e6d46e92f3.json"
+);
+
+initializeApp({
+  credential: cert(serviceAccount.toString()),
+});
+
+const db = getFirestore();
 
 export default async function (
   _req: Request,
   _ctxt: Context
 ): Promise<Response> {
-  const randomIndex = Math.floor(Math.random() * jokes.length);
-  const randomJoke = jokes[randomIndex];
-  return new Response(randomJoke);
+  const content = await db
+    .collection("pageViews")
+    .doc("C0fWPSKPN1n8Dthu6t1Y")
+    .get();
+  if (!content.exists) return new Response("DOES NOT EXIST");
+
+  return new Response(JSON.stringify(content.data()));
 }
 
 export const config: Config = { path: "/pageViews" };
