@@ -10,7 +10,13 @@ const { title } = Astro.props;
 
 <script>
   // increment page view for this user
-  const response = await fetch("/pageViews");
+  const response = await fetch("/pageViews", {
+    method: "POST",
+    referrerPolicy: "same-origin",
+    body: JSON.stringify({
+      path: encodeURIComponent(window.location.pathname),
+    }),
+  });
   if (!response.ok) {
     const responseText = await response.text();
     console.error(

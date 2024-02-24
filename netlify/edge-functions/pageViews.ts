@@ -9,14 +9,39 @@ if (!supabaseKey) {
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default async function (
-  _req: Request,
-  _ctxt: Context
+  req: Request,
+  context: Context
 ): Promise<Response> {
-  const { data, error } = await supabase.from("page_views").select();
-  if (error) {
-    return new Response("internal server error reading from page_views");
+  try {
+    const reqBody = await req.json();
+    const message = !reqBody.path
+      ? "error: path not found"
+      : !context.ip
+        ? "error: missing ip"
+        : null;
+    if (message) {
+      console.log(message);
+      return new Response(message);
+    }
+
+    return new Response(
+      JSON.stringify({
+        path: reqBody.path,
+        ip: context.ip,
+        city: context.geo.city,
+        country: context.geo.country,
+      })
+    );
+  } catch (err) {
+    console.log(`error in handler: ${err}.`);
+    return new Response("internal server error");
   }
-  return new Response(JSON.stringify(data));
+  //const { data, error } = await supabase.from("page_views").insert({
+  //  path:
+  //});
+  //if (error) {
+  //  return new Response("internal server error reading from page_views");
+  //}
 }
 
 export const config: Config = { path: "/pageViews" };
