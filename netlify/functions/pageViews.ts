@@ -1,14 +1,11 @@
 import type { Context } from "@netlify/functions";
+import type { ServiceAccount } from "firebase-admin/app";
 import { initializeApp, cert } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
-import fs from "fs/promises";
-
-const serviceAccount = await fs.readFile(
-  "../../tiny-blog-database-e4e6d46e92f3.json"
-);
+import serviceAccount from "./tiny-blog-database-e4e6d46e92f3.json";
 
 initializeApp({
-  credential: cert(serviceAccount.toString()),
+  credential: cert(serviceAccount as ServiceAccount),
 });
 
 const db = getFirestore();
