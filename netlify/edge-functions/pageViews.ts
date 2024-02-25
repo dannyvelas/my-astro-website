@@ -44,7 +44,7 @@ export default async function (
       city: context.geo.city,
       country: context.geo.country?.name,
       location: point,
-      referrer: reqBody.referrer,
+      referrer: reqBody.referrer || null,
     });
     if (error) {
       log("INFO", "psql error inserting into supabase", { error });
