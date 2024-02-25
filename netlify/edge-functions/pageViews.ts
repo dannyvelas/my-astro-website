@@ -35,7 +35,7 @@ export default async function (
   const point =
     context.geo.latitude &&
     context.geo.longitude &&
-    `POINT(${context.geo.latitude} ${context.geo.longitude})`;
+    `(${context.geo.longitude},${context.geo.latitude})`;
 
   try {
     const { error } = await supabase.from("page_views").insert({
@@ -43,7 +43,7 @@ export default async function (
       ip: context.ip,
       city: context.geo.city,
       country: context.geo.country?.name,
-      lat_long: point,
+      location: point,
     });
     if (error) {
       log("INFO", "psql error inserting into supabase", { error });
