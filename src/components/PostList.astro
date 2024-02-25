@@ -24,7 +24,7 @@ const years = _.flow(
       <ul class="my-4">
         {year.posts.map((post) => (
           <li class="my-2 flex flex-row gap-4">
-            <p class="w-24 text-xs">{minimalDate(post.date)}</p>
+            <p class="min-w-12 text-xs">{minimalDate(post.date)}</p>
             <a class="hover:underline" href={post.url}>
               {post.frontmatter.title}
             </a>

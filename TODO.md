@@ -20,7 +20,7 @@
 * add post about the difference between static site generation and server side rendering and single page applications
 -- lower priority
 * add last edited time
-* add way for people to change theme
+* add way for people to activate dark theme
 -- not sure if want to do:
 * add good things when managing post
 * add sitemap
