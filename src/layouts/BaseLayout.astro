@@ -6,6 +6,10 @@ interface Props {
 }
 
 const { title } = Astro.props;
+
+for (const pair of Astro.request.headers.entries()) {
+  console.log(`${pair[0]}: ${pair[1]}`);
+}
 ---
 
 <script>
