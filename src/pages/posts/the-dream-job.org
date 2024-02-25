@@ -1,3 +1,6 @@
+#+OPTIONS: toc:nil
+
+#+BEGIN_SRC yaml
 ---
 layout: "../../layouts/BlogLayout.astro"
 title: 'The dream job'
@@ -6,6 +9,7 @@ description: 'Some thoughts I had about what having a "dream" job means, whether
 author: 'Daniel Velasquez'
 tags: ["career"]
 ---
+#+END_SRC
 
 * The dream job
 A friend of mine recently put me on to [[https://www.relay.fm/cortex ][a podcast called Cortex]]. The hosts of this show are two entrepreneurs that discuss, among other things, entrepreneurship. Some of their discussions have made me re-think the idea of a "dream job", as well as what my "dream job" would be.
