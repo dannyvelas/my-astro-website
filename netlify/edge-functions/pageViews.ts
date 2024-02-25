@@ -1,10 +1,7 @@
 import type { Config, Context } from "@netlify/edge-functions";
 import { createClient } from "@supabase/supabase-js";
 
-function log(level: string, message: string, data: Record<string, unknown>) {
-  console.log(JSON.stringify({ level, message, ...data }));
-}
-
+// global connection information
 const supabaseUrl = "https://yntmmqxawtjigczxvoas.supabase.co";
 const supabaseKey = process.env.SUPABASE_PRIVATE_KEY;
 if (!supabaseKey) {
@@ -12,6 +9,7 @@ if (!supabaseKey) {
 }
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+// function exports
 export default async function (
   req: Request,
   context: Context
@@ -34,12 +32,18 @@ export default async function (
     return new Response(message);
   }
 
+  const point =
+    context.geo.latitude &&
+    context.geo.longitude &&
+    `${context.geo.latitude} ${context.geo.longitude}`;
+
   try {
     const { error } = await supabase.from("page_views").insert({
       path: reqBody.path,
       ip: context.ip,
       city: context.geo.city,
       country: context.geo.country?.name,
+      lat_long: point,
     });
     if (error) {
       log("INFO", "psql error inserting into supabase", { error });
@@ -54,3 +58,8 @@ export default async function (
 }
 
 export const config: Config = { path: "/pageViews" };
+
+// helpers
+function log(level: string, message: string, data: Record<string, unknown>) {
+  console.log(JSON.stringify({ level, message, ...data }));
+}
