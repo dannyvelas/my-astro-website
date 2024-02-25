@@ -35,7 +35,7 @@ export default async function (
   const point =
     context.geo.latitude &&
     context.geo.longitude &&
-    `${context.geo.latitude} ${context.geo.longitude}`;
+    `POINT(${context.geo.latitude} ${context.geo.longitude})`;
 
   try {
     const { error } = await supabase.from("page_views").insert({
