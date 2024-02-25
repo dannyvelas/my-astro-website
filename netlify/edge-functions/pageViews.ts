@@ -37,6 +37,10 @@ export default async function (
     context.geo.longitude &&
     `(${context.geo.longitude},${context.geo.latitude})`;
 
+  const referrer = req.headers.get("Referer");
+  console.log(`req.headers.Referer IS: ${referrer}.`);
+  console.log(`reqBody.referrer IS: ${reqBody.referrer}.`);
+
   try {
     const { error } = await supabase.from("page_views").insert({
       path: reqBody.path,
@@ -44,6 +48,7 @@ export default async function (
       city: context.geo.city,
       country: context.geo.country?.name,
       location: point,
+      referrer: reqBody.referrer,
     });
     if (error) {
       log("INFO", "psql error inserting into supabase", { error });

@@ -9,11 +9,13 @@ const { title } = Astro.props;
 ---
 
 <script>
+  console.log(document.referrer);
   fetch("/pageViews", {
     method: "POST",
     referrerPolicy: "same-origin",
     body: JSON.stringify({
       path: encodeURIComponent(window.location.pathname),
+      referrer: document.referrer,
     }),
   });
 </script>
