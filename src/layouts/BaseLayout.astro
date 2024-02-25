@@ -9,8 +9,12 @@ const { title } = Astro.props;
 ---
 
 <script>
+  // extract "from" property from URL query params, if it happens to exist
   const params = new URL(document.location).searchParams;
   const from = params.get("from");
+
+  // now that we've captured it, remove all url query params so that the URL looks nice and minimal again
+  window.history.replaceState(null, "", window.location.pathname);
 
   fetch("/pageViews", {
     method: "POST",
