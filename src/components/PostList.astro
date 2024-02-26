@@ -24,8 +24,6 @@ const years = _.flow(
       <ul class="my-4">
         {year.posts.map((post) => (
           <li class="my-2 flex flex-row gap-4">
-            // leading-6 is a hack to make the date be vertically aligned with
-            // the title
             <p class="min-w-12 text-xs leading-6">{minimalDate(post.date)}</p>
             <a class="hover:underline" href={post.url}>
               {post.frontmatter.title}
