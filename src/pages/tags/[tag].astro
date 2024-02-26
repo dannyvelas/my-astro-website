@@ -19,7 +19,7 @@ const filteredPosts = posts.filter((post) =>
 );
 ---
 
-<BaseLayout pageTitle={tag}>
+<BaseLayout title={tag}>
   <h2 class="text-2xl mt-8 mb-4">Posts about {tagToPrettyName(tag)}</h2>
   <PostList posts={filteredPosts} />
 </BaseLayout>
