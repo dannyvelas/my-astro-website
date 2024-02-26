@@ -17,7 +17,7 @@
 ✓ add post about the 5 things that you look for in a career
 ✓ add last edited time
 -- easy
-* add page that lists of all of your tags
+✓ add page that lists of all of your tags
 * add post about the new language you want to create
 -- medium
 * add haskell solution to expression problem and a conclusion
