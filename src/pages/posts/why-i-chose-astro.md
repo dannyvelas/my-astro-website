@@ -7,8 +7,6 @@ author: 'Daniel Velasquez'
 tags: ["web-frameworks"]
 ---
 
-# Why I chose Astro
-
 This is the third time I'm making my own blogging website. I know, embarrassing right? How hard could it be to make something as simple as a blogging website? What is this, the 90s?
 
 I think it's taken my a while to choose the right approach to making a blogging website because I never made a careful evaluation about the tool I should use to make my blogging website. Every time I wanted to make a website I sort-of just picked a tool and went with it. It wasn't until using it for days that I realized it's suboptimal for some reason I never thought about.

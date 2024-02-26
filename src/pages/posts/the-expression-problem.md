@@ -7,8 +7,6 @@ author: 'Daniel Velasquez'
 tags: ["design-patterns", "clojure", "polymorphism"]
 ---
 
-# The expression problem
-
 When I was a university student, my favorite class was a graduate class called "Compiler Construction." It was also the hardest class I've ever taken. Back in those days, I would track my time using [Toggl](https://toggl.com/). And, I realized that I spent somewhere between 30 to 40h per week, just on that one class. Although it was very time consuming, I enjoyed every minute of it. We had a capstone project of building our own compiler within teams of three. Our compiler would read a language very similar to a subset of Python with static typing and emit RISC V assembly code. I remember going to sleep at late hours, crunching out some final lines of code for that project with sheer excitement about waking up early to go to my team standup first thing in the morning. I can't pinpoint exactly why I was so excited but I think it was a mix of being proud about the code I wrote and being very interested in the subject matter. I think this made me eager to share my updates and come up with new plans in standup.
 
 I think I was interested in low-level development and programming languages before I took that class. But I think that class kind of cemented my interest in these topics because of how much fun I had. Nowadays, I'm trying to see how I can work on projects that gravitate around these interests either personally or professionally.

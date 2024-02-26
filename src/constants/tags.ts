@@ -1,4 +1,10 @@
-const tags = ["design-patterns", "clojure", "polymorphism", "web-frameworks"];
+const tags = [
+  "design-patterns",
+  "clojure",
+  "polymorphism",
+  "web-frameworks",
+  "career",
+];
 
 export const getTags = () => structuredClone(tags);
 

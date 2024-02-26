@@ -7,8 +7,6 @@ author: 'Daniel Velasquez'
 tags: ["career"]
 ---
 
-# Bad reasons for being an entrepreneur
-
 For a long time, almost every day after work, I would spend hours trying to build my own income-generating business. I sacrificed time with my girlfriend, personal interests, time talking to family, etc. in doing so. I did this because I thought that the only job that would suit me was being an entrepreneur. I had several reasons:
 
 -   Starting and running a business is almost universally regarded as a difficult thing to do. So, if I could do this, other people become impressed and might even feel some sense of admiration towards me.
