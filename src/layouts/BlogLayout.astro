@@ -28,9 +28,7 @@ const { frontmatter } = Astro.props;
         }
       </div>
     </div>
-    <h1 class="text-4xl font-extrabold text-gray-900">
-      {frontmatter.title}
-    </h1>
+    <h1 class="text-4xl font-extrabold text-gray-900">{frontmatter.title}</h1>
     <p class="text-xs text-gray-400">
       Last modified: {detailDate(new Date(frontmatter.lastModified))}
     </p>

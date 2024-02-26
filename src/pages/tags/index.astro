@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getTags, tagToPrettyName } from "../../constants/tags.ts";
+---
+
+<BaseLayout title="Tags">
+  <h1 class="text-4xl font-extrabold text-gray-900 mb-8">
+    Topics I write about
+  </h1>
+  <ul class="flex flex-col gap-4">
+    {
+      getTags().map((tag) => (
+        <li class="list-disc list-inside">
+          <a href={`/tags/${tag}`} class="hover:underline">
+            {tagToPrettyName(tag)}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
