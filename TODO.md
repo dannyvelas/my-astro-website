@@ -14,18 +14,22 @@
 ✓ add way to track how many people see a post
 ✓ make `from` dissapear after api request is sent
 ✓ delete firebase project
-* add dream job post
-* add footer
-* add post about the new language you want to create
-* add post about the 5 things that you look for in a career
-* add haskell solution to expression problem and a conclusion
+✓ add post about the 5 things that you look for in a career
+✓ add last edited time
+-- easy
 * add page that lists of all of your tags
-* add post about the difference between static site generation and server side rendering and single page applications
-* add post about why i decided to use 3 apps for note taking, and how they serve different purposes
--- lower priority
-* add last edited time
-* add way for people to activate dark theme
--- not sure if want to do:
+* add post about the new language you want to create
+-- medium
+* add haskell solution to expression problem and a conclusion
 * add good things when managing post
+* add post about why i decided to use 3 apps for note taking, and how they serve different purposes
+-- hard
+* add way for people to activate dark theme
+* add post about the difference between static site generation and server side rendering and single page applications
+
+-- not sure if want to do:
 * add sitemap
 * add rss feed
+
+-- not going to do
+* add footer (no value)
