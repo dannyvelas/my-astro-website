@@ -41,11 +41,13 @@ I believe array languages aren't mutually intelligible with popular languages be
 
 - They use obscure non-ASCII glyphs in their syntax. The use of these unfamiliar glyphs makes it harder to understand for a newcomer.
 - Each function primitive is a glyph. This makes the language very terse because you can apply several functions to a given input in one line. For example, this is the solution to the AOC 2022, day 1 part 1 problem: `⌈/+/¨⍎¨¨((0≠≢¨)⊆⊢)⊃⎕NGET'input.txt'1`.
-- Every function is called using infix notation and this can make order-of-operations seem inconsistent at times. Consider these two APL expressions: (suppose `f` is pre-defined as: `{⊃⍵}`)
+- Every function is called using infix notation and this can make order-of-operations seem inconsistent at times. Consider these two APL expressions: (suppose `f` is this pre-defined function: `{⊃⍵}`)
 - `f⍋3⍴1 2`
 - `f⌺1⊢1 2`
 
 These two expressions have a seemingly similar structure: `<function> <glyph> <number> <glyph> <number> <number>`. However, shockingly enough, these two expressions will have a different evaluation order. The first one will evaluate strictly right-to-left, equivalent to: `f⍋(3⍴(1 2))`. The second expression, in contrast, will evaluate like so: `(f⌺1)(⊢(1 2))`. There are reasons for this, and these reasons might be obvious to a seasoned APL developer. However, this is unintuitive to a newcomer.
+
+You could avoid the order-of-operations ambiguity in the second example by wrapping the first part in parenthesis: `(f⌺1)⊢1 2`. At this point, a newcomer may realize that they can simplify the expression to `(f⌺1)1 2`. Unfortunately, this form is not idiomatic APL. Idimioatic APL seems to be more about terseness than readability for newcomers. Since `(f⌺1)1 2` is 8 characters and `f⌺1⊢1 2` is 7, you'll often see APL developers suggest using `f⌺1⊢1 2` over `(f⌺1)1 2`.
 
 . For example, in Dyalog APL there is [a stencil operator](https://help.dyalog.com/latest/Content/Language/Primitive%20Operators/Stencil.htm). It looks like this: `⌺`. This operator takes two arguments and returns a function. Suppose `f`, `g`, and `Y` are variables in scope. The idiomatic way to use this operator is to use syntax like this: `f⌺g⊢Y`. To a newcomer, the order of operations is not straightforward. The correct answer is that this is equivalent to `(f⌺g)⊢Y`. But, a newcomer might think that this is evaluated as `f⌺(g⊢Y)`. A newcomer would have good reason to guess the latter. 2↑3⍴0
 
