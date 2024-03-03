@@ -9,16 +9,16 @@ tags: ["career"]
 
 ## Background: Learning APL
 
-My background is predominantly in imperative or object-oriented languages. The first language I ever learned was C++. In college, I mostly wrote Java, C, and C++. In my career, I've mostly developed using Typescript and Go. However, I've always had a keen interest in functional programming. As such, I've tried to teach myself functional languages and patterns in my spare time.
+My background is predominantly in imperative or object-oriented languages. The first language I ever learned was C++. In college, I mostly wrote Java, C, and C++. In my career, I've mostly developed using Go and Typescript. However, I've always had a keen interest in functional programming. As such, I've tried to teach myself functional languages and patterns in my spare time.
 
 Most recently, I've been learning how to write APL<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>. APL is what's known as an "array language." An array language is a type of programming language where one can apply a function to every element of a vector or matrix without iteration. I've been solving the problems of Advent of Code (AOC) 2023 in APL. Before I started, I understood that coding in APL would be somewhat similar to coding in a functional language. I've had some experience with functional languages already. I also already solved some problems of AOC 2022 in Clojure. So, I figured that I was already equipped to have a relatively easy time learning APL. I thought that the only thing that might make APL a bit more difficult, is that I would have to learn how to type the glyphs. However, I was wrong. Typing the glyphs was easy. Writing idiomatic APL programs was very hard.
 
 Since Clojure is a functional language, the Clojure community encourages one to solve algorithms by chaining pure functions together. As such, when I would solve AOC 2022 problems, I would create a bunch of pure functions, read the input file, pass it to a pure function, then, I would pass the output of that to another pure function, and so on, until finally, the last pure function would return the expected answer to the problem. Now that I look back at my AOC 2022 Clojure solutions, I realize that some of the functions I wrote may not be so idiomatic from a functional programming perspective. Some functions that I wrote were translations of what I would do in an imperative language like Go. For example, I noticed that in many of my Clojure functions I decided to use the "loop" construct. The logic of the loop would be very similar to the logic I would write in Go. I believe that instead of writing iteration logic in Clojure, it would have been more idiomatic to have a chain of functions that transform the input of the function to some desired output. I probably did not do it this way, because I could not think of a way to implement the function in such a way.
 
-Writing APL was difficult for me because in APL (and array languages in general) it is much more uncomfortable to do the equivalent of a Clojure "loop", or more generally, iteration through recursion. It seems to me that to write idiomatic code in an array language, one must write algorithms as a chain of functions that transform the input of the function into some desired output. In other words, array languages force you to think only in terms of transformations, not iterations. If you tried to do iteration through recursion in an array language, you would end up with a pretty long and complicated program. As such, array languages seem like a really good medium to sharpen one's functional programming skills. They don't have an easy escape hatch to resort to imperative thinking. If I ever want to guarantee that I use only functional patterns to solve a problem in a given functional language, I might choose to solve it in APL first, and then translate it to that given language.
+Writing APL was difficult for me because in APL (and array languages in general) it is much more uncomfortable to do the equivalent of a Clojure "loop", or more generally, iteration through recursion. It seems to me that to write idiomatic code in an array language, one _must_ write algorithms as a chain of functions that transform the input of the function into some desired output. In other words, array languages force you to think only in terms of transformations, not iterations. If you tried to do iteration through recursion in an array language, you would end up with a pretty long and complicated program. As such, array languages seem like a really good medium to sharpen one's functional programming skills. They don't have an easy escape hatch to resort to imperative thinking. If I ever want to guarantee that I use only functional patterns to solve a problem in a given functional language, I might choose to solve it in APL first, and then translate it to that given language.
 
 
-## Language Barrier of APL
+## Language Barrier of Array languages
 
 As I've gotten better at APL I've started to have some appreciation for the beauty and simplicity of array languages. It makes me wish that these array languages were more popular so that more people could use them to solve problems faster and easier than they would otherwise.
 
@@ -26,7 +26,7 @@ If we think of programming languages as a product, we can think of the people wh
 
 As I looked through the list of popular languages, I noticed that APL, the most popular array language, was third-to-last on the list. And, I asked myself why array languages like APL, BQN, or Uiua don't have bigger market share. I finally concluded that it's because array languages have a sort of language barrier to entry.
 
-Suppose we get a person who is comfortable using one of the popular languages that has never learned how to read or write an array language at random and we ask them to try to explain the workings of a program written in a language that they are not familiar with. Suppose we do this exercise twice. The first program we show them is written in a non-array language from the popular languages list. The second is a program written in an array language. I believe that:
+Suppose we get a person who is comfortable using one of the popular languages who has never learned how to read or write an array language at random and we ask them to try to explain the workings of a program written in a language that they are not familiar with. Suppose we do this exercise twice. The first program we show them is written in a non-array language from the popular languages list. The second is a program written in an array language. I believe that:
 
 -   The programmer would statistically be most likely to be familiar with one or several of the languages in the popular languages list.
 -   Through this experience, they would most likely be able to explain what the first language is doing with moderate success.
@@ -37,11 +37,36 @@ If this is true, this would mean two things:
 -   The majority of popular languages are, to a certain degree, [mutually intelligible](https://en.wikipedia.org/wiki/Mutual_intelligibility) with other popular languages. In other words, people who have been taught to write and read a subset of popular languages can often read and (sometimes, or to a limited degree) write a distinct subset of popular languages.
 -   Popular languages are almost not mutually intelligible with array languages at all. In other words, people who have been taught to write and read popular languages will likely not be able to read array languages and vice versa.
 
-I believe array languages aren't mutually intelligible with popular languages because<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>:
+I believe array languages aren't mutually intelligible with popular languages because, unlike popular languages, array languages use either non-ASCII glyphs or ASCII digraphs for runtime function calls. 
 
-- They use obscure non-ASCII glyphs in their syntax. The use of these unfamiliar glyphs makes it harder to understand for a newcomer.
-- Each function primitive is a glyph. This makes the language very terse because you can apply several functions to a given input in one line. For example, this is the solution to the AOC 2022, day 1 part 1 problem: `⌈/+/¨⍎¨¨((0≠≢¨)⊆⊢)⊃⎕NGET'input.txt'1`.
-- Every function is called using infix notation and this can make order-of-operations seem inconsistent at times. Consider these two APL expressions: (suppose `f` is this pre-defined function: `{⊃⍵}`)
+Even if a developer of a popular language were interested in learning APL, they may get deterred from continuing to learn because of some difficulties:
+- Every function is called using infix notation and this can make order-of-operations seem inconsistent at times.
+- Array languages require extensive use of combinatory logic for writing idiomatic programs. Combinatory logic is rarely used in popular languages. So it can be quite hard for newcomers to understand idiomatic array language expressions.
+- There are some non-intuitive things about the way rank polymorphism works (e.g. `f¨⊂Y` is not the same as `f Y`).
+
+I'll explain these three points below.
+
+### The use of non-ASCII glyphs or ASCII digraphs for runtime function calls
+
+Languages often come with functions that the developer can use for common tasks. When I was solving the first problem of AOC 2022 in Clojure, I used the `map`, `partition-by`, and `reduce` functions, among others, which were provided by the Clojure runtime. In popular languages like Clojure, to call one of these functions, a developer must use the English name of this function. For example, if I wanted to use the `map` function in Clojure to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `(map inc v)`.
+
+Array languages also have a runtime that provides functions that the developer can use. In APL, the equivalents of the functions I mentioned above are: `Each`, `Partition`, and `Reduce`, respectively.  However, to call these functions, you don't use their English names. You use a glyph that represents that function. For example, if I wanted to use the `Each` function in APL to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `+∘1¨v`<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">1</a></sup>. In this APL expression, the glyph `¨` represents the `Each` function. Similarly, `⊆` represents `Partition` and `/` represents `Reduce`.
+
+This is the case because array languages treat functions and operators as one-and-the-same. In many popular languages like Python, `+` is an operator and `map` is a function. These are distinct; operators are always symbols and functions are always English names. In contrast, in an array language like APL, `+` is no different to `¨`. These are both functions that take two arguments. To call both of these functions you must use infix notation. And, both of these functions are invoked using a symbol instead of an English name.
+
+
+Some array languages like J and K restrict their grammar to only having ASCII characters. In J for example, the function for  only ASCII characters, but others are digraphs formed by joining two ASCII characters. For example &.>
+
+Since APL makes a developer use glyphs to call runtime functions, it makes
+
+. To call one of these functions, one can use english words for common functions. They use obscure non-ASCII glyphs in their syntax. The use of these unfamiliar glyphs makes it harder to understand for a newcomer.
+- Each function primitive is a glyph. This makes the language very terse because you can apply several functions to a given input in one line.
+
+For example, this is my solution to the AOC 2022, day 1 part 1 problem: `⌈/+/¨⍎¨¨((0≠≢¨)⊆⊢)⊃⎕NGET'input.txt'1`. It's cool that the language is so concise. However, this also means that there
+- Every function is called using infix notation and this can make order-of-operations seem inconsistent at times.
+
+
+Consider these two APL expressions: (suppose `f` is this pre-defined function: `{⊃⍵}`)
 - `f⍋3⍴1 2`
 - `f⌺1⊢1 2`
 
@@ -49,7 +74,6 @@ These two expressions have a seemingly similar structure: `<function> <glyph> <n
 
 You could avoid the order-of-operations ambiguity in the second example by wrapping the first part in parenthesis: `(f⌺1)⊢1 2`. At this point, a newcomer may realize that they can simplify the expression to `(f⌺1)1 2`. Unfortunately, this form is not idiomatic APL. Idiomatic APL seems to be more about terseness than readability for newcomers. Since `(f⌺1)1 2` is 8 characters and `f⌺1⊢1 2` is 7, you'll often see APL developers suggest using `f⌺1⊢1 2` over `(f⌺1)1 2`.
 
-. For example, in Dyalog APL there is [a stencil operator](https://help.dyalog.com/latest/Content/Language/Primitive%20Operators/Stencil.htm). It looks like this: `⌺`. This operator takes two arguments and returns a function. Suppose `f`, `g`, and `Y` are variables in scope. The idiomatic way to use this operator is to use syntax like this: `f⌺g⊢Y`. To a newcomer, the order of operations is not straightforward. The correct answer is that this is equivalent to `(f⌺g)⊢Y`. But, a newcomer might think that this is evaluated as `f⌺(g⊢Y)`. A newcomer would have good reason to guess the latter. 2↑3⍴0
 
 
 ## Derivative of APL
@@ -80,4 +104,4 @@ My language and jq would be different in that:
 
 <sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> When I say "APL", I'm referring to Dyalog APL using "dfn style".
 
-<sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> These points are less true for array languages like J and K. These languages use ASCII characters instead. Some function primitives are one glyph, but others are digraphs formed by joining two ASCII characters. In my opinion, these differences make J and K and little bit more beginner friendly than APL, BQN, and Uiua because they are easier to type. However, they are just as unintelligible to a newcomer.
+<sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> Of course, in APL, there is a much more idiomatic way to do this: `v + 1`. However, for this example, I wanted to demonstrate the `Each` function.
