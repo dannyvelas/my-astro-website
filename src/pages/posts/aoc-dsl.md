@@ -37,7 +37,7 @@ If this is true, this would mean two things:
 -   The majority of popular languages are, to a certain degree, [mutually intelligible](https://en.wikipedia.org/wiki/Mutual_intelligibility) with other popular languages. In other words, people who have been taught to write and read a subset of popular languages can often read and (sometimes, or to a limited degree) write a distinct subset of popular languages.
 -   Popular languages are almost not mutually intelligible with array languages at all. In other words, people who have been taught to write and read popular languages will likely not be able to read array languages and vice versa.
 
-I believe array languages aren't mutually intelligible with popular languages because, unlike popular languages, array languages use either non-ASCII glyphs or ASCII digraphs for runtime function calls. 
+I believe array languages aren't mutually intelligible with popular languages because, unlike popular languages, array languages use either non-ASCII glyphs or ASCII digraphs for built-in function calls. 
 
 Even if a developer of a popular language were interested in learning APL, they may get deterred from continuing to learn because of some difficulties:
 - Every function is called using infix notation and this can make order-of-operations seem inconsistent at times.
@@ -46,7 +46,7 @@ Even if a developer of a popular language were interested in learning APL, they 
 
 I'll explain these three points below.
 
-### The use of non-ASCII glyphs or ASCII digraphs for runtime function calls
+### The use of non-ASCII glyphs or ASCII digraphs for built-in function calls
 
 Languages often come with functions that the developer can use for common tasks. When I was solving the first problem of AOC 2022 in Clojure, I used the `map`, `partition-by`, and `reduce` functions, among others, which were provided by the Clojure runtime. In popular languages like Clojure, to call one of these functions, a developer must use the English name of this function. For example, if I wanted to use the `map` function in Clojure to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `(map inc v)`.
 
@@ -54,21 +54,19 @@ Array languages also have a runtime that provides functions that the developer c
 
 This is the case because array languages treat functions and operators as one-and-the-same. In many popular languages, functions and operators are distinct. For example, in Python, operators are always symbols that are applied using infix notation (e.g. `1+2`). Functions are applied using English names using prefix notation (e.g. `map(some_fn, some_iterable)`). In contrast, in an array language like APL, the entity for addition `+` is a function that behaves just like `¨`. Both of these are infix functions that take two arguments, which must be invoked using a symbol instead of an English name. From the standpoint of a popular language, one might say that APL basically forces every function to behave like an operator.
 
-While APL uses strange non-ASCII symbols to represent function primitives, not all array languages are like this. For example, array languages J and K restrict their grammar to only having ASCII characters. Functions in these languages are ASCII symbols. Some functions are represented by joining two ASCII symbols (a digraph). In J for example, [the function for "greater than" is `>`. The function for ceiling is `>.`](https://www.jsoftware.com/help/learning/01.htm).
+While APL uses non-ASCII symbols to represent many function primitives, not all array languages are like this. For example, array languages J and K restrict their grammar to only having ASCII characters. Functions in these languages are ASCII symbols. Some functions are represented by joining two ASCII symbols (a digraph). In J for example, the function<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">1</a></sup> [for "greater than" is `>`. The function for ceiling is `>.`](https://www.jsoftware.com/help/learning/01.htm).
 
+Since array language use symbols or digraphs for built-in functions, they look very different to popular languages. 
 
-For example, this is my solution to the AOC 2022, day 1 part 1 problem: `⌈/+/¨⍎¨¨((0≠≢¨)⊆⊢)⊃⎕NGET'input.txt'1`. It's cool that the language is so concise. However, this also means that there
-- Every function is called using infix notation and this can make order-of-operations seem inconsistent at times.
+### Order-of-operations seem inconsistent at times
 
-
-Consider these two APL expressions: (suppose `f` is this pre-defined function: `{⊃⍵}`)
+Consider these two APL expressions: (suppose `f` is this user-defined function: `{⊃⍵}`)
 - `f⍋3⍴1 2`
 - `f⌺1⊢1 2`
 
 These two expressions have a seemingly similar structure: `<function> <glyph> <number> <glyph> <number> <number>`. However, shockingly enough, these two expressions will have a different evaluation order. The first one will evaluate strictly right-to-left, equivalent to: `f⍋(3⍴(1 2))`. The second expression, in contrast, will evaluate like so: `(f⌺1)(⊢(1 2))`. There are reasons for this, and these reasons might be obvious to a seasoned APL developer. However, this is unintuitive to a newcomer.
 
 You could avoid the order-of-operations ambiguity in the second example by wrapping the first part in parenthesis: `(f⌺1)⊢1 2`. At this point, a newcomer may realize that they can simplify the expression to `(f⌺1)1 2`. Unfortunately, this form is not idiomatic APL. Idiomatic APL seems to be more about terseness than readability for newcomers. Since `(f⌺1)1 2` is 8 characters and `f⌺1⊢1 2` is 7, you'll often see APL developers suggest using `f⌺1⊢1 2` over `(f⌺1)1 2`.
-
 
 
 ## Derivative of APL
@@ -100,3 +98,5 @@ My language and jq would be different in that:
 <sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> When I say "APL", I'm referring to Dyalog APL using "dfn style".
 
 <sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> Of course, in APL, there is a much more idiomatic way to do this: `v + 1`. However, for this example, I wanted to demonstrate the `Each` function.
+
+<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> I believe that in J, what I refer to as "functions" are actually [called "verbs"](https://www.jsoftware.com/books/pdf/brief.pdf).
