@@ -18,40 +18,60 @@ Since Clojure is a functional language, the Clojure community encourages one to 
 Writing APL was difficult for me because in APL (and array languages in general) it is much more uncomfortable to do the equivalent of a Clojure "loop", or more generally, iteration through recursion. It seems to me that to write idiomatic code in an array language, one _must_ write algorithms as a chain of functions that transform the input of the function into some desired output. In other words, array languages force you to think only in terms of transformations, not iterations. If you tried to do iteration through recursion in an array language, you would end up with a pretty long and complicated program. As such, array languages seem like a really good medium to sharpen one's functional programming skills. They don't have an easy escape hatch to resort to imperative thinking. If I ever want to guarantee that I use only functional patterns to solve a problem in a given functional language, I might choose to solve it in APL first, and then translate it to that given language.
 
 
-## Language Barrier of Array languages
+## Language Barrier of APL
 
-As I've gotten better at APL I've started to have some appreciation for the beauty and simplicity of array languages. It makes me wish that these array languages were more popular so that more people could use them to solve problems faster and easier than they would otherwise.
+As I've gotten better at APL I've started to have some appreciation for its beauty and simplicity. It makes me wish that it was more popular so that more people could use them to solve problems faster and easier than they would otherwise.
 
 If we think of programming languages as a product, we can think of the people who choose between languages as a market. We can look at [the 51 languages with the largest market share in the StackOverflow 2023 Survey](https://survey.stackoverflow.co/2023/#technology-most-popular-technologies). Let's call these languages "popular languages".
 
 As I looked through the list of popular languages, I noticed that APL, the most popular array language, was third-to-last on the list. And, I asked myself why array languages like APL, BQN, or Uiua don't have bigger market share. I finally concluded that it's because array languages have a sort of language barrier to entry.
 
-Suppose we get a person who is comfortable using one of the popular languages who has never learned how to read or write an array language at random and we ask them to try to explain the workings of a program written in a language that they are not familiar with. Suppose we do this exercise twice. The first program we show them is written in a non-array language from the popular languages list. The second is a program written in an array language. I believe that:
+In this post, I'll talk only about the language barriers of APL. But, some of these points apply to array languages in general.
+
+Suppose we get a person who is comfortable using one of the popular languages who has never learned how to read or write APL at random and we ask them to try to explain the workings of a program written in a language that they are not familiar with. Suppose we do this exercise twice. The first program we show them is written in a popular language. The second is an APL program. I believe that:
 
 -   The programmer would statistically be most likely to be familiar with one or several of the languages in the popular languages list.
 -   Through this experience, they would most likely be able to explain what the first language is doing with moderate success.
--   Despite this experience, they would have almost no success in explaining what the array language is doing.
+-   Despite this experience, they would have almost no success in explaining what APL is doing
 
 If this is true, this would mean two things:
 
 -   The majority of popular languages are, to a certain degree, [mutually intelligible](https://en.wikipedia.org/wiki/Mutual_intelligibility) with other popular languages. In other words, people who have been taught to write and read a subset of popular languages can often read and (sometimes, or to a limited degree) write a distinct subset of popular languages.
--   Popular languages are almost not mutually intelligible with array languages at all. In other words, people who have been taught to write and read popular languages will likely not be able to read array languages and vice versa.
+-   Popular languages are almost not mutually intelligible with APL at all. In other words, people who have been taught to write and read popular languages will likely not be able to read APL and vice versa.
 
-I believe array languages aren't mutually intelligible with popular languages because, unlike popular languages, array languages use either symbols or digraphs for built-in function calls. 
+I believe that APL isn't mutually intelligible with popular languages because, unlike popular languages, APL uses symbols for built-in function calls. 
 
-### The use of non-ASCII glyphs or ASCII digraphs for built-in function calls
+### The use of symbols for built-in function calls
 
 Languages often come with functions that the developer can use for common tasks. When I was solving the first problem of AOC 2022 in Clojure, I used the `map`, `partition-by`, and `reduce` functions, among others, which were provided by the Clojure runtime. In popular languages like Clojure, to call one of these functions, a developer must use the English name of this function. For example, if I wanted to use the `map` function in Clojure to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `(map inc v)`.
 
-Array languages also have a runtime that provides functions that the developer can use. For example, APL provides primitive functions equivalent the ones I mentioned above: `Each`, `Partition`, and `Reduce`, respectively. However, in an array language, to call these functions, you don't use their English names. You use symbol that represents that function. For example, if I wanted to use the `Each` function in APL to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `+∘1¨v`<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">1</a></sup>. In this APL expression, the glyph `¨` represents the `Each` function. Similarly, `⊆` represents `Partition` and `/` represents `Reduce`.
+APL also has a runtime that provides functions that the developer can use. In APL, the functions equivalent to the ones that I mentioned above are: `Each`, `Partition`, and `Reduce`, respectively. However, in APL, to call these functions, you don't use their English names. You use symbol that represents that function. For example, if I wanted to use the `Each` function in APL to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `+∘1¨v`<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">1</a></sup>. In this APL expression, the glyph `¨` represents the `Each` function. Similarly, `⊆` represents `Partition` and `/` represents `Reduce`.
 
-This is the case because array languages treat functions and operators as one-and-the-same. In many popular languages, functions and operators are distinct. For example, in Python, operators are always symbols that are applied using infix notation (e.g. `1+2`). Functions are applied using English names using prefix notation (e.g. `map(some_fn, some_iterable)`). In contrast, in an array language like APL, the entity for addition `+` is a function that behaves just like `¨`. Both of these are infix functions that take two arguments, which must be invoked using a symbol instead of an English name. From the standpoint of a popular language, one might say that APL basically forces every function to behave like an operator.
+This is the case because APL treats functions and operators as one-and-the-same. In many popular languages, functions and operators are distinct. For example, in Python, operators are always symbols that are applied using infix notation (e.g. `1+2`). Functions are applied using English names using prefix notation (e.g. `map(some_fn, some_iterable)`). In contrast, in APL, the entity for addition `+` is a function that behaves just like `¨`. Both of these are infix functions that take two arguments, which must be invoked using a symbol instead of an English name. From the standpoint of a popular language, one might say that APL basically forces every function to behave like an operator.
 
-While APL uses non-ASCII symbols to represent many function primitives, not all array languages are like this. For example, array languages J and K restrict their grammar to only having ASCII characters. Functions in these languages are ASCII symbols. Some functions are represented by joining two ASCII symbols (a digraph). In J for example, the function<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">1</a></sup> [for "greater than" is `>`. The function for ceiling is `>.`](https://www.jsoftware.com/help/learning/01.htm).
+Since APL uses symbols to invoke built-in functions, its source code will look very concise compared to popular languages. However, this is a trade-off. If a developer were to read a function call that uses the English name of the function, this English name will provide context to the developer about what that function is doing. The same isn't the case with symbols. If a non-Clojure developer were to see this Clojure expression out-of-context: `(partition-by empty? coll)`, I believe they would be able to somewhat detect that the `partition-by` function probably takes some collection as input and partitions it based in some criteria. In contrast, if a non-APL developer were to see the equivalent APL expression, out-of-context: `((0≠≢¨)⊆⊢)coll`, I don't think they would be able to gather much meaningful insight.
 
-### The trade-off
+## Further APL Complexity
 
-Since array language use symbols or digraphs for built-in functions, their source code will look very concise compared to popular languages. However, this is a trade-off. If a developer were to read a function call that uses the English name of the function, this English name will provide context to the developer about what that function is doing. The same isn't the case with symbols. If a non-Clojure developer were to see this Clojure expression out-of-context: `(partition-by empty? coll)`, I believe they would be able to somewhat detect that the `partition-by` function probably takes some collection as input and partitions it based in some criteria. In contrast, if a non-APL developer were to see the equivalent APL expression, out-of-context: `((0≠≢¨)⊆⊢)coll`, I don't think they would be able to gather much meaningful insight.
+Even if a developer of a popular language were able to get past the initial intimidation of non-ASCII symbols, they may get deterred from continuing to learn because additional particularities of APL:
+- Every function is called using infix notation and this can make order-of-operations seem inconsistent at times.
+- APL requires extensive use of combinatory logic for writing idiomatic programs. Combinatory logic is rarely used in popular languages. So it can be quite hard for newcomers to understand idiomatic array language expressions.
+- There are some non-intuitive things about the way rank polymorphism works (e.g. `f¨⊂Y` is not the same as `f Y`).
+
+### Order-of-operations seem inconsistent at times
+
+For the most part, APL has a very simple order-of-operations that I really appreciate. APL evaluates expressions right to left. For the most part, every function in-between two operands will take as little as possible from its left side and as much as possible from its right side.
+
+In other words, consider this contrived APL expression: `f⍋3⍴1 2`. The
+
+Consider these two APL expressions: (suppose `f` is this user-defined function: `{⊃⍵}`)
+- `f⍋3⍴1 2`
+- `f⌺1⊢1 2`
+
+These two expressions have a seemingly similar structure: `<function> <glyph> <number> <glyph> <number> <number>`. However, shockingly enough, these two expressions will have a different evaluation order. The first one will evaluate strictly right-to-left, equivalent to: `f⍋(3⍴(1 2))`. The second expression, in contrast, will evaluate like so: `(f⌺1)(⊢(1 2))`. There are reasons for this, and these reasons might be obvious to a seasoned APL developer. However, this is unintuitive to a newcomer.
+
+You could avoid the order-of-operations ambiguity in the second example by wrapping the first part in parenthesis: `(f⌺1)⊢1 2`. At this point, a newcomer may realize that they can simplify the expression to `(f⌺1)1 2`. Unfortunately, this form is not idiomatic APL. Idiomatic APL seems to be more about terseness than readability for newcomers. Since `(f⌺1)1 2` is 8 characters and `f⌺1⊢1 2` is 7, you'll often see APL developers suggest using `f⌺1⊢1 2` over `(f⌺1)1 2`.
+
 
 ## Derivative of APL
 
