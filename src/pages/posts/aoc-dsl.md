@@ -68,7 +68,7 @@ At the same time, APL provides built-in functions that, in other languages, take
 
 In APL, the symbol for replace is `⎕R`. To do the same in APL, you would need to do this: `('a'⎕R'b')s`. This expression calls the `Replace` function with two arguments: `'a'` and `'b'`. This call returns a new function that takes one string argument and does the replacing.
 
-Okay, this doesn't seem so bad. But here's where things get ugly. Now suppose we want to write a `Replace` function that is case insensitive. This would be a 4 argument function. In python we could do this by importing the `re` library and using the `sub` function: `re.sub('a', 'b', s, flags=re.IGNORECASE)`. In Dyalog APL, to do this, we would have to pass 
+Okay, this doesn't seem so bad. But here's where things get ugly. Now suppose we want to write a `Replace` function that is case insensitive. This would be a 4 argument function. In python we could do this by importing the `re` library and using the `sub` function: `re.sub('a', 'b', s, flags=re.IGNORECASE)`. The equivalent APL expression looks like this: `('a'⎕R'b'⍠'IC'1)s`. In both cases, we needed to change our function call to have a flag that indicates that we want to ignore case. In python, we just need to add an additional argument, `flags`. In APL, we had to introduce the use of a new glyph `⍠`. This new glyph doesn't
 
 For the most part, APL has a very simple order-of-operations that I really appreciate. APL evaluates expressions right to left. For the most part, every function in-between two operands will take as little as possible from its left side and as much as possible from its right side.
 
