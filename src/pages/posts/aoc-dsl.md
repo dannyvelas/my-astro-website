@@ -37,14 +37,7 @@ If this is true, this would mean two things:
 -   The majority of popular languages are, to a certain degree, [mutually intelligible](https://en.wikipedia.org/wiki/Mutual_intelligibility) with other popular languages. In other words, people who have been taught to write and read a subset of popular languages can often read and (sometimes, or to a limited degree) write a distinct subset of popular languages.
 -   Popular languages are almost not mutually intelligible with array languages at all. In other words, people who have been taught to write and read popular languages will likely not be able to read array languages and vice versa.
 
-I believe array languages aren't mutually intelligible with popular languages because, unlike popular languages, array languages use either non-ASCII glyphs or ASCII digraphs for built-in function calls. 
-
-Even if a developer of a popular language were interested in learning APL, they may get deterred from continuing to learn because of some difficulties:
-- Every function is called using infix notation and this can make order-of-operations seem inconsistent at times.
-- Array languages require extensive use of combinatory logic for writing idiomatic programs. Combinatory logic is rarely used in popular languages. So it can be quite hard for newcomers to understand idiomatic array language expressions.
-- There are some non-intuitive things about the way rank polymorphism works (e.g. `f¨⊂Y` is not the same as `f Y`).
-
-I'll explain these three points below.
+I believe array languages aren't mutually intelligible with popular languages because, unlike popular languages, array languages use either symbols or digraphs for built-in function calls. 
 
 ### The use of non-ASCII glyphs or ASCII digraphs for built-in function calls
 
@@ -56,18 +49,9 @@ This is the case because array languages treat functions and operators as one-an
 
 While APL uses non-ASCII symbols to represent many function primitives, not all array languages are like this. For example, array languages J and K restrict their grammar to only having ASCII characters. Functions in these languages are ASCII symbols. Some functions are represented by joining two ASCII symbols (a digraph). In J for example, the function<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">1</a></sup> [for "greater than" is `>`. The function for ceiling is `>.`](https://www.jsoftware.com/help/learning/01.htm).
 
-Since array language use symbols or digraphs for built-in functions, they look very different to popular languages. 
+### The trade-off
 
-### Order-of-operations seem inconsistent at times
-
-Consider these two APL expressions: (suppose `f` is this user-defined function: `{⊃⍵}`)
-- `f⍋3⍴1 2`
-- `f⌺1⊢1 2`
-
-These two expressions have a seemingly similar structure: `<function> <glyph> <number> <glyph> <number> <number>`. However, shockingly enough, these two expressions will have a different evaluation order. The first one will evaluate strictly right-to-left, equivalent to: `f⍋(3⍴(1 2))`. The second expression, in contrast, will evaluate like so: `(f⌺1)(⊢(1 2))`. There are reasons for this, and these reasons might be obvious to a seasoned APL developer. However, this is unintuitive to a newcomer.
-
-You could avoid the order-of-operations ambiguity in the second example by wrapping the first part in parenthesis: `(f⌺1)⊢1 2`. At this point, a newcomer may realize that they can simplify the expression to `(f⌺1)1 2`. Unfortunately, this form is not idiomatic APL. Idiomatic APL seems to be more about terseness than readability for newcomers. Since `(f⌺1)1 2` is 8 characters and `f⌺1⊢1 2` is 7, you'll often see APL developers suggest using `f⌺1⊢1 2` over `(f⌺1)1 2`.
-
+Since array language use symbols or digraphs for built-in functions, their source code will look very concise compared to popular languages. However, this is a trade-off. If a developer were to read a function call that uses the English name of the function, this English name will provide context to the developer about what that function is doing. The same isn't the case with symbols. If a non-Clojure developer were to see this Clojure expression out-of-context: `(partition-by empty? coll)`, I believe they would be able to somewhat detect that the `partition-by` function probably takes some collection as input and partitions it based in some criteria. In contrast, if a non-APL developer were to see the equivalent APL expression, out-of-context: `((0≠≢¨)⊆⊢)coll`, I don't think they would be able to gather much meaningful insight.
 
 ## Derivative of APL
 
