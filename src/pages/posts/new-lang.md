@@ -39,7 +39,7 @@ At the same time, APL provides built-in functions that, in other languages, take
 
 In APL, the symbol for replace is `⎕R`. To do the same in APL, you would need to do this: `('a'⎕R'b')s`. This expression calls the `Replace` function with two arguments: `'a'` and `'b'`. This call returns a new function that takes one string argument and does the replacing.
 
-Of course this works, but it feels to me to be a little bit clunky. I believe that a function `f` that takes 4 arguments in APL might look like this: `(arg3(arg1 f arg0)arg2)` or like this `(((arg1 f arg0)arg2)arg3)`. I don't like this because it seems to me to add unnecessary complexity. For every additional argument or set of arguments, you have to return an additional function. Because of infix notation, in our example, in the worst case, for `f` to work, it must be a function that returns a function that returns a function. If we didn't have infix notation, it would be much simpler to define `f`. We would simply make it take 4 arguments. That's it. End of story.
+Of course this works, but it feels to me to be a little bit clunky. I believe that a function `f` that takes 4 arguments in APL might look like this: `(arg3(arg1 f arg0)arg2)`, or like this: `(((arg1 f arg0)arg2)arg3)` (among other ways). I don't like this because it seems to me to add unnecessary complexity. For every additional argument or set of arguments, you have to return an additional function. Because of infix notation, in our example, in the second case, for `f` to work, it must be a function that returns a function that returns a function. If we didn't have infix notation, it would be much simpler to define `f`. We would simply make it take 4 arguments. That's it. End of story.
 
 You might say that Haskell suffers from the same problem. After all, technically, all Haskell functions can only take at most one argument. Functions that seem to take `n` arguments are just a function returning a function, returning a function...`n` times. While this is true, there is decided difference that makes this a non-problem in Haskell. Haskell makes it extremely easy and natural to write functions that return functions because that's just the standard way to write functions. The syntax hides this from you so much that you don't even realize you're doing it. Your functions will look very similar to functions in an imperative language. In contrast, I don't think that writing functions that return functions is so easy and natural in APL. It seems to me that if you wanted to write a function that needed three or more inputs, you would have to carefully write some particular and nuanced code to do so.
 
@@ -49,7 +49,7 @@ The `⍠` operator might make the syntax of calling the `Replace` function a lit
 
 #### Prefix Notation is better
 
-Prefix notation
+Prefix notation is better because it does not suffer from any of those problems. With prefix notation, it is trivial to write a function that takes more than two arguments, or takes multiple optional arguments.
 
 For the most part, APL has a very simple order-of-operations that I really appreciate. APL evaluates expressions right to left. For the most part, every function in-between two operands will take as little as possible from its left side and as much as possible from its right side.
 
