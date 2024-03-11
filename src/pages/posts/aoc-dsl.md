@@ -28,6 +28,19 @@ As I looked through the list of popular languages, I noticed that APL, the most 
 
 In this post, I'll talk only about the language barriers of APL. But, some of these points apply to array languages in general.
 
+I believe that APL is not so popular because:
+- It is not mutually intelligible with popular languages
+- It has no universal LSP
+
+Even if APL were popular, I feel like it can be improved in some ways. Here's what I don't like about APL:
+- Infix notation
+- APL requires extensive use of combinatory logic for writing idiomatic programs. Combinatory logic is rarely used in popular languages. So it can be quite hard for newcomers to understand idiomatic array language expressions.
+- There are some non-intuitive things about the way rank polymorphism works (e.g. `f¨⊂Y` is not the same as `f Y`).
+
+I'll expand on these points below.
+
+### Mutual intelligibility of APL
+
 Suppose we get a person who is comfortable using one of the popular languages who has never learned how to read or write APL at random and we ask them to try to explain the workings of a program written in a language that they are not familiar with. Suppose we do this exercise twice. The first program we show them is written in a popular language. The second is an APL program. I believe that:
 
 -   The programmer would statistically be most likely to be familiar with one or several of the languages in the popular languages list.
@@ -41,8 +54,6 @@ If this is true, this would mean two things:
 
 I believe that APL isn't mutually intelligible with popular languages because, unlike popular languages, APL uses symbols for built-in function calls. 
 
-### The use of symbols for built-in function calls
-
 Languages often come with functions that the developer can use for common tasks. When I was solving the first problem of AOC 2022 in Clojure, I used the `map`, `partition-by`, and `reduce` functions, among others, which were provided by the Clojure runtime. In popular languages like Clojure, to call one of these functions, a developer must use the English name of this function. For example, if I wanted to use the `map` function in Clojure to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `(map inc v)`.
 
 APL also has a runtime that provides functions that the developer can use. In APL, the functions equivalent to the ones that I mentioned above are: `Each`, `Partition`, and `Reduce`, respectively. However, in APL, to call these functions, you don't use their English names. You use symbol that represents that function. For example, if I wanted to use the `Each` function in APL to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `+∘1¨v`<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">1</a></sup>. In this APL expression, the glyph `¨` represents the `Each` function. Similarly, `⊆` represents `Partition` and `/` represents `Reduce`.
@@ -51,45 +62,37 @@ This is the case because APL treats functions and operators as one-and-the-same.
 
 Since APL uses symbols to invoke built-in functions, its source code will look very concise compared to popular languages. However, this is a trade-off. If a developer were to read a function call that uses the English name of the function, this English name will provide context to the developer about what that function is doing. The same isn't the case with symbols. If a non-Clojure developer were to see this Clojure expression out-of-context: `(partition-by empty? coll)`, I believe they would be able to somewhat detect that the `partition-by` function probably takes some collection as input and partitions it based in some criteria. In contrast, if a non-APL developer were to see the equivalent APL expression, out-of-context: `((0≠≢¨)⊆⊢)coll`, I don't think they would be able to gather much meaningful insight.
 
-## Further APL Complexity
+## Suboptimal support for editors
+
+If you're a developer that wants to start using APL, you have three main APL implementations to choose from: [Dyalog APL](https://www.dyalog.com/), [GNU APL](https://www.gnu.org/software/apl/), and [dzaima/APL](https://github.com/dzaima/APL/).
+
+If you're a developer, the first lines of code that you wrote in your current language of choice were most likely in an IDE or in an editor like Eclipse or IntelliJ or RStudio or PyCharm or Visual Studio Code. Your first lines of APL code will most likely be in a REPL. In contrast to popular languages, APL seems to be a lot more REPL-oriented than many, if not most, popular languages.
+
+To use Dyalog APL, you have to download [the official Dyalog IDE](https://www.dyalog.com/download-zone.htm). After downloading, you can use the main window of this IDE as a REPL to write APL. To use [GNU APL](https://www.gnu.org/software/apl/apl-intro.html#CH_2) or [dzaima/APL](https://github.com/dzaima/APL/blob/5eb0a4205e27afa6122096a25008474eec562dc0/readme.md) you have to download their interpreter and execute it through your shell. This would spawn an APL REPL.
+
+If you wanted to write your APL in a file, using your preferred editor, you certainly could. But, I feel like there isn't much tooling available in the APL community to make this as good as it could be. 
+
+Using a REPL is nice. But many times you want to write APL inside of a file. Writing code inside of a file has multiple benefits: you can check your code into version control, you can more easily share your code with others, and you can write your code in your preferred editor.
+
+If you wanted to write your APL in a file, you could do so by using Dyalog APL and putting [a special shebang at the top of the file](https://www.dyalog.com/uploads/documents/Dyalog_V182_highlights.pdf). You could also execute code from a file with [GNU APL](https://www.gnu.org/software/apl/apl-intro.html#CH_2). 
+
+Now, if you want any help from your editor when you're using it to write APL, you are absolutely out of luck. As much as your Visual Studio Code or Vim or Sublime editor wants to help you with helpful error messages about syntax errors, or syntax highlighting, or even formatting, it can't when you are using it to write APL. This is because there is no such thing as an APL.
+
+## Further APL complexity
 
 Even if a developer of a popular language were able to get past the initial intimidation of non-ASCII symbols, they may get deterred from continuing to learn because additional particularities of APL:
-- There are some functions that APL offers that should logically take three or more arguments. However, since every function in APL must be called using infix notation, to call these functions you need to use some strange syntax.
 - APL requires extensive use of combinatory logic for writing idiomatic programs. Combinatory logic is rarely used in popular languages. So it can be quite hard for newcomers to understand idiomatic array language expressions.
 - There are some non-intuitive things about the way rank polymorphism works (e.g. `f¨⊂Y` is not the same as `f Y`).
 
-### Strange syntax for functions that should logically take three or more arguments
+### Extensive use of combinatory logic
 
-The functions that are built-in to programming languages often have different arities. Some take one argument, others take two, some take three or more.
+### Non-Intuitive Rank Polymorphism
 
-Since APL makes all functions infix, all functions provided by APL technically take either one argument or two, but no more than two.
+## A new language, inspired by APL
 
-At the same time, APL provides built-in functions that, in other languages, take 3 arguments or more. A good example is the `Replace` function. In Python if you have a string `s` and you want to replace all instances of the character "a" in `s` with "b", you can do: `s.replace("a", "b")`. This `replace` function can be thought of as taking three arguments: `s`, `"a"`, and `"b"`. The question is, how does APL make the `Replace` function take three arguments if it can only be applied using infix notation? Well, APL gets around this problem by using [currying](https://en.wikipedia.org/wiki/Currying).
+I thought APL was fun to learn (and I still have a lot to learn), but as I was learning, I started to think about how I could make a language that would take some inspiration from APL. At the same time, I wanted this language to have some improvements over APL.
 
-In APL, the symbol for replace is `⎕R`. To do the same in APL, you would need to do this: `('a'⎕R'b')s`. This expression calls the `Replace` function with two arguments: `'a'` and `'b'`. This call returns a new function that takes one string argument and does the replacing.
-
-Okay, this doesn't seem so bad. But here's where things get ugly. Now suppose we want to write a `Replace` function that is case insensitive. This would be a 4 argument function. In python we could do this by importing the `re` library and using the `sub` function: `re.sub('a', 'b', s, flags=re.IGNORECASE)`. The equivalent APL expression looks like this: `('a'⎕R'b'⍠'IC'1)s`. In both cases, we needed to change our function call to have a flag that indicates that we want to ignore case. In python, we just need to add an additional argument, `flags`. In APL, we had to introduce the use of a new glyph `⍠`. This new glyph doesn't
-
-For the most part, APL has a very simple order-of-operations that I really appreciate. APL evaluates expressions right to left. For the most part, every function in-between two operands will take as little as possible from its left side and as much as possible from its right side.
-
-This works well for functions that take one or two arguments at most. Consider this simple APL expression: `f⍋3⍴1 2`, where `f` is a user-defined function: `{⊃⍵}`. This expression will be evaluated as: `(f⍋(3⍴1 2))`.
-
-Popular languages often provide built-in functions that should take more than two arguments there are some built-in APL functions like for example: `Stencil`, `Replace`, and `Search`, thatk 
-
-For example, consider the following APL expressions: `f⌺1⊢1 2`.
-
-This expression seems to have a very similar structure to the expression I presented earlier: `<user-defined-function> <glyph> <number> <glyph> <number> <number>`. However, this expression will have a different evaluation order. This expression will evaluate like so: `(f⌺1)(⊢(1 2))`. There are reasons for this, and these reasons might be obvious to a seasoned APL developer. However, this is unintuitive to a newcomer.
-
-You could avoid the order-of-operations ambiguity in the second example by wrapping the first part in parenthesis: `(f⌺1)⊢1 2`. At this point, a newcomer may realize that they can simplify the expression to `(f⌺1)1 2`. Unfortunately, this form is not idiomatic APL. Idiomatic APL seems to be more about terseness than readability for newcomers. Since `(f⌺1)1 2` is 8 characters and `f⌺1⊢1 2` is 7, a newcomer might be more likely to see `f⌺1⊢1 2` over `(f⌺1)1 2`.
-
-Although this is unintutive, I think I can understand why APL allows for this ambiguity in order-of-operations. `Stencil` was designed to be a function that makes it easy to [iterate over an array, updating each element according to some rules about its neighbors](https://en.wikipedia.org/wiki/Iterative_Stencil_Loops). This function is ideal for simulating [Conway's game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). To write this function in a C-family language, you would likely make it take three arguments: a function `f` that operates on a given sliding window, some configuration object `c` that specifies the size and movement of the sliding window, and finally the matrix which will be iterated through with windows specified by `c`, which will in turn get passed to function `f`. However, in APL, since all functions are infix, it's impossible to make `Stencil` a 3-argument function. So, the best you can do is make it a two-argument function that returns a function that accepts a single argument. 
-
-
-## Derivative of APL
-
-I thought APL was fun to learn (and I still have a lot to learn), but as I was learning, I started to think about how I could make an array language that would be kind of like a derivative of APL.
-
-The language would be different in that it would:
+The language would be different to APL in that it would:
 
 -   Use English words for function primitives instead of using single-character glyphs or ASCII digraphs. This would hopefully make it more of a beginner-friendly language because it won't suffer from the language barrier problem. In this respect, it would be like [Ivy](https://pkg.go.dev/robpike.io/ivy).
 -   All function primitives will be prefix, not infix.
