@@ -1,13 +1,13 @@
 ---
 layout: "../../layouts/BlogLayout.astro"
-title: 'My idea of a cool new programming language'
+title: 'Learning APL'
 publishedDate: 2024-02-25
 description: 'Spec of a programming language that might be cool to develop'
 author: 'Daniel Velasquez'
-tags: ["career"]
+tags: ["apl", "functional-programming", "languages"]
 ---
 
-## Background: Learning APL
+## Background
 
 My background is predominantly in imperative or object-oriented languages. The first language I ever learned was C++. In college, I mostly wrote Java, C, and C++. In my career, I've mostly developed using Go and Typescript. However, I've always had a keen interest in functional programming. As such, I've tried to teach myself functional languages and patterns in my spare time.
 
@@ -20,33 +20,11 @@ Writing APL was difficult for me because in APL (and array languages in general)
 
 ## Reflection on APL
 
-As I've gotten better at APL, I've started to have some appreciation for its beauty and simplicity. Strangely enough, despite this, APL is a pretty obscure language that is seldom heard of, let alone used [among the majority of developers](https://survey.stackoverflow.co/2023/#technology-most-popular-technologies).
+As I've gotten better at APL, I've started to have some appreciation for its beauty and simplicity. Despite its beauty, APL is a pretty obscure language that is seldom heard of, let alone used, [among the majority of developers](https://survey.stackoverflow.co/2023/#technology-most-popular-technologies).
 
-If you were to look through [a recent survey on the most popular languages](https://survey.stackoverflow.co/2023/#technology-most-popular-technologies), you'll notice that APL is third-to-last on that list. This seemed really low to me. Also note that APL, is the most popular array language. So other array languages like J, K, BQN, and Uiua didn't even make the list
+At first, it seemed strange to me that such an interesting and concise language could be so overlooked. But, as I thought about it more, I came to believe that there is a reason for APL's lack of popularity. I believe the biggest reason APL is unpopular is that it's not mutually intelligible with the most popular and conventional languages used by developers.
 
-As I've gotten better at APL, I've started to have some appreciation for its beauty and simplicity. z
-
-At the same time though, I've began to believe that it might have some flaws that prevent it from becoming more popular.
-
-In particular, I believe that APL would be better if:
-- It where mutually intelligible with the most popular languag
-If you were to look through [a recent survey on the most popular languages](https://survey.stackoverflow.co/2023/#technology-most-popular-technologies), you'll notice that APL is third-to-last on that list. This seemed really low to me. Also note that APL, is the most popular array language. So other array languages like J, K, BQN, and Uiua didn't even make the list.
-
-
-It makes me wish that it was more popular so that more people could use them to solve problems faster and easier than they would otherwise. At the same time though, I've noticed some things about it that I don't like that much.
-
-I believe that APL isn't popular because it is not mutually intelligible with popular languages. If it were, I believe it would have a much better chance at gaining popularity.
-
-In this post, I'll talk only about the language barriers of APL. But, some of these points apply to array languages in general.
-
-I believe that APL is not so popular because it is not mutually intelligible with popular languages.
-
-Even if APL were popular, I feel like it can be improved in some ways. Here's what I don't like about APL:
-- Infix notation
-- APL requires extensive use of combinatory logic for writing idiomatic programs. Combinatory logic is rarely used in popular languages. So it can be quite hard for newcomers to understand idiomatic array language expressions.
-- There are some non-intuitive things about the way rank polymorphism works (e.g. `f¨⊂Y` is not always the same as `f Y`).
-
-I'll expand on these points below.
+If APL were more mutually intelligible, I believe that it would be more popular and successful.
 
 ### Mutual intelligibility of APL
 
@@ -71,44 +49,8 @@ This is the case because APL treats functions and operators as one-and-the-same.
 
 Since APL uses symbols to invoke built-in functions, its source code will look very concise compared to popular languages. However, this is a trade-off. If a developer were to read a function call that uses the English name of the function, this English name will provide context to the developer about what that function is doing. The same isn't the case with symbols. If a non-Clojure developer were to see this Clojure expression out-of-context: `(partition-by empty? coll)`, I believe they would be able to somewhat detect that the `partition-by` function probably takes some collection as input and partitions it based in some criteria. In contrast, if a non-APL developer were to see the equivalent APL expression, out-of-context: `((0≠≢¨)⊆⊢)coll`, I don't think they would be able to gather much meaningful insight.
 
-## Further APL complexity
-
-Even if a developer of a popular language were able to get past the initial intimidation of non-ASCII symbols, they may get deterred from continuing to learn because additional particularities of APL:
-- APL requires extensive use of combinatory logic for writing idiomatic programs. Combinatory logic is rarely used in popular languages. So it can be quite hard for newcomers to understand idiomatic array language expressions.
-- There are some non-intuitive things about the way rank polymorphism works (e.g. `f¨⊂Y` is not the same as `f Y`).
-
-### Extensive use of combinatory logic
-
-### Non-Intuitive Rank Polymorphism
-
-## A new language, inspired by APL
-
-I thought APL was fun to learn (and I still have a lot to learn), but as I was learning, I started to think about how I could make a language that would take some inspiration from APL. At the same time, I wanted this language to have some improvements over APL.
-
-The language would be different to APL in that it would:
-
--   Use English words for function primitives instead of using single-character glyphs or ASCII digraphs. This would hopefully make it more of a beginner-friendly language because it won't suffer from the language barrier problem. In this respect, it would be like [Ivy](https://pkg.go.dev/robpike.io/ivy).
--   All function primitives will be prefix, not infix.
--   Use based array theory [like BQN](https://mlochbaum.github.io/BQN/doc/based.htmlinstead), instead of [nested array theory](https://aplwiki.com/wiki/Array_model#Nested_array_theory).
-
-The language would be similar to APL in that it would:
--   Be an array language with rank polymorphism
--   Have [combinators](https://raw.githubusercontent.com/codereport/Content/main/Publications/Combinatory_Logic_and_Combinators_in_Array_Languages.pdf), like the "I" combinator (identity), the "K" combinator (const), the "S" combinator (hook), the "B" combinator (composition), the "C" combinator (flip), and finally, the "W" combinator (join).
-
-
-## With jq
-
-Also, I want to take this language in an interesting direction that is not common for array languages. I want this language to be a DSL for file scripting. In other words, I want to be able to use this language to be optimized almost exclusively for reading files as input, the same way that JQ is optimized to be used exclusively for reading JSON files as input.
-
-My language and jq would be different in that:
-
--   It will be optimized for CSV files, not JSON files.
--   jq allows you to run the same source file in a variety of different ways by specifying different command line flags. My language will allow you to specify different "run-modes" as special directives at the top. This will make programs a little more portable. The idea is that you would can get a source file of my program and run it without needing to also get learn how to specify the correct arguments and run it.
-
 ## Footnotes
 
 <sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> When I say "APL", I'm referring to Dyalog APL using "dfn style".
 
 <sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> Of course, in APL, there is a much more idiomatic way to do this: `v + 1`. However, for this example, I wanted to demonstrate the `Each` function.
-
-<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> I believe that in J, what I refer to as "functions" are actually [called "verbs"](https://www.jsoftware.com/books/pdf/brief.pdf).
