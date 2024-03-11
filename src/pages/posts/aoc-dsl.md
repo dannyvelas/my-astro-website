@@ -70,11 +70,9 @@ If you're a developer, the first lines of code that you wrote in your current la
 
 To use Dyalog APL, you have to download [the official Dyalog IDE](https://www.dyalog.com/download-zone.htm). After downloading, you can use the main window of this IDE as a REPL to write APL. To use [GNU APL](https://www.gnu.org/software/apl/apl-intro.html#CH_2) or [dzaima/APL](https://github.com/dzaima/APL/blob/5eb0a4205e27afa6122096a25008474eec562dc0/readme.md) you have to download their interpreter and execute it through your shell. This would spawn an APL REPL.
 
-If you wanted to write your APL in a file, using your preferred editor, you certainly could. But, I feel like there isn't much tooling available in the APL community to make this as good as it could be. 
+If you wanted to write APL using your preferred editor, you certainly could. But, I feel like there isn't much tooling available in the APL community to make this as good as it could be. 
 
-Using a REPL is nice. But many times you want to write APL inside of a file. Writing code inside of a file has multiple benefits: you can check your code into version control, you can more easily share your code with others, and you can write your code in your preferred editor.
-
-If you wanted to write your APL in a file, you could do so by using Dyalog APL and putting [a special shebang at the top of the file](https://www.dyalog.com/uploads/documents/Dyalog_V182_highlights.pdf). You could also execute code from a file with [GNU APL](https://www.gnu.org/software/apl/apl-intro.html#CH_2). 
+To write your APL in your editor, you could create a new file, write your APL code, and execute it with [Dyalog APL](https://www.dyalog.com/uploads/documents/Dyalog_V182_highlights.pdf) or with [GNU APL](https://www.gnu.org/software/apl/apl-intro.html#CH_2). 
 
 Now, if you want any help from your editor when you're using it to write APL, you are absolutely out of luck. As much as your Visual Studio Code or Vim or Sublime editor wants to help you with helpful error messages about syntax errors, or syntax highlighting, or even formatting, it can't when you are using it to write APL. This is because there is no such thing as an APL.
 
