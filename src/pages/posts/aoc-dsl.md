@@ -18,24 +18,33 @@ Since Clojure is a functional language, the Clojure community encourages one to 
 Writing APL was difficult for me because in APL (and array languages in general) it is much more uncomfortable to do the equivalent of a Clojure "loop", or more generally, iteration through recursion. It seems to me that to write idiomatic code in an array language, one _must_ write algorithms as a chain of functions that transform the input of the function into some desired output. In other words, array languages force you to think only in terms of transformations, not iterations. If you tried to do iteration through recursion in an array language, you would end up with a pretty long and complicated program. As such, array languages seem like a really good medium to sharpen one's functional programming skills. They don't have an easy escape hatch to resort to imperative thinking. If I ever want to guarantee that I use only functional patterns to solve a problem in a given functional language, I might choose to solve it in APL first, and then translate it to that given language.
 
 
-## Language Barrier of APL
+## Reflection on APL
 
-As I've gotten better at APL I've started to have some appreciation for its beauty and simplicity. It makes me wish that it was more popular so that more people could use them to solve problems faster and easier than they would otherwise.
+As I've gotten better at APL, I've started to have some appreciation for its beauty and simplicity. Strangely enough, despite this, APL is a pretty obscure language that is seldom heard of, let alone used [among the majority of developers](https://survey.stackoverflow.co/2023/#technology-most-popular-technologies).
 
-If we think of programming languages as a product, we can think of the people who choose between languages as a market. We can look at [the 51 languages with the largest market share in the StackOverflow 2023 Survey](https://survey.stackoverflow.co/2023/#technology-most-popular-technologies). Let's call these languages "popular languages".
+If you were to look through [a recent survey on the most popular languages](https://survey.stackoverflow.co/2023/#technology-most-popular-technologies), you'll notice that APL is third-to-last on that list. This seemed really low to me. Also note that APL, is the most popular array language. So other array languages like J, K, BQN, and Uiua didn't even make the list
 
-As I looked through the list of popular languages, I noticed that APL, the most popular array language, was third-to-last on the list. And, I asked myself why array languages like APL, BQN, or Uiua don't have bigger market share. I finally concluded that it's because array languages have a sort of language barrier to entry.
+As I've gotten better at APL, I've started to have some appreciation for its beauty and simplicity. z
+
+At the same time though, I've began to believe that it might have some flaws that prevent it from becoming more popular.
+
+In particular, I believe that APL would be better if:
+- It where mutually intelligible with the most popular languag
+If you were to look through [a recent survey on the most popular languages](https://survey.stackoverflow.co/2023/#technology-most-popular-technologies), you'll notice that APL is third-to-last on that list. This seemed really low to me. Also note that APL, is the most popular array language. So other array languages like J, K, BQN, and Uiua didn't even make the list.
+
+
+It makes me wish that it was more popular so that more people could use them to solve problems faster and easier than they would otherwise. At the same time though, I've noticed some things about it that I don't like that much.
+
+I believe that APL isn't popular because it is not mutually intelligible with popular languages. If it were, I believe it would have a much better chance at gaining popularity.
 
 In this post, I'll talk only about the language barriers of APL. But, some of these points apply to array languages in general.
 
-I believe that APL is not so popular because:
-- It is not mutually intelligible with popular languages
-- It has no universal LSP
+I believe that APL is not so popular because it is not mutually intelligible with popular languages.
 
 Even if APL were popular, I feel like it can be improved in some ways. Here's what I don't like about APL:
 - Infix notation
 - APL requires extensive use of combinatory logic for writing idiomatic programs. Combinatory logic is rarely used in popular languages. So it can be quite hard for newcomers to understand idiomatic array language expressions.
-- There are some non-intuitive things about the way rank polymorphism works (e.g. `f¨⊂Y` is not the same as `f Y`).
+- There are some non-intuitive things about the way rank polymorphism works (e.g. `f¨⊂Y` is not always the same as `f Y`).
 
 I'll expand on these points below.
 
@@ -61,20 +70,6 @@ APL also has a runtime that provides functions that the developer can use. In AP
 This is the case because APL treats functions and operators as one-and-the-same. In many popular languages, functions and operators are distinct. For example, in Python, operators are always symbols that are applied using infix notation (e.g. `1+2`). Functions are applied using English names using prefix notation (e.g. `map(some_fn, some_iterable)`). In contrast, in APL, the entity for addition `+` is a function that behaves just like `¨`. Both of these are infix functions that take two arguments, which must be invoked using a symbol instead of an English name. From the standpoint of a popular language, one might say that APL basically forces every function to behave like an operator.
 
 Since APL uses symbols to invoke built-in functions, its source code will look very concise compared to popular languages. However, this is a trade-off. If a developer were to read a function call that uses the English name of the function, this English name will provide context to the developer about what that function is doing. The same isn't the case with symbols. If a non-Clojure developer were to see this Clojure expression out-of-context: `(partition-by empty? coll)`, I believe they would be able to somewhat detect that the `partition-by` function probably takes some collection as input and partitions it based in some criteria. In contrast, if a non-APL developer were to see the equivalent APL expression, out-of-context: `((0≠≢¨)⊆⊢)coll`, I don't think they would be able to gather much meaningful insight.
-
-## Suboptimal support for editors
-
-If you're a developer that wants to start using APL, you have three main APL implementations to choose from: [Dyalog APL](https://www.dyalog.com/), [GNU APL](https://www.gnu.org/software/apl/), and [dzaima/APL](https://github.com/dzaima/APL/).
-
-If you're a developer, the first lines of code that you wrote in your current language of choice were most likely in an IDE or in an editor like Eclipse or IntelliJ or RStudio or PyCharm or Visual Studio Code. Your first lines of APL code will most likely be in a REPL. In contrast to popular languages, APL seems to be a lot more REPL-oriented than many, if not most, popular languages.
-
-To use Dyalog APL, you have to download [the official Dyalog IDE](https://www.dyalog.com/download-zone.htm). After downloading, you can use the main window of this IDE as a REPL to write APL. To use [GNU APL](https://www.gnu.org/software/apl/apl-intro.html#CH_2) or [dzaima/APL](https://github.com/dzaima/APL/blob/5eb0a4205e27afa6122096a25008474eec562dc0/readme.md) you have to download their interpreter and execute it through your shell. This would spawn an APL REPL.
-
-If you wanted to write APL using your preferred editor, you certainly could. But, I feel like there isn't much tooling available in the APL community to make this as good as it could be. 
-
-To write your APL in your editor, you could create a new file, write your APL code, and execute it with [Dyalog APL](https://www.dyalog.com/uploads/documents/Dyalog_V182_highlights.pdf) or with [GNU APL](https://www.gnu.org/software/apl/apl-intro.html#CH_2). 
-
-Now, if you want any help from your editor when you're using it to write APL, you are absolutely out of luck. As much as your Visual Studio Code or Vim or Sublime editor wants to help you with helpful error messages about syntax errors, or syntax highlighting, or even formatting, it can't when you are using it to write APL. This is because there is no such thing as an APL.
 
 ## Further APL complexity
 
