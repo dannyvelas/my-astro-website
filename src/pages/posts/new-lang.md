@@ -14,7 +14,7 @@ In my last post (*TODO: CITE*), I wrote about how I learned APL<sup><a id="fnr.1
 As I wrote the last post, I started thinking about how it might be interesting to create a new language that takes some of the good things about APL but changes or removes some of the things that I didn't like.
 
 In particular, these are the things that I don't like about APL:
-- Infix notation.
+- Infix notation for function calls.
 - Extensive use of combinatory logic for writing idiomatic programs.
 - There are some non-intuitive things about the way rank polymorphism works (e.g. `f¨⊂Y` is not always the same as `f Y`).
 
@@ -26,30 +26,50 @@ In my last post, I wrote about the fact that APL uses symbols for built-in funct
 
 If we wanted to make a new language like APL that was a little more readable, I think it might make sense for this language to take the same approach as [Ivy](https://pkg.go.dev/robpike.io/ivy), where each function is an English word.
 
-### Prefix instead of infix notation
+### Prefix instead of infix notation for function calls
 
 #### Infix notation adds unnecessary complexity
-In my last post I wrote about how in APL, functions are applied using infix notation. I think infix notation has some decided limitations when defining functions. To get around these limitations, you have to do some pretty complex stuff.
-
-In particular, infix notation makes it very complex to have functions that take three or more arguments. It also makes it very complex to have functions that take multiple optional arguments.
-
-The functions that are built-in to programming languages often have different arities. Some take one argument, others take two, some take three or more. Since APL makes all functions infix, all functions provided by APL technically take either one argument or two, but no more than two.
+In my last post I wrote about how in APL, functions are invoked using infix notation. As a result, all functions in APL must technically take either one argument or two, but no more than two.
 
 At the same time, APL provides built-in functions that, in other languages, take 3 arguments or more. A good example is the `Replace` function. In Python if you have a string `s` and you want to replace all instances of the character "a" in `s` with "b", you can do: `s.replace("a", "b")`. This `replace` function can be thought of as taking three arguments: `s`, `"a"`, and `"b"`. The question is, how does APL make the `Replace` function take three arguments if it can only be applied using infix notation? Well, APL gets around this problem by using [currying](https://en.wikipedia.org/wiki/Currying).
 
 In APL, the symbol for replace is `⎕R`. To do the same in APL, you would need to do this: `('a'⎕R'b')s`. This expression calls the `Replace` function with two arguments: `'a'` and `'b'`. This call returns a new function that takes one string argument and does the replacing.
 
-Of course this works, but it feels to me to be a little bit clunky. I believe that a function `f` that takes 4 arguments in APL might look like this: `(arg3(arg1 f arg0)arg2)`, or like this: `(((arg1 f arg0)arg2)arg3)` (among other ways). I don't like this because it seems to me to add unnecessary complexity. For every additional argument or set of arguments, you have to return an additional function. Because of infix notation, in our example, in the second case, for `f` to work, it must be a function that returns a function that returns a function. If we didn't have infix notation, it would be much simpler to define `f`. We would simply make it take 4 arguments. That's it. End of story.
+Suppose you need to translate a translate a function `f` from an imperative language that takes four arguments to APL, you would have to use currying. You could, for example, define a function that takes two arguments that returns another function that takes two arguments, that returns a final value. The result would look like this: `(arg3(arg1 f arg0)arg2)`.
 
-You might say that Haskell suffers from the same problem. After all, technically, all Haskell functions can only take at most one argument. Functions that seem to take `n` arguments are just a function returning a function, returning a function...`n` times. While this is true, there is decided difference that makes this a non-problem in Haskell. Haskell makes it extremely easy and natural to write functions that return functions because that's just the standard way to write functions. The syntax hides this from you so much that you don't even realize you're doing it. Your functions will look very similar to functions in an imperative language. In contrast, I don't think that writing functions that return functions is so easy and natural in APL. It seems to me that if you wanted to write a function that needed three or more inputs, you would have to carefully write some particular and nuanced code to do so.
+In this post, I will refer to the "final value" produced by a sequence of function invocations as a "terminal value". So, technically the `Replace` function takes at most 2 arguments. But, it needs three inputs to produce a terminal value. In our example, these values are `'a'`', `'b'`, and `s`.
 
-Some functions in APL, like `Replace`, make use of the `⍠` operator. For example, if you wanted to replace all instances of `"a"` to `"b"` in `s` in a case insensitive way, you would have to do this: `('a'⎕R'b'⍠'IC'1)s`. `"IC"` could have been treated as an additional argument to use as a flag, but instead it was used to modify the call to `⎕R`. If you wanted to add other additional optional configuration options to `⎕R`, you would simply add the `⍠` operator again: `('a'⎕R'b'⍠ 'Mode' 'D' ⍠ 'NEOL' 1 ⍠ 'EOL' 'LF')s`. The `⍠` operator helps a lot. Without it, I'm not sure how one would express functions that take multiple optional arguments in APL. However, it seems a bit crazy to me that Dyalog had to invent a whole new glyph and operator to solve this problem.
+In my opinion, it would only make sense for a language to require infix function calls if every function in the language can only take a maximum of two inputs before returning a terminal value. If a language were to require infix notation for function calls, it would become very difficult in that language to define functions that require three inputs to produce a terminal value. It would also become very difficult in that language to define functions that take optional inputs to produce a terminal value.
 
-The `⍠` operator might make the syntax of calling the `Replace` function a little bit more clear. Without it, one might need to write the following: `(((('a'⎕R'b')'D')1)'LF')s` instead of using the syntax of the previous example. But, I'm not sure that it reduces complexity. The `⍠` operator, in essence, is a function that takes three inputs. The left argument is a function, the right argument is a configuration name. These two arguments return a function that takes one argument, the intended value for the configuration name. Suppose that you are tasked with writing a function `f` that, similar to `Replace`, needs to take optional configuration inputs. As such, You would need to write `f` in such a way that allows for it to be passed to the functions created by `⍠`, and in doing so, changes the behavior of `f`. I believe this would also require some very particular and nuanced code. In contrast, in other languages like Python, JavaScript, Java, or Clojure optional arguments is pretty trivial stuff.
+Because of infix function calls, I feel like our example of defining `f` was unnecessarily complicated. For every additional input or pair of input, you are forced to return an additional function<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>.
+
+Defining functions that take optional arguments is unnecessarily complicated too.
+
+For functions that can take optional arguments, Dyalog APL lets you use the `⍠` operator. This operator can be used with the `Replace` function. For example, if you wanted to replace all instances of `"a"` to `"b"` in `s` in a case insensitive way, you would have to do this: `('a'⎕R'b'⍠'IC'1)s`. `"IC"` here is used to modify the call to `⎕R`. It's like a flag that stands for "case insensitive." If you wanted to add other additional configuration options to `⎕R`, you would simply add the `⍠` operator again: `('a'⎕R'b'⍠ 'Mode' 'D' ⍠ 'NEOL' 1 ⍠ 'EOL' 'LF')s`.
+
+Fortunately the `⍠` operator allows us to use optional arguments in APL, I'm not sure how one would define functions in APL if it weren't for this magical operator. While the existence of this operator is nice, it seems a bit crazy to me that Dyalog had to invent a whole new operator to solve this problem. Also, the complexity of defining a function that uses this operator seems a bit crazy to me.
+
+The `⍠` operator, in essence, is a function that takes three inputs. The left argument is a function, the right argument is a configuration name. These two arguments return a function that takes one argument, the intended value for the configuration name.
+
+Suppose that you are tasked with writing a function `f` that, similar to `Replace`, needs to take optional configuration inputs. When downstream code calls `f`, it will need to use the `⍠` operator. As such, `f` will be passed as a left argument (alongside a right string argument, let's call it `s`) to a function created by `⍠`. The return value will be a function (`g`) that takes one argument (`a`). You would need to write `f` in a way that will make sure that when `g` receives `a` as an argument, `f` will acknowledge that the optional argument denoted by `s` will have a value of `a` and behave accordingly. This is pretty insane stuff. If it is difficult to understand this, you can imagine how difficult it would be to write and test logic for this.
 
 #### Prefix Notation is better
 
-Prefix notation is better because it does not suffer from any of those problems. With prefix notation, it is trivial to write a function that takes more than two arguments, or takes multiple optional arguments.
+Prefix notation for function calls is better because it does not suffer from any of those problems. Python, JavaScript, Java, and Clojure all use prefix notation for function calls. In all of these languages, it is trivial to write a function that takes more than two arguments, or takes multiple optional arguments.
+
+For example, if you needed to define a function like `Replace` in python you could simply do something [like this](https://docs.python.org/3/library/re.html#re.sub):
+```
+def sub(pattern, repl, string, count=0, flags=0):
+  pass
+```
+
+The `sub` function in particular from [the `re` library](https://docs.python.org/3/library/re.html) allows you to pass multiple optional arguments by using the bitwise OR `|` operator:
+```
+re.sub('a', 'b', s, flags=re.I|re.DOTALL)
+```
+
+I won't compare the implementation differences here of a function like `sub` in APL and Python. But I'm almost positive the Python implementation would be much simpler to write and understand.
+
 
 For the most part, APL has a very simple order-of-operations that I really appreciate. APL evaluates expressions right to left. For the most part, every function in-between two operands will take as little as possible from its left side and as much as possible from its right side.
 
@@ -100,3 +120,5 @@ My language and jq would be different in that:
 -   jq allows you to run the same source file in a variety of different ways by specifying different command line flags. My language will allow you to specify different "run-modes" as special directives at the top. This will make programs a little more portable. The idea is that you would can get a source file of my program and run it without needing to also get learn how to specify the correct arguments and run it.
 
 <sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> When I say "APL", I'm referring to Dyalog APL using "dfn style".
+
+<sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> You might say that Haskell suffers from the same problem. After all, technically, all Haskell functions can only take at most one argument. Functions that seem to take `n` arguments are just a function returning a function, returning a function...`n` times. While this is true, there is decided difference that makes this a non-problem in Haskell. Haskell makes it extremely easy and natural to write functions that return functions because that's just the standard way to write functions. The syntax hides this from you so much that you don't even realize you're doing it. Your functions will look very similar to functions in an imperative language. In contrast, I don't think that writing functions that return functions is so easy and natural in APL. It seems to me that if you wanted to write a function that needed three or more inputs, you would have to carefully write some particular and nuanced code to do so.
