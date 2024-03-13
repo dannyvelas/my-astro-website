@@ -9,16 +9,22 @@ tags: ["apl", "functional-programming", "languages"]
 
 ## Background: Learning APL
 
-In my last post (*TODO: CITE*), I wrote about how I learned APL<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> and how I thought it might have been more popular if it were a bit more mutually intelligible with popular languages.
+In my last post (*TODO: CITE*), I wrote about how I was learning APL<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> and how I thought it might have been more popular if it were a bit more mutually intelligible with popular languages.
 
 As I wrote the last post, I started thinking about how it might be interesting to create a new language that takes some of the good things about APL but changes or removes some of the things that I didn't like.
 
+These are some of the things that I liked about APL:
+- An emphasis on programming via a REPL, while still allowing a way to invoke the intrepeter on an arbitrary file.
+- [A language server client](https://marketplace.visualstudio.com/items?itemName=OptimaSystems.vscode-apl-language-client) available in Visual Studio Code.
+- Removing the distinction between an operator and a function.
+
 In particular, these are the things that I don't like about APL:
+- Not being mutually intelligible with popular languages.
 - Infix notation for function calls.
 - Extensive use of combinatory logic for writing idiomatic programs.
 - There are some non-intuitive things about the way rank polymorphism works (e.g. `f¨⊂Y` is not always the same as `f Y`).
 
-In this post, I'll explore what a language might look like if it were like APL, except it more mutually intelligible with popular languages and without these things.
+In this post, I'll explore what a language might look like if it had the things that I like about APL, without the things that I don't like.
 
 ### More mutually intelligible with popular languages
 
