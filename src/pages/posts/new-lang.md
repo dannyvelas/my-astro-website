@@ -50,7 +50,7 @@ I believe that APL isn't mutually intelligible with popular languages because, u
 
 Languages often come with functions that the developer can use for common tasks. When I was solving the first problem of AOC 2022 in Clojure, I used the `map`, `partition-by`, and `reduce` functions, among others, which were provided by the Clojure runtime. In popular languages like Clojure, to call one of these functions, a developer must use the English name of this function. For example, if I wanted to use the `map` function in Clojure to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `(map inc v)`.
 
-APL also has a runtime that provides functions that the developer can use. In APL, the functions equivalent to the ones that I mentioned above are: `Each`, `Partition`, and `Reduce`, respectively. However, in APL, to call these functions, you don't use their English names. You use symbol that represents that function. For example, if I wanted to use the `Each` function in APL to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `+∘1¨v`<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">1</a></sup>. In this APL expression, the glyph `¨` represents the `Each` function. Similarly, `⊆` represents `Partition` and `/` represents `Reduce`.
+APL also has a runtime that provides functions that the developer can use. In APL, the functions equivalent to the ones that I mentioned above are: `Each`, `Partition`, and `Reduce`, respectively. However, in APL, to call these functions, you don't use their English names. You use symbol that represents that function. For example, if I wanted to use the `Each` function in APL to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `+∘1¨v`<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>. In this APL expression, the glyph `¨` represents the `Each` function. Similarly, `⊆` represents `Partition` and `/` represents `Reduce`.
 
 This is the case because APL treats functions and operators as one-and-the-same. In many popular languages, functions and operators are distinct. For example, in Python, operators are always symbols that are applied using infix notation (e.g. `1+2`). Functions are applied using English names (e.g. `map(some_fn, some_iterable)`). In contrast, in APL, the entity for addition `+` is a function that behaves just like `¨`. Both of these are infix functions that take two arguments, which must be invoked using a symbol instead of an English name. From the standpoint of a popular language, one might say that APL forces every function to behave like an operator.
 
@@ -95,28 +95,37 @@ For the most part, APL has a very simple order-of-operations that I really appre
 
 This works well for functions that need one or two inputs at most before producing a terminal value. Consider this simple APL expression: `f⍋3⍴1 2`, where `f` is a user-defined function: `{⊃⍵}`. This expression will be evaluated as: `(f⍋(3⍴1 2))`.
 
-In the case that a function, needs three inputs to produce a terminal value, things get more tricky. For example, consider the following APL expression which makes use of the `Stencil` (`⌺`) function: `f⌺1⊢1 2`.
+In the case that a function, needs three inputs to produce a terminal value, things get more tricky. For example, consider the following APL expression which makes use of the [`Stencil` (`⌺`)](https://help.dyalog.com/latest/index.htm#Language/Primitive%20Operators/Stencil.htm) function: `f⌺1⊢1 2`.
 
 This expression seems to have a very similar structure to the expression I presented earlier: `<user-defined-function> <glyph> <number> <glyph> <number> <number>`. However, this expression will have a different evaluation order. This expression will evaluate like so: `(f⌺1)(⊢(1 2))`. Since `Stencil` is a function that takes two arguments and returns a function, it will bind tightly to `f` and `1`. 
 
 The fact that the evaluation order is different in these two expressions is confusing and can hurt readability. You could avoid the order-of-operations ambiguity in the second example by wrapping the first part in parenthesis: `(f⌺1)⊢1 2`. At this point, a newcomer may realize that they can simplify the expression to `(f⌺1)1 2`. Unfortunately, this form is not idiomatic APL. Idiomatic APL seems to be more about terseness than readability for newcomers. Since `(f⌺1)1 2` is 8 characters and `f⌺1⊢1 2` is 7, a newcomer might be more likely to see `f⌺1⊢1 2` over `(f⌺1)1 2`.
 
-#### Prefix notation is better
+#### Prefix notation makes defining functions of more than two parameters or optional parameters trivial
 
 Prefix notation for function calls is better because it does not suffer from any of those problems. Lisp languages are the perfect example of this. They all use prefix notation for function calls. In all of these languages, it is trivial to write a function of more than two parameters, or with optional parameters. In these languages, there is also no ambiguity in order-of-operations.
 
-For example, if you needed to define a function in Clojure with optional parameters that would be equivalent to APL's `Replace` (at least a simpler version that would work with the example above), all you would have to do is use a rest parameter that can receive a map. With some de-structuring you can set default values if only the first three arguments are passed in, or if only some map keys are passed:
-```
-(defn apl-replace [s pattern repl & {:keys [ic mode neol] :or {ic false mode \L neol false}}])
+For example, if you needed to define a function in Clojure with optional parameters that would be equivalent to APL's `Replace` (at least a simpler version that would work with the example above), all you would have to do is use a rest parameter that can receive a map. With some de-structuring you can set default values if any or all of the arguments after the first three are omitted:
+
+```clojure
+(defn apl-replace [s pattern repl & {:keys [ic mode neol] :or {:ic false :mode \L :neol false}}])
 ```
 
 I won't compare the implementation differences here of a function like `Replace` in APL and Clojure. But I'm almost positive that the Clojure implementation would be much simpler to write and understand for developers of equal proficiency in each language.
 
-## Further APL complexity
+#### Prefix notation does not introduce order of operation ambiguity
 
-Even if a developer of a popular language were able to get past the initial intimidation of non-ASCII symbols, they may get deterred from continuing to learn because additional particularities of APL:
-- APL requires extensive use of combinatory logic for writing idiomatic programs. Combinatory logic is rarely used in popular languages. So it can be quite hard for newcomers to understand idiomatic array language expressions.
-- There are some non-intuitive things about the way rank polymorphism works (e.g. `f¨⊂Y` is not the same as `f Y`).
+The declaration of a simple translation of APL's `Stencil` function in Clojure would look like this:
+```clojure
+(defn apl-stencil [f g Y])
+```
+
+As such, the seemingly ambiguous APL code from our previous example (`f⌺1⊢1 2`) would this in Clojure:
+```clojure
+(apl-stencil f [1] [1 2])
+```
+
+In this snippet it's clear that the `apl-stencil` function is receiving three arguments. 
 
 ### Extensive use of combinatory logic
 
