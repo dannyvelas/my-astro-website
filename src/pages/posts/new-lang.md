@@ -7,14 +7,21 @@ author: 'Daniel Velasquez'
 tags: ["apl", "functional-programming", "languages"]
 ---
 
-## Background: Learning APL
+## Background
 
-In my last post (*TODO: CITE*), I wrote about how I was learning APL<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> and how I thought it might have been more popular if it were a bit more mutually intelligible with popular languages.
+My background is predominantly in imperative or object-oriented languages. The first language I ever learned was C++. In college, I mostly wrote Java, C, and C++. In my career, I've mostly developed using Go and Typescript. However, I've always had a keen interest in functional programming. As such, I've tried to teach myself functional languages and patterns in my spare time.
 
-As I wrote the last post, I started thinking about how it might be interesting to create a new language that takes some of the good things about APL but changes or removes some of the things that I didn't like.
+Most recently, I've been learning how to write APL<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>. APL is what's known as an "array language." An array language is a type of programming language where one can apply a function to every element of a vector or matrix without iteration. I've been solving the problems of Advent of Code (AOC) 2023 in APL. Before I started, I understood that coding in APL would be somewhat similar to coding in a functional language. I've had some experience with functional languages already. I also already solved some problems of AOC 2022 in Clojure. So, I figured that I was already equipped to have a relatively easy time learning APL. I thought that the only thing that might make APL a bit more difficult, is that I would have to learn how to type the glyphs. However, I was wrong. Typing the glyphs was easy. Writing idiomatic APL programs was very hard.
+
+Since Clojure is a functional language, the Clojure community encourages one to solve algorithms by chaining pure functions together. As such, when I would solve AOC 2022 problems, I would create a bunch of pure functions, read the input file, pass it to a pure function, then, I would pass the output of that to another pure function, and so on, until finally, the last pure function would return the expected answer to the problem. Now that I look back at my AOC 2022 Clojure solutions, I realize that some of the functions I wrote may not be so idiomatic from a functional programming perspective. Some functions that I wrote were translations of what I would do in an imperative language like Go. For example, I noticed that in many of my Clojure functions I decided to use the "loop" construct. The logic of the loop would be very similar to the logic I would write in Go. I believe that instead of writing iteration logic in Clojure, it would have been more idiomatic to have a chain of functions that transform the input of the function to some desired output. I probably did not do it this way, because I could not think of a way to implement the function in such a way.
+
+Writing APL was difficult for me because in APL (and array languages in general) it is much more uncomfortable to do the equivalent of a Clojure "loop", or more generally, iteration through recursion. It seems to me that to write idiomatic code in an array language, one _must_ write algorithms as a chain of functions that transform the input of the function into some desired output. In other words, array languages force you to think only in terms of transformations, not iterations. If you tried to do iteration through recursion in an array language, you would end up with a pretty long and complicated program. As such, array languages seem like a really good medium to sharpen one's functional programming skills. They don't have an easy escape hatch to resort to imperative thinking. If I ever want to guarantee that I use only functional patterns to solve a problem in a given functional language, I might choose to solve it in APL first, and then translate it to that given language.
+
+## Ideas for a new language
+As I've learned APL, I've started thinking about how it might be interesting to create a new language that takes some of the good things about APL but changes or removes some of the things that I didn't like.
 
 These are some of the things that I liked about APL:
-- An emphasis on programming via a REPL, while still allowing a way to invoke the intrepeter on an arbitrary file.
+- An emphasis on programming via a REPL, while still allowing a way to invoke the interpreter on an arbitrary file.
 - [A language server client](https://marketplace.visualstudio.com/items?itemName=OptimaSystems.vscode-apl-language-client) available in Visual Studio Code.
 - Removing the distinction between an operator and a function.
 
@@ -28,13 +35,32 @@ In this post, I'll explore what a language might look like if it had the things 
 
 ### More mutually intelligible with popular languages
 
-In my last post, I wrote about the fact that APL uses symbols for built-in functions hurts readability for non-APL developers (*TODO: cite*).
+Suppose we get a person who is comfortable using one of the popular languages who has never learned how to read or write APL at random and we ask them to try to explain the workings of a program written in a language that they are not familiar with. Suppose we do this exercise twice. The first program we show them is written in a popular language. The second is an APL program. I believe that:
 
-If we wanted to make a new language like APL that was a little more readable, I think it might make sense for this language to take the same approach as [Ivy](https://pkg.go.dev/robpike.io/ivy), where each function is an English word.
+-   The programmer would statistically be most likely to be familiar with one or several of the languages in the popular languages list.
+-   Through this experience, they would most likely be able to explain what the first language is doing with moderate success.
+-   Despite this experience, they would have almost no success in explaining what APL is doing
 
-### Prefix instead of infix notation for function calls
+If this is true, this would mean two things:
 
-#### Infix notation adds unnecessary complexity
+-   The majority of popular languages are, to a certain degree, [mutually intelligible](https://en.wikipedia.org/wiki/Mutual_intelligibility) with other popular languages. In other words, people who have been taught to write and read a subset of popular languages can often read and (sometimes, or to a limited degree) write a distinct subset of popular languages.
+-   Popular languages are almost not mutually intelligible with APL at all. In other words, people who have been taught to write and read popular languages will likely not be able to read APL and vice versa.
+
+I believe that APL isn't mutually intelligible with popular languages because, unlike popular languages, APL uses symbols for built-in function calls. 
+
+Languages often come with functions that the developer can use for common tasks. When I was solving the first problem of AOC 2022 in Clojure, I used the `map`, `partition-by`, and `reduce` functions, among others, which were provided by the Clojure runtime. In popular languages like Clojure, to call one of these functions, a developer must use the English name of this function. For example, if I wanted to use the `map` function in Clojure to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `(map inc v)`.
+
+APL also has a runtime that provides functions that the developer can use. In APL, the functions equivalent to the ones that I mentioned above are: `Each`, `Partition`, and `Reduce`, respectively. However, in APL, to call these functions, you don't use their English names. You use symbol that represents that function. For example, if I wanted to use the `Each` function in APL to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `+∘1¨v`<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">1</a></sup>. In this APL expression, the glyph `¨` represents the `Each` function. Similarly, `⊆` represents `Partition` and `/` represents `Reduce`.
+
+This is the case because APL treats functions and operators as one-and-the-same. In many popular languages, functions and operators are distinct. For example, in Python, operators are always symbols that are applied using infix notation (e.g. `1+2`). Functions are applied using English names (e.g. `map(some_fn, some_iterable)`). In contrast, in APL, the entity for addition `+` is a function that behaves just like `¨`. Both of these are infix functions that take two arguments, which must be invoked using a symbol instead of an English name. From the standpoint of a popular language, one might say that APL forces every function to behave like an operator.
+
+Since APL uses symbols to invoke built-in functions, its source code will look very concise compared to popular languages. However, this is a trade-off. If a developer were to read a function call that uses the English name of the function, this English name will provide context to the developer about what that function is doing. The same isn't the case with symbols. If a non-Clojure developer were to see this Clojure expression out-of-context: `(partition-by empty? coll)`, I believe they would be able to somewhat detect that the `partition-by` function probably takes some collection as input and partitions it based in some criteria. In contrast, if a non-APL developer were to see the equivalent APL expression, out-of-context: `((0≠≢¨)⊆⊢)coll`, I don't think they would be able to gather much meaningful insight.
+
+If I wanted to make an array language like APL that was a little more readable for non-APL developers, I think it might make sense for this language to take the same approach as [Ivy](https://pkg.go.dev/robpike.io/ivy), where each function is an English word.
+
+### No infix notation for function calls
+
+#### Infix notation adds unnecessary complexity when defining functions of more than two parameters
 In my last post I wrote about how in APL, functions are invoked using infix notation. As a result, all functions in APL must technically take either one argument or two, but no more than two.
 
 At the same time, APL provides built-in functions that, in other languages, take 3 arguments or more. A good example is the `Replace` function. In Python if you have a string `s` and you want to replace all instances of the character "a" in `s` with "b", you can do: `s.replace("a", "b")`. This `replace` function can be thought of as taking three arguments: `s`, `"a"`, and `"b"`. The question is, how does APL make the `Replace` function take three arguments if it can only be applied using infix notation? Well, APL gets around this problem by using [currying](https://en.wikipedia.org/wiki/Currying).
@@ -43,53 +69,48 @@ In APL, the symbol for replace is `⎕R`. To do the same in APL, you would need 
 
 Suppose you need to translate a translate a function `f` from an imperative language that takes four arguments to APL, you would have to use currying. You could, for example, define a function that takes two arguments that returns another function that takes two arguments, that returns a final value. The result would look like this: `(arg3(arg1 f arg0)arg2)`.
 
-In this post, I will refer to the "final value" produced by a sequence of function invocations as a "terminal value". So, technically the `Replace` function takes at most 2 arguments. But, it needs three inputs to produce a terminal value. In our example, these values are `'a'`', `'b'`, and `s`.
+In this post, I will refer to the "final value" produced by a sequence of function invocations as a "terminal value". So, technically the `Replace` function takes at most two arguments. But, it needs three inputs to produce a terminal value. In our example, these values are `'a'`', `'b'`, and `s`.
 
 In my opinion, it would only make sense for a language to require infix function calls if every function in the language can only take a maximum of two inputs before returning a terminal value. If a language were to require infix notation for function calls, it would become very difficult in that language to define functions that require three inputs to produce a terminal value. It would also become very difficult in that language to define functions that take optional inputs to produce a terminal value.
 
-Because of infix function calls, I feel like our example of defining `f` was unnecessarily complicated. For every additional input or pair of input, you are forced to return an additional function<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>.
+Because of infix function calls, I feel like our example of defining `f` was unnecessarily complicated. For every additional input or pair of input, you are forced to return an additional function<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>. 
+
+#### Infix notation adds unnecessary complexity when defining functions of more than two parameters
 
 Defining functions that take optional arguments is unnecessarily complicated too.
 
-For functions that can take optional arguments, Dyalog APL lets you use the `⍠` operator. This operator can be used with the `Replace` function. For example, if you wanted to replace all instances of `"a"` to `"b"` in `s` in a case insensitive way, you would have to do this: `('a'⎕R'b'⍠'IC'1)s`. `"IC"` here is used to modify the call to `⎕R`. It's like a flag that stands for "case insensitive." If you wanted to add other additional configuration options to `⎕R`, you would simply add the `⍠` operator again: `('a'⎕R'b'⍠ 'Mode' 'D' ⍠ 'NEOL' 1 ⍠ 'EOL' 'LF')s`.
+For functions that can take optional arguments, Dyalog APL lets you use the `⍠` operator. This operator can be used with the `Replace` function. For example, if you wanted to replace all instances of `"a"` to `"b"` in `s` in a case insensitive way, you would have to do this: `('a'⎕R'b'⍠'IC'1)s`. `"IC"` here is used to modify the call to `⎕R`. It's like an optional flag that stands for "case insensitive." If you wanted to add other additional optional arguments to `⎕R`, you would simply add the `⍠` operator again: `('a'⎕R'b'⍠'IC' 1 ⍠ 'Mode' 'D' ⍠ 'NEOL' 1)s`.
 
-Fortunately the `⍠` operator allows us to use optional arguments in APL, I'm not sure how one would define functions in APL if it weren't for this magical operator. While the existence of this operator is nice, it seems a bit crazy to me that Dyalog had to invent a whole new operator to solve this problem. Also, the complexity of defining a function that uses this operator seems a bit crazy to me.
+I'm not sure how one would define functions in APL if it weren't for this magical operator. While the existence of this operator is nice, it seems a bit crazy to me that Dyalog had to invent a whole new operator to solve this problem. Also, the complexity of defining a function that uses this operator seems a bit crazy to me.
 
-The `⍠` operator, in essence, is a function that takes three inputs. The left argument is a function, the right argument is a configuration name. These two arguments return a function that takes one argument, the intended value for the configuration name.
+The `⍠` operator, in essence, is a function that takes three inputs. The left argument is a function, the right argument is a string. These two arguments return a function that takes one argument of any type.
 
-Suppose that you are tasked with writing a function `f` that, similar to `Replace`, needs to take optional configuration inputs. When downstream code calls `f`, it will need to use the `⍠` operator. As such, `f` will be passed as a left argument (alongside a right string argument, let's call it `s`) to a function created by `⍠`. The return value will be a function (`g`) that takes one argument (`a`). You would need to write `f` in a way that will make sure that when `g` receives `a` as an argument, `f` will acknowledge that the optional argument denoted by `s` will have a value of `a` and behave accordingly. This is pretty insane stuff. If it is difficult to understand this, you can imagine how difficult it would be to write and test logic for this.
+Suppose that you are tasked with writing a function `f` that, similar to `Replace`, needs to take optional configuration inputs. When downstream code calls `f`, it will need to use the `⍠` operator. You would need to write `f` in a way that when `f` is passed alongside an arbitrary string argument `s` to `⍠`, it will return a function that will take one argument `a` and return a function that will behave like `f` except with an optional argument with name `s` set to `a`. This is pretty insane stuff. If it is difficult to understand this, you can imagine how difficult it would be to write and test logic for this.
 
-#### Prefix Notation is better
+#### Infix notation makes order-of-operations seem a bit inconsistent at times
 
-Prefix notation for function calls is better because it does not suffer from any of those problems. Python, JavaScript, Java, and Clojure all use prefix notation for function calls. In all of these languages, it is trivial to write a function that takes more than two arguments, or takes multiple optional arguments.
-
-For example, if you needed to define a function like `Replace` in python you could simply do something [like this](https://docs.python.org/3/library/re.html#re.sub):
-```
-def sub(pattern, repl, string, count=0, flags=0):
-  pass
-```
-
-The `sub` function in particular from [the `re` library](https://docs.python.org/3/library/re.html) allows you to pass multiple optional arguments by using the bitwise OR `|` operator:
-```
-re.sub('a', 'b', s, flags=re.I|re.DOTALL)
-```
-
-I won't compare the implementation differences here of a function like `sub` in APL and Python. But I'm almost positive the Python implementation would be much simpler to write and understand.
-
+Infix notation for function calls has another subtle problem that makes the language a little bit more difficult.
 
 For the most part, APL has a very simple order-of-operations that I really appreciate. APL evaluates expressions right to left. For the most part, every function in-between two operands will take as little as possible from its left side and as much as possible from its right side.
 
-This works well for functions that take one or two arguments at most. Consider this simple APL expression: `f⍋3⍴1 2`, where `f` is a user-defined function: `{⊃⍵}`. This expression will be evaluated as: `(f⍋(3⍴1 2))`.
+This works well for functions that need one or two inputs at most before producing a terminal value. Consider this simple APL expression: `f⍋3⍴1 2`, where `f` is a user-defined function: `{⊃⍵}`. This expression will be evaluated as: `(f⍋(3⍴1 2))`.
 
-Popular languages often provide built-in functions that should take more than two arguments there are some built-in APL functions like for example: `Stencil`, `Replace`, and `Search`, thatk 
+In the case that a function, needs three inputs to produce a terminal value, things get more tricky. For example, consider the following APL expression which makes use of the `Stencil` (`⌺`) function: `f⌺1⊢1 2`.
 
-For example, consider the following APL expressions: `f⌺1⊢1 2`.
+This expression seems to have a very similar structure to the expression I presented earlier: `<user-defined-function> <glyph> <number> <glyph> <number> <number>`. However, this expression will have a different evaluation order. This expression will evaluate like so: `(f⌺1)(⊢(1 2))`. Since `Stencil` is a function that takes two arguments and returns a function, it will bind tightly to `f` and `1`. 
 
-This expression seems to have a very similar structure to the expression I presented earlier: `<user-defined-function> <glyph> <number> <glyph> <number> <number>`. However, this expression will have a different evaluation order. This expression will evaluate like so: `(f⌺1)(⊢(1 2))`. There are reasons for this, and these reasons might be obvious to a seasoned APL developer. However, this is unintuitive to a newcomer.
+The fact that the evaluation order is different in these two expressions is confusing and can hurt readability. You could avoid the order-of-operations ambiguity in the second example by wrapping the first part in parenthesis: `(f⌺1)⊢1 2`. At this point, a newcomer may realize that they can simplify the expression to `(f⌺1)1 2`. Unfortunately, this form is not idiomatic APL. Idiomatic APL seems to be more about terseness than readability for newcomers. Since `(f⌺1)1 2` is 8 characters and `f⌺1⊢1 2` is 7, a newcomer might be more likely to see `f⌺1⊢1 2` over `(f⌺1)1 2`.
 
-You could avoid the order-of-operations ambiguity in the second example by wrapping the first part in parenthesis: `(f⌺1)⊢1 2`. At this point, a newcomer may realize that they can simplify the expression to `(f⌺1)1 2`. Unfortunately, this form is not idiomatic APL. Idiomatic APL seems to be more about terseness than readability for newcomers. Since `(f⌺1)1 2` is 8 characters and `f⌺1⊢1 2` is 7, a newcomer might be more likely to see `f⌺1⊢1 2` over `(f⌺1)1 2`.
+#### Prefix notation is better
 
-Although this is unintutive, I think I can understand why APL allows for this ambiguity in order-of-operations. `Stencil` was designed to be a function that makes it easy to [iterate over an array, updating each element according to some rules about its neighbors](https://en.wikipedia.org/wiki/Iterative_Stencil_Loops). This function is ideal for simulating [Conway's game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). To write this function in a C-family language, you would likely make it take three arguments: a function `f` that operates on a given sliding window, some configuration object `c` that specifies the size and movement of the sliding window, and finally the matrix which will be iterated through with windows specified by `c`, which will in turn get passed to function `f`. However, in APL, since all functions are infix, it's impossible to make `Stencil` a 3-argument function. So, the best you can do is make it a two-argument function that returns a function that accepts a single argument. 
+Prefix notation for function calls is better because it does not suffer from any of those problems. Lisp languages are the perfect example of this. They all use prefix notation for function calls. In all of these languages, it is trivial to write a function of more than two parameters, or with optional parameters. In these languages, there is also no ambiguity in order-of-operations.
+
+For example, if you needed to define a function in Clojure with optional parameters that would be equivalent to APL's `Replace` (at least a simpler version that would work with the example above), all you would have to do is use a rest parameter that can receive a map. With some de-structuring you can set default values if only the first three arguments are passed in, or if only some map keys are passed:
+```
+(defn apl-replace [s pattern repl & {:keys [ic mode neol] :or {ic false mode \L neol false}}])
+```
+
+I won't compare the implementation differences here of a function like `Replace` in APL and Clojure. But I'm almost positive that the Clojure implementation would be much simpler to write and understand for developers of equal proficiency in each language.
 
 ## Further APL complexity
 
@@ -127,4 +148,6 @@ My language and jq would be different in that:
 
 <sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> When I say "APL", I'm referring to Dyalog APL using "dfn style".
 
-<sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> You might say that Haskell suffers from the same problem. After all, technically, all Haskell functions can only take at most one argument. Functions that seem to take `n` arguments are just a function returning a function, returning a function...`n` times. While this is true, there is decided difference that makes this a non-problem in Haskell. Haskell makes it extremely easy and natural to write functions that return functions because that's just the standard way to write functions. The syntax hides this from you so much that you don't even realize you're doing it. Your functions will look very similar to functions in an imperative language. In contrast, I don't think that writing functions that return functions is so easy and natural in APL. It seems to me that if you wanted to write a function that needed three or more inputs, you would have to carefully write some particular and nuanced code to do so.
+<sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> Of course, in APL, there is a much more idiomatic way to do this: `v + 1`. However, for this example, I wanted to demonstrate the `Each` function.
+
+<sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> You might say that Haskell suffers from the same problem. After all, technically, all Haskell functions can only take at most one argument. Functions that seem to take `n` arguments are just a function returning a function, returning a function...`n` times. While this is true, there is decided difference that makes this a non-problem in Haskell. Haskell makes it extremely easy and natural to write functions that return functions because that's just the standard way to write functions. The syntax hides this from you so much that you don't even realize you're doing it. Your functions will look very similar to functions in an imperative language. In contrast, I don't think that writing functions that return functions is so easy and natural in APL. It seems to me that if you wanted to write a function that needed three or more inputs, you would have to carefully write some particular and nuanced code to do so.
