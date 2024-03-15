@@ -101,9 +101,9 @@ This expression seems to have a very similar structure to the expression I prese
 
 The fact that the evaluation order is different in these two expressions is confusing and can hurt readability. You could avoid the order-of-operations ambiguity in the second example by wrapping the first part in parenthesis: `(f⌺1)⊢1 2`. At this point, a newcomer may realize that they can simplify the expression to `(f⌺1)1 2`. Unfortunately, this form is not idiomatic APL. Idiomatic APL seems to be more about terseness than readability for newcomers. Since `(f⌺1)1 2` is 8 characters and `f⌺1⊢1 2` is 7, a newcomer might be more likely to see `f⌺1⊢1 2` over `(f⌺1)1 2`.
 
-#### Prefix notation makes defining functions of more than two parameters or optional parameters trivial
+#### Prefix notation is better
 
-Prefix notation for function calls is better because it does not suffer from any of those problems. Lisp languages are the perfect example of this. They all use prefix notation for function calls. In all of these languages, it is trivial to write a function of more than two parameters, or with optional parameters. In these languages, there is also no ambiguity in order-of-operations.
+Prefix notation for function calls is better because it does not suffer from any of those problems. Lisp languages are the perfect example of this. They all use prefix notation for function calls. In all of these languages, it is trivial to write a function of more than two parameters, or with optional parameters. The syntax for function calls in Lisp languages also entirely avoids the order-of-operations ambiguity presented in the APL example above.
 
 For example, if you needed to define a function in Clojure with optional parameters that would be equivalent to APL's `Replace` (at least a simpler version that would work with the example above), all you would have to do is use a rest parameter that can receive a map. With some de-structuring you can set default values if any or all of the arguments after the first three are omitted:
 
@@ -113,21 +113,35 @@ For example, if you needed to define a function in Clojure with optional paramet
 
 I won't compare the implementation differences here of a function like `Replace` in APL and Clojure. But I'm almost positive that the Clojure implementation would be much simpler to write and understand for developers of equal proficiency in each language.
 
-#### Prefix notation does not introduce order of operation ambiguity
-
-The declaration of a simple translation of APL's `Stencil` function in Clojure would look like this:
-```clojure
-(defn apl-stencil [f g Y])
-```
-
-As such, the seemingly ambiguous APL code from our previous example (`f⌺1⊢1 2`) would this in Clojure:
-```clojure
-(apl-stencil f [1] [1 2])
-```
-
-In this snippet it's clear that the `apl-stencil` function is receiving three arguments. 
-
 ### Extensive use of combinatory logic
+
+[The first problem of Advent of Code 2022](https://adventofcode.com/2022/day/1), asks you to read a file. There are two kinds of lines in the file, lines containing nothing but a numeric string, and empty lines. The first part of the problem is to create a nested array where adjoining lines of numeric strings are grouped together.
+
+To do this in a functional language, after reading the file into a string and splitting by new lines, one popular way of creating this nested array is to use a partition function. In Clojure one could use the `partition-by` function that takes two arguments, a function that returns a boolean and a collection. If the function returns true for an index `i`, then the collection will be partitioned at that index.
+
+When I tried to solve this problem in APL, I realized that partitioning works differently. APL's partition function (`⊆`) does not accept a function that returns a boolean. Instead, it expects an array of 1s and 0s, let's call it `b`. You can call it like this: `b ⊆ a`. If `b[i]` is a 1, then `a` would be partitioned at index `i`. When I learned this, I tried to solve this problem by doing the following:
+
+```apl
+(~{''≡⍵}¨file) ⊆ file
+```
+
+If you are a developer, chances are that the first thing that came to your mind as a way to do this is to use a `filter` function. In JavaScript, this would look like this:
+```javascript
+const evens = ints.filter(x => x % 2 == 0);
+```
+
+`filter` functions are really common. Almost every popular language has a built-in `filter` function. They are especially useful in functional languages. Despite APL having functional qualities, it does not have a `filter` function. When I was first learning APL, if I were given the problem statement above, I would have probably written the following to get around the lack of a `filter` function:
+
+```apl
+(~2|ints)/ints
+```
+However, I believe that a more idiomatic way to do this would be the following:
+```apl
+((~2∘|)⊢⍤/⊢)
+```
+
+In essence, this expression creates a binary array `b`. If `b[i]` is a 1, that means that `ints[i]` is odd. Next, I invert `b` so that 1s are 0s and 0s are 1s. Next, I use the `Replicate` function to return each element of `ints[i]`, `b[i]` times. If `b[i]` is 0, then `ints[i]` will get removed. If `b[i]` is 1, then `ints[i]` will remain.
+
 
 ### Non-Intuitive Rank Polymorphism
 
