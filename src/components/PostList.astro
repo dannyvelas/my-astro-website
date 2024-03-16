@@ -1,11 +1,11 @@
 ---
-import { minimalDate, newDateLocal } from "../util/time.ts";
+import { minimalDate, newDateET } from "../util/time.ts";
 import _ from "lodash/fp";
 
 const { posts } = Astro.props;
 
 const years = _.flow(
-  _.map((x) => ({ ...x, date: newDateLocal(x.frontmatter.publishedDate) })),
+  _.map((x) => ({ ...x, date: newDateET(x.frontmatter.publishedDate) })),
   _.groupBy((post) => post.date.getFullYear()),
   _.values,
   _.map((posts) => ({

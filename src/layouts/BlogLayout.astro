@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import { monthDayYear, newDateLocal, detailDate } from "../util/time.ts";
+import { monthDayYear, newDateET, detailDate } from "../util/time.ts";
 
 interface Props {
   frontmatter: Record<string, any>;
@@ -13,7 +13,7 @@ const { frontmatter } = Astro.props;
   <header class="mb-4 flex flex-col gap-4">
     <div class="flex flex-row justify-between items-center">
       <p class="text-xs text-gray-400">
-        {monthDayYear(newDateLocal(frontmatter.publishedDate))}
+        {monthDayYear(newDateET(frontmatter.publishedDate))}
       </p>
       <div class="flex flex-row gap-4">
         {
