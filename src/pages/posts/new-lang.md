@@ -29,7 +29,6 @@ In particular, these are the things that I don't like about APL:
 - Not being mutually intelligible with popular languages.
 - Infix notation for function calls.
 - Extensive use of combinatory logic for writing idiomatic programs.
-- There are some non-intuitive things about the way rank polymorphism works (e.g. `f¨⊂Y` is not always the same as `f Y`).
 
 In this post, I'll explore what a language might look like if it had the things that I like about APL, without the things that I don't like.
 
@@ -139,9 +138,6 @@ I can appreciate that there is a concise way to call `Partition`. I like that th
 Ultimately, APL's choice of making combinatory logic the idiomatic way to use `Partition` seems overly complicated. Instead of learning about all the different combinators, how to use them in APL, and debugging tacit functions, it seems much easier to just pass in a function and call it a day.
 
 `Partition` is no exception. Other functions work much the same way. For example, to filter an array in APL, instead of calling a `Filter` function using a function that returns a bool value as an argument, you have to use the `Replicate` function and pass in an binary array. Similarly, to make this idiomatic, you'd need to use combinatory logic.
-
-
-### Non-Intuitive Rank Polymorphism
 
 ## A new language, inspired by APL
 
