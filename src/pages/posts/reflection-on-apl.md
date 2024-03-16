@@ -7,9 +7,9 @@ author: 'Daniel Velasquez'
 tags: ["apl"]
 ---
 
-When I was in college, I took a parallel computing class. One of the projects of this class to was to write a C program that computed a given generation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), using parallelism via [OpenMP](https://www.openmp.org/). My solution was about 117 lines of code.
+When I was in college, I took a parallel computing class. One of the projects of this class was to was to write a C program that computed a given generation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), using parallelism via [OpenMP](https://www.openmp.org/). My solution was about 117 lines of code.
 
-Two years ago, I came across a crazy language called [APL](https://en.wikipedia.org/wiki/APL_(programming_language)). I was drawn to it after watching [this video](https://www.youtube.com/watch?v=a9xAKttWgP4) which demonstrates how one could compute a given generation of Conways Game of Life, in only one line of APL code. This was interesting to me. For a long time, I waiting for a chance to learn some APL and play around with it.
+Two years ago, I came across a crazy language called [APL](https://en.wikipedia.org/wiki/APL_(programming_language)). I was drawn to it after watching [this video](https://www.youtube.com/watch?v=a9xAKttWgP4) which demonstrates how one could compute a given generation of Conway's Game of Life, in only one line of APL code. This was interesting to me. For a long time, I had waited for a chance to learn some APL and play around with it.
 
 Finally, at the end of 2023, I had an opportunity to do so by solving some problems from [Advent of Code (AOC) 2023](https://adventofcode.com/2023) in APL<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
 
