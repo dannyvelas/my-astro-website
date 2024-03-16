@@ -7,7 +7,11 @@ author: 'Daniel Velasquez'
 tags: ["apl"]
 ---
 
-Recently, I tried to solve some problems from [Advent of Code (AOC) 2023](https://adventofcode.com/2023) in APL<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>. [APL](https://en.wikipedia.org/wiki/APL_(programming_language)) is what's known as an "array language." An array language is a type of programming language where one can apply a function to every element of a vector or matrix without iteration.
+When I was in college, I took a parallel computing class. One of the projects of this class to was to write a C program that computed a given generation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), using parallelism via [OpenMP](https://www.openmp.org/). My solution was about 117 lines of code.
+
+Two years ago, I came across a crazy language called [APL](https://en.wikipedia.org/wiki/APL_(programming_language)). I was drawn to it after watching [this video](https://www.youtube.com/watch?v=a9xAKttWgP4) which demonstrates how one could compute a given generation of Conways Game of Life, in only one line of APL code. This was interesting to me. For a long time, I waiting for a chance to learn some APL and play around with it.
+
+Finally, at the end of 2023, I had an opportunity to do so by solving some problems from [Advent of Code (AOC) 2023](https://adventofcode.com/2023) in APL<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
 
 As I learned APL, I noted down the qualities that I liked about it, as well as the qualities that I didn't like about it.
 
@@ -18,7 +22,7 @@ These are some of the qualities that I liked about APL:
 
 These are some of the qualities that I didn't like about APL:
 - Not being mutually intelligible with popular languages
-- Infix notation for function calls
+- Some ambiguity in order-of-operations
 - Extensive use of combinatory logic
 
 I will reflect on these points in this post.
@@ -65,11 +69,11 @@ I believe that APL isn't mutually intelligible with popular languages because, u
 
 Languages often come with functions that the developer can use for common tasks. When I was solving the first problem of AOC 2022 in Clojure, I used the `map`, `partition-by`, and `reduce` functions, among others, which were provided by the Clojure runtime. In popular languages like Clojure, to call one of these functions, a developer must use the English name of this function. For example, if I wanted to use the `map` function in Clojure to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `(map inc v)`.
 
-APL also has a runtime that provides functions that the developer can use. In APL, the functions equivalent to the ones that I mentioned above are: `Each`, `Partition`, and `Reduce`, respectively. However, in APL, to call these functions, you don't use their English names. You use a symbol that represents that function. For example, if I wanted to use the `Each` function in APL to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `+∘1¨v`<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">1</a></sup>. In this APL expression, the glyph `¨` represents the `Each` function. Similarly, `⊆` represents `Partition` and `/` represents `Reduce`.
+APL also has a runtime that provides functions that the developer can use. In APL, the functions equivalent to the ones that I mentioned above are: `Each`, `Partition`, and `Reduce`, respectively. However, in APL, to call these functions, you don't use their English names. You use a symbol that represents that function. For example, if I wanted to use the `Each` function in APL to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `+∘1¨v`<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>. In this APL expression, the glyph `¨` represents the `Each` function. Similarly, `⊆` represents `Partition` and `/` represents `Reduce`.
 
 Since APL uses symbols to invoke built-in functions, its source code will look very concise compared to popular languages. However, this is a trade-off. If a developer were to read a function call that uses the English name of the function, this English name would provide context to the developer about what that function is doing. The same isn't the case with symbols. If a non-Clojure developer were to see this Clojure expression out-of-context: `(partition-by empty? coll)`, I believe they would be able to somewhat detect that the `partition-by` function probably takes some collection as input and partitions it based in some criteria. In contrast, if a non-APL developer were to see the equivalent APL expression, out-of-context: `((0≠≢¨)⊆⊢)coll`, I don't think they would be able to gather much meaningful insight.
 
-## Infix notation made order-of-operations seem a bit inconsistent at times
+## Order of operations seems a bit ambiguous at times
 
 Since APL uses infix notation for function calls, I ran into a subtle problem that made learning the language a little bit more difficult.
 
@@ -114,7 +118,7 @@ I enjoyed learning APL and plan to continue learning and writing it from time to
 
 ## Footnotes
 
-<sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> When I say "APL", I'm referring to Dyalog APL using "dfn style".
+<sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> From here on, when I say "APL", I'm referring to Dyalog APL using "dfn style".
 
 <sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> Of course, in APL, there is a much more idiomatic way to do this: `v + 1`. However, for this example, I wanted to demonstrate the `Each` function.
 
