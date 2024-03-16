@@ -25,6 +25,7 @@ export const detailDate = (d: Date): string =>
     hour: "2-digit",
     minute: "2-digit",
     timeZone: newYorkIANATimeZone,
+    timeZoneName: "short",
   });
 
 // this function expects an ISO date string of the following form: 2023-11-01T00:00:00.000Z
