@@ -117,24 +117,28 @@ I won't compare the implementation differences here of a function like `Replace`
 
 [The first problem of Advent of Code 2022](https://adventofcode.com/2022/day/1), asks you to read a file. There are two kinds of lines in the file, lines containing nothing but a numeric string, and empty lines. The first part of the problem is to create a nested array where adjoining lines of numeric strings are grouped together.
 
-To do this in a functional language, after reading the file into a string and splitting by new lines, one popular way of creating this nested array is to use a partition function. In Clojure one could use the `partition-by` function that takes two arguments, a function that returns a boolean and a collection. If the function returns true for an index `i`, then the collection will be partitioned at that index. In my Clojure solution to this problem, I used the partition function like this: `(partition-by #(= % "") file)`
+To do this in a functional language, after reading the file into a string and splitting by new lines, one popular way of creating this nested array is to use a partition function. In Clojure one could use the `partition-by` function that takes two arguments, a function that returns a bool value and a collection. If the function returns true for an index `i`, then the collection will be partitioned at that index. In my Clojure solution to this problem, I used the partition function like this: `(partition-by #(= % "") file)`
 
-When I tried to solve this problem in APL, I realized that partitioning works differently. APL's partition function (`⊆`) does not accept a function that returns a boolean. Instead, it expects an array of 1s and 0s, let's call it `b`. You can call it like this: `b ⊆ a`. If `b[i]` is a 0, then the result of this expression would be a new array like `a`, partitioned at index `i`. When I learned this, I solved this problem by creating a binary array to the left of `⊆`:
+When I tried to solve this problem in APL, I realized that partitioning works differently. APL's partition function (`Partition`) does not accept a function that returns a bool value. Instead, it expects an array of 1s and 0s, let's call it `b`. You can call it like this: `b ⊆ a`. If `b[i]` is a 0, then the result of this expression would be a new array like `a`, partitioned at index `i`. When I learned this, I solved this problem by creating a binary array to the left of `⊆`:
 
 ```apl
 ({0≠≢⍵}¨file)⊆file
 ```
 
-To create this binary array, I created an array of 0s with the same size as `file`, and set an index `i` to be 1 if the length of `file[i]` was non-empty. In my opinion, this is quite a less elegant than the equivalent Clojure code. It felt like I had to jump through way more mental hoops to get to the same behavior. I didn't understand why APL designers hadn't changed the partition function to be simpler and accept a function instead of a boolean array. After learning more APL, I feel like I now understand why.
+To create this binary array, I created an array of 0s with the same size as `file`, and set an index `i` to be 1 if the length of `file[i]` was non-empty. In my opinion, this is quite a less elegant than the equivalent Clojure code. It felt like I had to jump through way more mental hoops to get to the same behavior. I didn't understand why APL designers hadn't changed `Partition` to be simpler and accept a function instead of a boolean array. After learning more APL, I feel like I now understand why.
 
-APL has this signature for their partition function because it has an elegant way for callers to use it. You could write the same expression above in idiomatic APL like so:
+APL has this signature for `Partition` because it has an elegant way for callers to use it. You could write the same expression above in idiomatic APL like so:
 ```apl
 ((0≠≢¨)⊆⊢)file
 ```
 
-This expression expands to `((0≠≢¨)file)⊆file`, which in turn expands to: `({0≠≢⍵}¨file)⊆file` (my original attempt). The idiomatic APL expression works because APL supports [tacit programming](https://xpqz.github.io/learnapl/tacit.html). It has a set of rules for how a string a functions within parentheses will expand to form a composition of function applications. Our expression is using the [`Φ` combinator](https://raw.githubusercontent.com/codereport/Content/main/Publications/Combinatory_Logic_and_Combinators_in_Array_Languages.pdf).
+This expression expands to `((0≠≢¨)file)⊆file`, which in turn expands to: `({0≠≢⍵}¨file)⊆file` (my original attempt). The idiomatic APL expression works because APL supports [tacit programming](https://xpqz.github.io/learnapl/tacit.html). It has a set of rules for how a string a functions within parentheses will expand to form a composition of function applications. This is combinatory logic. This particular rule is formally called the [`Φ` combinator](https://raw.githubusercontent.com/codereport/Content/main/Publications/Combinatory_Logic_and_Combinators_in_Array_Languages.pdf).
 
-On one hand, this is neat. I can appreciate that there is a concise way to call the partition function in APL. I like that the left part of it almost syntactically resembles the Clojure example of calling `partition-by`. `(0≠≢¨)` kind-of looks like a lambda function that returns a boolean. On the other hand, a part of me feels like this is still too complicated.
+I can appreciate that there is a concise way to call `Partition`. I like that the left part of it almost syntactically resembles the Clojure example of calling `partition-by`. `(0≠≢¨)` kind-of looks like a lambda function that returns a bool value.
+
+Ultimately, APL's choice of making combinatory logic the idiomatic way to use `Partition` seems overly complicated. Instead of learning about all the different combinators, how to use them in APL, and debugging tacit functions, it seems much easier to just pass in a function and call it a day.
+
+`Partition` is no exception. Other functions work much the same way. For example, to filter an array in APL, instead of calling a `Filter` function using a function that returns a bool value as an argument, you have to use the `Replicate` function and pass in an binary array. Similarly, to make this idiomatic, you'd need to use combinatory logic.
 
 
 ### Non-Intuitive Rank Polymorphism
