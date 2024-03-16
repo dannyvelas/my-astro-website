@@ -4,6 +4,7 @@ const tags = [
   "polymorphism",
   "web-frameworks",
   "career",
+  "apl",
 ];
 
 export const getTags = () => structuredClone(tags);

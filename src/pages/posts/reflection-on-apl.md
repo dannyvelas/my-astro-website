@@ -4,7 +4,7 @@ title: 'Reflection on APL'
 publishedDate: 2024-03-16
 description: 'Some reflection on the APL language after trying it out a little bit'
 author: 'Daniel Velasquez'
-tags: ["apl", "functional-programming", "languages"]
+tags: ["apl"]
 ---
 
 Recently, I tried to solve some problems from [Advent of Code (AOC) 2023](https://adventofcode.com/2023) in APL<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>. [APL](https://en.wikipedia.org/wiki/APL_(programming_language)) is what's known as an "array language." An array language is a type of programming language where one can apply a function to every element of a vector or matrix without iteration.
