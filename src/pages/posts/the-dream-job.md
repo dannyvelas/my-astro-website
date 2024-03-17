@@ -39,7 +39,7 @@ I've always been someone with a lot of side projects. The goal of my side projec
 
 As such, I've spent a lot of time trying to figure out how I could somehow determine what job would suit my interests and skills.
 
-At first, I thought that entrepreneurship was the answer. But after some reflection, (**TODO cite**), I realized that it makes more sense to start by creating a list of qualities that I would desire in a job. The idea is that I could use this list as a guide to navigate my career.
+At first, I thought that entrepreneurship was the answer. But [after some reflection](https://www.dannyvelasquez.com/posts/why-be-an-entrepreneur/), I realized that it makes more sense to start by creating a list of qualities that I would desire in a job. The idea is that I could use this list as a guide to navigate my career.
 
 It would be an oversimplification to treat this list as a checklist and qualify a given job by the number of items that it shares with my quality list. The answer of whether a given job shares a quality with my list is not binary. It is a sliding scale. If two of my list qualities are "being easy to commute to" and "being interesting," a job might score a 40% at the first criterion and an 85% at the other.
 
