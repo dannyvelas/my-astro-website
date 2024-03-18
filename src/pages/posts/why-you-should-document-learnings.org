@@ -1,0 +1,31 @@
+#+BEGIN_SRC yaml
+---
+layout: "../../layouts/BlogLayout.astro"
+title: 'Why you should document your learnings'
+publishedDate: 2024-03-18
+description: 'One good reason to document your learnings'
+author: 'Daniel Velasquez'
+tags: ["career"]
+---
+#+END_SRC
+
+Recently, I've been trying to get better at writing down my thoughts. I've realized that writing has several benefits:
+- Writing helps me explore my thoughts and thereby understand my opinions and desires better.
+- I like documenting.
+- It's good to practice the skill of expressing myself clearly and concisely.
+- When I'm older, I'll be able to see what my younger self was thinking and feeling by looking back at my writings. It could be really fun to analyze the changes in my thoughts and personality as a function of time.
+- I have a lot of thoughts and a bad memory. If I don't write consistently, I'll occasionally experience a big realization and feel really good about it, only for others to tell me that I've already had that realization, which makes me feel like I'm in an infinite realization cycle.
+  
+I created this website to share some of my writings, those that may be of interest to others.
+
+--- 
+The learning process is a curious thing.
+
+As you learn about a foreign subject, a lot of the things that at one point seemed unintuitive, confusing, and strange to you, will start to seem intuitive, straight-forward, and natural to you. One of my favorite quotes summarizes this phenomenon: "All of physics is either impossible or trivial. It is impossible until you understand it, and then it becomes trivial" - Ernest Rutherford. I feel like this phenomenon is the reason that the [[https://en.wikipedia.org/wiki/Curse_of_knowledge][Curse of knowledge]] exists. Once you become an expert, it becomes difficult to explain things to a beginner. Many of the things that a beginner would want you to explain are things that you don't even consider explaining because they seem so trivial.
+
+This is why whenever I realize that I am learning something important, I try to write it down immediately. By doing so, I might bypass the Curse of knowledge. At the instant of learning something new, I'm at the state of transition between something being impossible and trivial. In this state, I can remember why I felt like the thing that I've just learned is impossible, and simultaneously feel like it is trivial. So, if I were to write down the learning at that instant, I might be able to write down an explanation that would be understandable to someone who thinks that it is impossible, while detailing the knowledge of someone who thinks it is trivial.
+
+
+** scraps
+
+I strive to write down important ideas almost as soon as possible after having them. I feel like if I wait to write down the idea, I may forget it, lose interest in it, or forget the important details about it.
