@@ -12,12 +12,19 @@ tags: ["career"]
 In this post I'll explain why I try to document the things that I learn as soon as I learn them.
 
 The extent to which I reap [the benefits of writing](*TODO: CITE*) depends on the level of effort that I put in. If I try to write things with a lot of explanation, detail, and research, I will explore more, challenge more, remember more, and have more to reflect on in the future. This is why whenever I write about my learnings, I try to explain them very well, as if the content were to be read by an absolute beginner. This approach also comes with the obvious benefit that if someone were to come across my writings, there's a higher chance that they will understand the content and get something out of it.
+
+However, this isn't always easy. This post is about the challenge of writing accessible content, and one approach I take to try to address that challenge.
   
-Unfortunately, it is sometimes hard for me to make content accessible because of [[https://en.wikipedia.org/wiki/Curse_of_knowledge][the curse of knowledge]]. The curse of knowledge is a cognitive bias that makes it difficult for those with experience to explain things to a beginner. A sentence that may seem trivial and easily understandable to anyone for someone with experience might totally perplex a student. This is because after high levels of mastery, it becomes difficult for experts to put themselves in the perspective of the beginner and remember their challenges.
+** Curse of knowledge makes it hard for me to make content accessible
+It is sometimes hard for me to make content accessible because of [[https://en.wikipedia.org/wiki/Curse_of_knowledge][the curse of knowledge]]. The curse of knowledge is a cognitive bias that makes it difficult for those with experience to explain things to a beginner. An expert might have a difficult time explaining because in their explanations, they might use sentences that seem trivial and easily understandable to them, but totally perplex the beginner. This is because after high levels of mastery, an expert might subconsciously wrongly assume that others know the things that they consider to be basic; it becomes difficult for them to put themselves in the perspective of the beginner and remember their challenges.
 
 I think that it becomes difficult for experts to put themselves in the perspective of the beginner because of the way that people learn. When people learn about a foreign subject, a lot of the things that at one point seemed unintuitive, confusing, and strange to them, will start to seem intuitive, straight-forward, and natural to them. One of my favorite quotes summarizes this phenomenon: "All of physics is either impossible or trivial. It is impossible until you understand it, and then it becomes trivial" - Ernest Rutherford. Experts are likely people who have spent a long time feeling like foundational content is trivial. This makes them forget their ability to relate to beginners.
 
-The curse of knowledge is the reason that whenever I realize that I am learning something important, I try to write it down immediately. By doing so, I might bypass the curse of knowledge. At the instant of learning something new, I'm at the state of transition between something being impossible and trivial. In this state, I can remember why I felt like the thing that I've just learned is impossible, and simultaneously feel like it is trivial. So, if I were to write down the learning at that instant, I might be able to write down an explanation that would be understandable to someone who thinks that it is impossible, while detailing the knowledge of someone who thinks it is trivial.
+I feel like this happens to me many times when I'm writing or explaining something. I forget the perspective of an absolute beginner, so I might explain something assuming that they already know things that they don't.
+
+** Solution
+
+In an effort to write content in an accessible way, I am trying to write down the things that I learn, almost as soon as I learn them. By doing so, I might bypass the curse of knowledge. At the instant of learning something new, I'm at the state of transition between something being impossible and trivial. In this state, I can remember why I felt like the thing that I've just learned is impossible, and simultaneously feel like it is trivial. So, if I were to write down the learning at that instant, I might be able to write down an explanation that would be understandable to someone who thinks that it is impossible, while detailing the knowledge of someone who thinks it is trivial.
 
 
 ** scraps
@@ -39,3 +46,5 @@ I like writing about the things that I learn. I try to document my learnings in 
 I like writing about my learnings in an accessible way. But, sometimes this could be difficult. 
 
 . I try to do to make my writings accessible 
+
+A sentence that may seem trivial and easily understandable to anyone for someone with experience might totally perplex a student
