@@ -9,25 +9,13 @@ tags: ["career"]
 ---
 #+END_SRC
 
-Recently, I've been trying to get better at writing down my thoughts. I've realized that writing has several benefits:
-- Writing helps me explore my thoughts and thereby understand my opinions and desires better. Also, writing helps me have new thoughts at a greater level of nuance. 
-- Writing enables me to challenge my ideas, by checking facts, evidence, and others' opinions.
-- Writing helps me remember my learnings better.
-- I like documenting.
-- It's good to practice the skill of expressing myself clearly and concisely.
-- When I'm older, I'll be able to see what my younger self was thinking and feeling by looking back at my writings. It could be really fun to analyze the changes in my thoughts and personality as a function of time.
-- When I'm older, I'll be able to re-teach myself about some of the things that I've forgotten about by looking back at my writings.
+In this post I'll explain why I try to document the things that I learn as soon as I learn them.
+
+The extent to which I reap [the benefits of writing](*TODO: CITE*) depends on the level of effort that I put in. If I try to write things with a lot of explanation, detail, and research, I will explore more, challenge more, remember more, and have more to reflect on in the future. This is why whenever I write about my learnings, I try to explain them very well, as if the content were to be read by an absolute beginner. This approach also comes with the obvious benefit that if someone were to come across my writings, there's a higher chance that they will understand the content and get something out of it.
   
-I like writing about the things that I learn. I try to document my learnings in a way that is accessible because it'll helps me learn more.
-- The more accessible I make content, the more effort I have to put into explaining the content, which means I'll learn more in the process.
-- If I make my writings accessible, there's a higher chance that me in the future or another person will understand the content and get something out of it.
+Unfortunately, it is sometimes hard for me to make content accessible because of [[https://en.wikipedia.org/wiki/Curse_of_knowledge][the curse of knowledge]]. The curse of knowledge is a cognitive bias that makes it difficult for those with experience to explain things to a beginner. A sentence that may seem trivial and easily understandable to anyone for someone with experience might totally perplex a student. This is because after high levels of mastery, it becomes difficult for experts to put themselves in the perspective of the beginner and remember their challenges.
 
-Unfortunately, it is often hard to make content accessible. This is because of [[https://en.wikipedia.org/wiki/Curse_of_knowledge][The curse of knowledge]].
-
-** The curse of knowledge
-The curse of knowledge is a cognitive bias that makes it difficult for experts to explain things to a beginner. This happens when experts subconsciously wrongly assume that others know the things that they consider to be basic. As a result, seemingly trivial sentences for them perplex the student. This is because after high levels of mastery, it becomes difficult for experts to put themselves in the perspective of the beginner and remember their challenges.
-
-I think that it becomes difficult for experts to put themselves in the perspective of the beginner because of the way that people learn. When people learn about a foreign subject, a lot of the things that at one point seemed unintuitive, confusing, and strange to them, will start to seem intuitive, straight-forward, and natural to them. One of my favorite quotes summarizes this phenomenon: "All of physics is either impossible or trivial. It is impossible until you understand it, and then it becomes trivial" - Ernest Rutherford. Experts are likely people who have spent a long time feeling like foundational content is trivial. So, this enables them to forget their ability to relate to beginners.
+I think that it becomes difficult for experts to put themselves in the perspective of the beginner because of the way that people learn. When people learn about a foreign subject, a lot of the things that at one point seemed unintuitive, confusing, and strange to them, will start to seem intuitive, straight-forward, and natural to them. One of my favorite quotes summarizes this phenomenon: "All of physics is either impossible or trivial. It is impossible until you understand it, and then it becomes trivial" - Ernest Rutherford. Experts are likely people who have spent a long time feeling like foundational content is trivial. This makes them forget their ability to relate to beginners.
 
 The curse of knowledge is the reason that whenever I realize that I am learning something important, I try to write it down immediately. By doing so, I might bypass the curse of knowledge. At the instant of learning something new, I'm at the state of transition between something being impossible and trivial. In this state, I can remember why I felt like the thing that I've just learned is impossible, and simultaneously feel like it is trivial. So, if I were to write down the learning at that instant, I might be able to write down an explanation that would be understandable to someone who thinks that it is impossible, while detailing the knowledge of someone who thinks it is trivial.
 
@@ -41,3 +29,13 @@ I strive to write down important ideas almost as soon as possible after having t
 I created this website to share some of my writings, those that may be of interest to others.
 
 The extent to which I reap these benefits depends on the level of effort that I put in. If I simply write jot down some thoughts with little explanation and no research, I likely won't be exploring or challenging my ideas much.
+
+I simply jot down some thoughts with little explanation and no research, I likely won't be exploring or challenging my ideas much
+
+I like writing about the things that I learn. I try to document my learnings in a way that is accessible because it helps me learn more.
+- The more accessible I make content, the more effort I have to put into explaining the content, which means I'll learn more in the process.
+- If I make my writings accessible, there's a higher chance that me in the future or another person will understand the content and get something out of it.
+
+I like writing about my learnings in an accessible way. But, sometimes this could be difficult. 
+
+. I try to do to make my writings accessible 
