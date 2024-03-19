@@ -9,15 +9,16 @@ tags: ["career"]
 ---
 #+END_SRC
 
-Recently, I've been trying to get better at writing down my thoughts. It's funny to me that I'm doing this because I didn't think that I would ever care about writing. There are several reasons I could have for not writing:
+Recently, I've been trying to get better at writing down my thoughts. It's funny to me that I'm doing this because I didn't think that I would ever care about writing. There are several reasons I have for not writing:
 - I'm already busy in my life with several other commitments, desires, and responsibilities.
 - Writing is a difficult and time-consuming process.
 - I don't particularly love writing. I was never good at it in school or took any special classes for it.
 
 I started writing because I realized that its benefits outweigh its costs:
-- Writing helps me explore my thoughts and thereby understand my opinions and desires better. Also, writing helps me have new thoughts at a greater level of nuance. 
+- Writing helps me explore my ideas and thereby understand my opinions and desires better. Also, writing helps me have new thoughts at a greater level of nuance.
 - Writing enables me to challenge my ideas, by checking facts, evidence, and others' opinions.
 - Writing helps me remember my learnings better.
+- I like documenting.
 - It's good to practice the skill of expressing myself clearly and concisely.
 - When I'm older, I'll be able to see what my younger self was thinking and feeling by looking back at my writings. It could be really fun to analyze the changes in my thoughts and personality as a function of time.
 - When I'm older, I'll be able to re-teach myself about some of the things that I've forgotten about by looking back at my writings.
@@ -25,3 +26,32 @@ I started writing because I realized that its benefits outweigh its costs:
 In this post, I'll expand on these reasons that I have to write.
 
 ** Explore my thoughts and understand my opinions and desires better
+
+I often feel like I want to explore and document the ideas that I have. I like to explore ideas a little bit by thinking about them when I'm doing monotonous tasks or when I have some free time. Exploring these ideas via thinking is nice but can only get me so far. Often, I'll get to a point where I'll get distracted by something else or confused or bored. So, the exploration will end there.
+
+Writing feels like a tool that I can use to help organize and structure my thoughts. This added structure helps me understand my ideas better. In structuring my thoughts, I'll often realize that my ideas have logical holes. If I put in effort to making the content that I write accessible, I'll often realize that I thought I knew something, but in reality I did not.
+
+To fix the logical holes and learn the things that I thought that I knew, I often need to do additional research. With this research, I'm able to add nuance to my ideas. Sometimes, I even get new ideas as a result.
+
+
+** scraps
+
+I strive to write down important ideas almost as soon as possible after having them. I feel like if I wait to write down the idea, I may forget it, lose interest in it, or forget the important details about it.
+
+- I have a lot of thoughts and a bad memory. If I don't write consistently, I'll occasionally experience a big realization and feel really good about it, only for others to tell me that I've already had that realization, which makes me feel like I'm in an infinite realization cycle.
+
+I created this website to share some of my writings, those that may be of interest to others.
+
+The extent to which I reap these benefits depends on the level of effort that I put in. If I simply write jot down some thoughts with little explanation and no research, I likely won't be exploring or challenging my ideas much.
+
+I simply jot down some thoughts with little explanation and no research, I likely won't be exploring or challenging my ideas much
+
+I like writing about the things that I learn. I try to document my learnings in a way that is accessible because it helps me learn more.
+- The more accessible I make content, the more effort I have to put into explaining the content, which means I'll learn more in the process.
+- If I make my writings accessible, there's a higher chance that me in the future or another person will understand the content and get something out of it.
+
+I like writing about my learnings in an accessible way. But, sometimes this could be difficult. 
+
+. I try to do to make my writings accessible 
+
+A sentence that may seem trivial and easily understandable to anyone for someone with experience might totally perplex a student
