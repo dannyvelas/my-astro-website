@@ -1,10 +1,9 @@
-
 #+BEGIN_SRC yaml
 ---
 layout: "../../layouts/BlogLayout.astro"
-title: Good things to do when managing'
+title: 'Good things to do when managing'
 publishedDate: 2024-03-18
-description: 'Some of things I've learned when managing'
+description: "Some of things I've learned when managing"
 author: 'Daniel Velasquez'
 tags: ["career"]
 ---
@@ -12,14 +11,14 @@ tags: ["career"]
 
 It's been almost a year since I've worked as a team lead at Walmart. It has been a great learning experience. As a lead, I've had the chance to learn some useful soft-skills that would have been difficult to pick up working strictly as an engineer.
 
-Every time I've learned something new that I deemed helpful and applicable to a generic working environment, I've made some effort to write it down. I did this for a few reasons:
+Every time I've learned something new that I deemed helpful and applicable to a generic working environment, I've made some effort to write it down. I wrote down these learnings for a few reasons:
 - These notes may come in handy for me in the future.
 - These notes may come in handy for someone else in the future.
 - In the future, I'll be able to look back at these notes. It might be nice to reflect on what I was learning and what I was doing at a given snapshot of time in my life.
 
-In addition, I like documenting learnings. The learning process is a curious thing. Before you set foot in learning about a foreign subject, you might know absolutely nothing about the subject. As you learn about the subject, a lot of the things that at one point seemed unintuitive, confusing, and strange to you, will start to seem intuitive, straight-forward, and natural to you. One of my favorite quotes summarizes this phenomenon: "All of physics is either impossible or trivial. It is impossible until you understand it, and then it becomes trivial" - Ernest Rutherford. I feel like this phenomenon is the reason that the [[https://en.wikipedia.org/wiki/Curse_of_knowledge][Curse of knowledge]] exists. Once you become an expert, it becomes difficult to explain things to a beginner. Many of the things that a beginner would want you to explain are things that you don't even consider explaining because they seem so trivial.
+I tried to write my learnings as soon as I had them because I feel like it's the optimal way to record accessible and detailed information. The learning process is a curious thing. Before you learn about a foreign subject, you might know absolutely nothing about the subject. As you learn about the subject, a lot of the things that at one point seemed unintuitive, confusing, and strange to you, will start to seem intuitive, straight-forward, and natural to you. One of my favorite quotes summarizes this phenomenon: "All of physics is either impossible or trivial. It is impossible until you understand it, and then it becomes trivial" - Ernest Rutherford. I feel like this phenomenon is the reason that the [[https://en.wikipedia.org/wiki/Curse_of_knowledge][Curse of knowledge]] exists. Once you become an expert, it becomes difficult to explain things to a beginner. Many of the things that a beginner would want you to explain are things that you don't even consider explaining because they seem so trivial.
 
-Once I understood this, I felt the need to document things as soon as I learned them, as an approach to see if I can bypass this effect. At the instant of learning something new, I'm at the state of transition between something being impossible and trivial. In this state, I feel like I retain the memory of feeling like the thing that I've just learned is impossible, but I also have the newfound knowledge that makes me feel like it is trivial. So, if I were to write down the learning at that instant, I might be able to write down an explanation that would be understandable, both to someone who thinks that it is impossible, while at the same time detailing the knowledge of someone who thinks it is trivial.
+Documenting things as soon as you learn them might be a way to bypass this effect. At the instant of learning something new, you're at the state of transition between something being impossible and trivial. In this state, you can remember why you felt like the thing that you've just learned is impossible, and simultaneously feel like it is trivial. So, if you were to write down the learning at that instant, you might be able to write down an explanation that would be understandable to someone who thinks that it is impossible, while detailing the knowledge of someone who thinks it is trivial.
 
 This post will be about me recounting the things that I've learned. Unfortunately, I may not be able to list all of the helpful things that I've learned. I suspect that many of the things that I've learned, are things that I've learned without realizing that I've learned them.
 
