@@ -389,7 +389,7 @@ In essence, this approach is very similar to the pattern-matching approach becau
 | No Separate Compilation    | x    |      |
 
 
-### Non-solution: re-visiting extending representations in The Visitor Pattern by using inheritance
+## Non-solution: re-visiting extending representations in The Visitor Pattern by using inheritance
 
 In the last section, we saw that the visitor pattern passed all but the first criterion. We weren't able to extend representations in the visitor pattern.
 
