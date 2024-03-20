@@ -1,6 +1,7 @@
 // these are the url-friendly tags
 const tags = [
   "design-patterns",
+  "writing",
   "clojure",
   "polymorphism",
   "web-frameworks",
