@@ -18,9 +18,8 @@ I started writing because I realized that its benefits outweigh its costs:
 - Writing helps me explore my ideas and thereby understand my opinions and desires better. Also, writing helps me have new thoughts at a greater level of nuance.
 - Writing helps me remember my learnings better.
 - I like documenting.
-- When I'm older, I'll be able to see what my younger self was thinking and feeling by looking back at my writings. It could be really fun to analyze the changes in my thoughts and personality as a function of time.
+- When I'm older, I'll be able to see what my younger self was thinking and feeling by looking back at my writings.
 - When I'm older, I'll be able to re-teach myself about some of the things that I've forgotten about by looking back at my writings.
-
 - It's good to practice the skill of expressing myself clearly and concisely.
 
 In this post, I'll expand on these reasons that I have to write.
@@ -49,11 +48,20 @@ Those years are behind me now. Now I don't associate writing with these things. 
 I like writing to the extent that it lets me feel like I'm build something and explaining something. For me, this is documentation. By documenting things, whether it's for a project, or for work, or for things in my life, I get the feeling that I get to build a body of knowledge that is accessible and helps other people. And, I like this.
 
 ** Looking back when I'm older
-One of the really cool things about 
-** scraps
+I think of writing as a way to collect data.
 
-I strive to write down important ideas almost as soon as possible after having them. I feel like if I wait to write down the idea, I may forget it, lose interest in it, or forget the important details about it.
+I use [[https://toggl.com/][an app to track my time]] and [[https://www.ynab.com/][an app to track my spending]]. These apps give me the ability to analyze my current behavior as well as my historical behavior. They help me make sure I'm not currently over-spending on time or money. They also give me detailed reports on how my behavior has trended over time. This is possible because I collect data about my behaviors using these apps.
 
-- I have a lot of thoughts and a bad memory. If I don't write consistently, I'll occasionally experience a big realization and feel really good about it, only for others to tell me that I've already had that realization, which makes me feel like I'm in an infinite realization cycle.
+Writing is very similar, I collect data about my thoughts and put them on paper. This gives me the ability to analyze my current thoughts. This also allows me to do analysis on the changes in my thoughts and personality as a function of time.
 
-I created this website to share some of my writings, those that may be of interest to others.
+** Re-teaching when I'm older
+I've realized that many of the subjects that I knew when I was younger quietly and slowly start to fade from my mind. At first, I'll forget only the details. After some time, I'll forget entire concepts if I'm not actively studying the subject.
+
+Writing about things I learn feels kind of like keeping the high-school or college notebooks of classes you enjoyed. There's a fair chance I'll never look back at some writings after a five or ten year period. But, on the chance that I do, it would be nice to get surprised by the things I knew back then and re-learn them, maybe even rekindle interest in those things.
+
+** Good to practice expressing yourself 
+I won't write much on this topic as I suspect that I won't need to convince on this point for you to believe it.
+
+One of the reasons I created this website is that I wanted to hold myself accountable to making sure that I actually practice my expression. If I didn't share my writings on a platform for the world to see, I was worried I would simply get lazy and write content without making it understandable to others.
+
+The other reason I created this website is that some of my writings may be of interest to others.
