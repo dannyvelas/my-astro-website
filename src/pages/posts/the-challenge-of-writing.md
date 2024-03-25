@@ -12,7 +12,7 @@ The extent to which I reap [the benefits of writing](https://www.dannyvelasquez.
 However, this isn't always easy. This post is about the challenge of writing accessible content, and one approach I take to try to address that challenge.
 
 
-# The curse of knowledge makes it hard for me to make content accessible
+## The curse of knowledge makes it hard for me to make content accessible
 
 It is sometimes hard for me to make content accessible because of [the curse of knowledge](https://en.wikipedia.org/wiki/Curse_of_knowledge). The curse of knowledge is a cognitive bias that makes it difficult for a person with experience to explain things to a beginner. A person with experience might have a difficult time explaining because, in their explanations, they might use sentences that seem trivial and easily understandable to them, but perplex the beginner. This is because after the experienced person might subconsciously wrongly assume that others know the things that they consider to be basic; it becomes difficult for them to put themselves in the perspective of the beginner and remember their challenges.
 
@@ -21,5 +21,5 @@ I think that it becomes difficult for those with experience to put themselves in
 I feel like this happens to me to some extent when I'm writing or explaining something. I can forget the perspective of an absolute beginner, so I might explain something assuming that they already know things that they don't. Sometimes I even do the reverse. I sometimes mistake the things that are confusing the listener and start elaborating on things that are trivial to everyone in the room.
 
 
-# Solution
+## Solution
 To write content in an accessible way, I am trying to write down the things that I learn, almost as soon as I learn them. By doing so, I might bypass the curse of knowledge. At the instant of learning something new, I'm at the state of transition between something being impossible and trivial. In this state, I can remember why I felt like the thing that I've just learned is impossible, and simultaneously feel like it is trivial. So, if I were to write down the learning at that instant, I might be able to write down an explanation that would be understandable to someone who thinks that it is impossible while detailing the knowledge of someone who thinks it is trivial.
