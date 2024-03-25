@@ -32,6 +32,7 @@ export default async function (
     return new Response(message);
   }
 
+  // longitude should go first since it is the x-axis
   const point =
     context.geo.latitude &&
     context.geo.longitude &&
