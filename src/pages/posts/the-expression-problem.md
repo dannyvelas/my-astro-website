@@ -5,37 +5,34 @@ publishedDate: 2023-11-01
 description: 'An explanation on what The Expression Problem is, how to solve it, and how to not solve it'
 author: 'Daniel Velasquez'
 tags: ["design-patterns", "clojure", "polymorphism"]
+public: true
 ---
 
 When I was a university student, my favorite class was a graduate class called "Compiler Construction." It was also the hardest class I've ever taken. Back in those days, I would track my time using [Toggl](https://toggl.com/). And, I realized that I spent somewhere between 30 to 40 hours per week, just on that one class. Although it was very time-consuming, I enjoyed every minute of it. We had a capstone project of building our own compiler within teams of three. Our compiler would read a language very similar to a subset of Python with static typing and emit RISC V assembly code. I remember going to sleep at late hours, crunching out some final lines of code for that project with sheer excitement about waking up early to go to my team standup first thing in the morning. I can't pinpoint exactly why I was so excited but I think it was a mix of being proud about the code I wrote and being very interested in the subject matter. I think this made me eager to share my updates and come up with new plans in standup.
 
 I think I was interested in low-level development and programming languages before I took that class. But I think that class kind of cemented my interest in these topics because of how much fun I had. Nowadays, I'm trying to see how I can work on projects that gravitate around these interests either personally or professionally.
 
-As I was working on my compiler I realized that I needed some way to recursively descend a syntax tree when doing type analysis and when generating assembly code. Thanks to [Bob Nystrom's Crafting Interpreters](https://craftinginterpreters.com/), I realized I could use the visitor pattern for this. 
+As I was working on my compiler I realized that I needed some way to recursively descend a syntax tree when doing type analysis and when generating assembly code. Thanks to [Bob Nystrom's Crafting Interpreters](https://craftinginterpreters.com/), I realized I could use the visitor pattern for this.
 
 Before explaining what the visitor pattern is, [Nystrom writes about why we need it](https://craftinginterpreters.com/representing-code.html#the-expression-problem). He writes that each language has a certain "grain" to it. Functional languages make it easy to add functions (behaviors), and object-oriented languages make it easy to add classes (representations). If you try to extend representations in functional languages or behaviors in object-oriented languages...well, good luck. It's not so easy to do. This is The Expression Problem.
 
 Back then I had pressing deadlines so I didn't really delve deep on what this really meant. It's not that intuitive. If you search StackOverflow overflow for The Expression Problem, you'll find [answers that are outright wrong about what it is](https://stackoverflow.com/a/22180495/11587741).
 
-I always remained curious in the back of my mind about it. Recently, I had some extra time on my hands so I decided to take a crack at understanding it. One of the best ways for me to learn things is to document them as a way to teach others. So, that's what this article is: it's me explaining to you what The Expression Problem is. 
+I always remained curious in the back of my mind about it. Recently, I had some extra time on my hands so I decided to take a crack at understanding it. One of the best ways for me to learn things is to document them as a way to teach others. So, that's what this article is: it's me explaining to you what The Expression Problem is.
 
 The Expression Problem is a design-pattern problem in Computer Science. A computer scientist named this issue after the subject matter in which they experienced it: they were trying to parse or evaluate expressions. Suppose there is a base package of representations. And suppose that these representations will be imported by downstream packages. The goal is to define the base package in such a way that downstream packages can extend the base package with both new behaviors and representations, without necessitating any modifications to the source of the base package, while using static types and without using separate compilation.
-
 
 ## Terminology
 
 For a reader to fully grasp this definition, they would need to fully understand the definition of the words "behavior" and "representation."
 
-
 ### Behavior
 
 By "behavior," I mean a unit of logic that takes input and returns some output. Usually a unit of logic is called a "function". However, a unit of logic could also be, for example, one branch of a "switch" statement. Of course, "unit" here is very vaguely defined. For now, we can satisfy ourselves with the idea that a "unit" can be anywhere from one line of code to thousands, such that the start of the unit takes in some form of input. And the end of the unit returns some form of output. Again, "input" and "output" here are very vague. "Input" can refer to one or more variables in scope, that are used inside of a unit of logic, or an argument, in the case that the unit of code is a function. "Output" can refer to the last variable (or variables) that are set at the end of a unit of logic, or a return value, in the case that the unit of code is a function.
 
-
 ### Representation
 
 By "Representation," I mean a collection of behaviors that conceptually represent an entity. In object-oriented languages, this is usually referred to as a "class", and each behavior is referred to as a "method." In functional programs, this is usually a module, which has several related functions that have some conceptual similarity.
-
 
 ## Example
 
@@ -46,7 +43,7 @@ Suppose we're developing a note-taking application. The application will be rele
 We can think of modes as representations and functionalities as behaviors. Imagine a table where each column symbolizes a behavior, and each row symbolizes a representation that implements those behaviors. The implementation of the behavior of a representation will be symbolized by an `x` at the intersection of a row with a column. In the first release of our application, our note-taking app will have a base package that looks something like this:
 
 |             | Loading | Editing | Saving |
-|----------- |------- |------- |------ |
+| ----------- | ------- | ------- | ------ |
 | Prose       | x       | x       | x      |
 | Whiteboard  | x       | x       | x      |
 | Spreadsheet | x       | x       | x      |
@@ -61,16 +58,14 @@ This problem statement comes with one more restriction: we should use language f
 
 We will show many different non-solutions to modeling this problem. Some approaches will be in a functional language, others will be in an object-oriented language. We will measure each approach against four criteria to gauge its effectiveness in solving The Expression Problem. These criteria are based on the criteria from [Dr. Ralf Laemmel's lecture on The Expression Problem](https://www.youtube.com/watch?v=FWW87fvBKJg). The more criteria an approach satisfies, the closer it is at solving the problem. If an approach satisfies all criteria, the approach effectively solves The Expression Problem. The four criteria are:
 
-1.  Is it easy to add new behaviors in downstream packages without modifying the base package?
-2.  Is it easy to add new representations in downstream packages without modifying the base package?
-3.  Does this solution use static type checking?
-4.  Does this solution require separate compilation?
-
+1. Is it easy to add new behaviors in downstream packages without modifying the base package?
+2. Is it easy to add new representations in downstream packages without modifying the base package?
+3. Does this solution use static type checking?
+4. Does this solution require separate compilation?
 
 ## Non-solution: using sum types in a functional language
 
 For our first approach, we will model this problem using a functional language using sum types. We will see at the end if this approach satisfies all four criteria for solving The Expression Problem.
-
 
 ### Base package
 
@@ -100,7 +95,6 @@ let save = function
 | Spreadsheet -> ;; spreadsheet save behavior
 ```
 
-
 ### Extending behaviors
 
 Now that we've established an idea of what the base package looks like, let's see how we can extend the behaviors of the base package without modifying it. The simplest approach would be to import the base package to another module. In that module, we can create one pattern-matching function for each functionality we would like to add. Here are the definitions for export, format, and select in a module that imports the base package:
@@ -128,20 +122,19 @@ With this approach, our new package, which imports the base package, adds new be
 
 With this simple and idiomatic approach, if we wanted to add a new mode type, like "Picture", our approach would require us to modify the base package. This is because the simplest way to add a new representation of the "Picture" mode would be to add a new "Picture" branch to the "mode" type. Once we add this branch, we will also need to modify all of the pattern-matching functions of the base package. This is because the "load", "edit", and "save" functions won't compile if their pattern-matching expression is not exhaustive of all of the mode types. So, we would need to add one new "Picture" branch to each of those functions as well.
 
-
 ### Evaluation
 
 In this approach, it was very easy to add columns to the table (behaviors) without modifying the base package. Yet it was impossible to add rows (representations) without modifying the base package. In total, this approach passed 3 out of 4 of our criteria:
 
 | Criteria                   | Pass | Fail |
-|-------------------------- |---- |---- |
+| -------------------------- | ---- | ---- |
 | Extensible Behaviors       | x    |      |
 | Extensible Representations |      | x    |
 | Static Type Checking       | x    |      |
 | No Separate Compilation    | x    |      |
 
-
 ## Non-solution: using classes and methods in an object-oriented language
+
 Now, let's model our problem using classes and methods in an object-oriented language and see how many criteria this approach passes.
 
 ### Base package
@@ -199,19 +192,17 @@ class Voice {
 In this approach, it was very easy to add rows to the table without modifying the base package, but it was impossible to add behaviors without modifying the base package. In total, this approach passed 3 out of 4 of our criteria:
 
 | Criteria                   | Pass | Fail |
-|-------------------------- |---- |---- |
+| -------------------------- | ---- | ---- |
 | Extensible Behaviors       |      | x    |
 | Extensible Representations | x    |      |
 | Static Type Checking       | x    |      |
 | No Separate Compilation    | x    |      |
-
 
 ## Non-solution: using dynamic type checking in an object-oriented language
 
 We can use an abstraction that makes it easy to add behaviors to a class, outside of its definition by defining a function outside of a class. The first parameter of this function would be an instance of the class. The body of the function will be the definition of the behavior.
 
 If we extend this idea to work for multiple classes, the type of the first parameter of this function would be a base class. This would allow us to pass instances of derived classes to our function. We can then use a control statement to define branches of behavior and associate each branch to a derived class. The control statement would dynamically check the type of the instance and dispatch the corresponding branch.
-
 
 ### Base package
 
@@ -235,7 +226,6 @@ class Behaviors {
 }
 ```
 
-
 ### Extending behaviors
 
 The behavior functions in this solution resemble the approach above where we used pattern matching functions when modeling this problem in a functional language. We can easily extend the behaviors of Modes by adding a new function that will take a mode as an argument:
@@ -253,11 +243,9 @@ class MoreBehaviors extends Behaviors {
 }
 ```
 
-
 ### Extending representations
 
 Unfortunately, it is difficult to add a new class. If we were to add a `Picture` class, for example, we would need to go to the `load`, `edit`, and `save` functions in the Behaviors class of our base package, and add a new branch to each function for our new `Picture` mode class.
-
 
 ### Evaluation
 
@@ -270,17 +258,15 @@ This solution is also different from the pattern-matching solution in that it sa
 This approach passes only 2 of 4 criteria:
 
 | Criteria                   | Pass | Fail |
-|-------------------------- |---- |---- |
+| -------------------------- | ---- | ---- |
 | Extensible Behaviors       | x    |      |
 | Extensible Representations |      | x    |
 | Static Type Checking       |      | x    |
 | No Separate Compilation    | x    |      |
 
-
 ## Non-solution: The Visitor Pattern
 
 If we want to separate the behaviors of class from its definition, it is a much better approach to use the visitor pattern. The visitor pattern also allows us to define a function in a downstream package and associate it with an imported class. It is a better approach than using dynamic type checking because the visitor pattern allows your code to dispatch behavior functions in constant time, instead of linear. Also, the visitor pattern doesn't prescribe dynamic type checking. So, your compiler can guide you to make sure all behavior functions are implemented.
-
 
 ### Base package
 
@@ -348,7 +334,6 @@ prose.accept(loadVisitor);
 
 In contrast to the approach where we used dynamic type checking, the loading function of the `Whiteboard` instance on line 6 and the loading function of the `Prose` instance on line 7 both dispatch instantly.
 
-
 ### Extending behaviors
 
 With the visitor pattern, we can easily extend the behavior of representations in downstream packages, in a way that is similar to the control statement approach, or the pattern matching approach. All we need to do is define new visitors:
@@ -371,23 +356,20 @@ class SelectVisitor implements Visitor {
 }
 ```
 
-
 ### Extending representations
 
 Unfortunately, with this approach, we can't extend the representations of the base package, without modifying it. For example, if we add a `Picture` class and if we want it to have `load`, `edit`, and `save` functionality, we will need to modify the `LoadVisitor`, `EditVisitor`, or `SaveVisitor` classes of the base package.
-
 
 ### Evaluation
 
 In essence, this approach is very similar to the pattern-matching approach because we were able to extend behaviors but not representations. This approach was better than the approach where we used dynamic type casting because we did not incur performance costs when dispatching behavior functions and we maintained static type safety. This approach passed 3 out of 4 criteria:
 
 | Criteria                   | Pass | Fail |
-|-------------------------- |---- |---- |
+| -------------------------- | ---- | ---- |
 | Extensible Behaviors       | x    |      |
 | Extensible Representations |      | x    |
 | Static Type Checking       | x    |      |
 | No Separate Compilation    | x    |      |
-
 
 ## Non-solution: re-visiting extending representations in The Visitor Pattern by using inheritance
 
@@ -428,7 +410,6 @@ class Picture extends Mode {
 }
 ```
 
-
 ### Evaluation
 
 In this way, were were able to adapt the Visitor pattern to pass the first criterion, but unfortunately, to do this, we had to resort to using dynamic casting.
@@ -436,17 +417,15 @@ In this way, were were able to adapt the Visitor pattern to pass the first crite
 Notice that the `accept` method of the `Picture` class must have an argument of type `Visitor` to properly extend the `Mode` class. We needed to cast this visitor to be of type `VisitorWithPicture` to make this approach work. All in all, this approach passed 3 of 4 criteria:
 
 | Criteria                   | Pass | Fail |
-|-------------------------- |---- |---- |
+| -------------------------- | ---- | ---- |
 | Extensible Behaviors       | x    |      |
 | Extensible Representations | x    |      |
 | Static Type Checking       |      | x    |
 | No Separate Compilation    | x    |      |
 
-
 ## Non-solution: Multimethods in Clojure
 
 [According to Eli Bendersky](https://eli.thegreenplace.net/2016/the-expression-problem-and-its-solutions/), we can try to use multimethods to solve The Expression Problem. Since Clojure is a dynamically typed language, similar to the previous approach, this approach will also pass all criteria except for the one about static type checking. In contrast to the previous approach, this approach is much more simple and elegant.
-
 
 ### Base package
 
@@ -471,7 +450,6 @@ In Clojure we can define our `Mode` types as records, and our functionalities as
 ;; definitions of edit and save multimethods look the same to load. They are omitted for brevity
 ```
 
-
 ### Extending behaviors
 
 It's straightforward to add new behaviors in downstream packages, like `export`:
@@ -488,7 +466,6 @@ It's straightforward to add new behaviors in downstream packages, like `export`:
   ;; spreadsheet export behavior
 )
 ```
-
 
 ### Extending representations
 
@@ -507,23 +484,20 @@ It's also straightforward to add new representations in downstream packages, lik
 )
 ```
 
-
 ### Evaluation
 
 As mentioned before, multi-methods in Clojure solve 3 of 4 criteria:
 
 | Criteria                   | Pass | Fail |
-|-------------------------- |---- |---- |
+| -------------------------- | ---- | ---- |
 | Extensible Behaviors       | x    |      |
 | Extensible Representations | x    |      |
 | Static Type Checking       |      | x    |
 | No Separate Compilation    | x    |      |
 
-
 ## Non-solution: protocols in Clojure
 
 In addition to using multimethods in Clojure, we can also try to use protocols to solve The Expression Problem. Of course, this approach will not pass the static-type checking criterion. But, it is interesting and instructional to see how we can easily pass the other three criteria.
-
 
 ### Base package
 
@@ -550,7 +524,6 @@ Just as before, we can define our `Mode` types as records. For behaviors, instea
 ;; definitions of edit and save multimethods look the same to load. They are omitted for brevity.
 ```
 
-
 ### Extending behaviors
 
 We can add a new behavior in downstream packages, like `export`, by defining a new protocol with `defprotocol` and making sure that the base types implement this new protocol by using `extend-protocol`:
@@ -568,7 +541,6 @@ We can add a new behavior in downstream packages, like `export`, by defining a n
   (export [_] (comment "spreadsheet export impl here")))
 ```
 
-
 ### Extending representations
 
 It's also straightforward to add new representations in downstream packages. If we want to add a new `Picture`, we can simply do it by making sure that we implement the base protocols:
@@ -583,13 +555,12 @@ It's also straightforward to add new representations in downstream packages. If 
   (save [_] (comment "picture edit impl here")))
 ```
 
-
 ### Evaluation
 
 As mentioned before, protocols in Clojure solve 3 of 4 criteria:
 
 | Criteria                   | Pass | Fail |
-|-------------------------- |---- |---- |
+| -------------------------- | ---- | ---- |
 | Extensible Behaviors       | x    |      |
 | Extensible Representations | x    |      |
 | Static Type Checking       |      | x    |
@@ -602,6 +573,7 @@ While I have been able to find many non-solutions to The Expression Problem, I h
 We can solve The Expression Problem in Haskell because of [Typeclasses](https://learnyouahaskell.com/types-and-typeclasses#typeclasses-101). Typeclasses allow you to extend both behaviors and representations.
 
 ### Base package
+
 To solve The Expression Problem for this example in Haskell, we would want to define three data types, one for each representation:
 
 ```haskell
@@ -680,7 +652,7 @@ instance Save Picture where
 This approach solves all four criteria. We were able to add new behaviors by creating a new Typclass that is a subclass of the `Mode` Typeclass; we were able to add new representations by creating a new data type that implements the `Mode` Typeclass; And, we were able to do this without any type assertions or separate complication!
 
 | Criteria                   | Pass | Fail |
-|-------------------------- |---- |---- |
+| -------------------------- | ---- | ---- |
 | Extensible Behaviors       | x    |      |
 | Extensible Representations | x    |      |
 | Static Type Checking       | x    |      |
@@ -698,13 +670,13 @@ So, while The Expression Problem might be nice to solve in concept, in practice,
 
 ## Q+A with myself as I studied this topic
 
--   Why use a multimethod in Clojure? Isn't this equivalent to using a pattern-matching function?
-    -   There's no such thing as native pattern-matching functionality in Clojure. At least, not in the way it exists in typed functional languages like OCaml or Haskell. The closest thing is `cond` or `condp`.
-    -   You could use these functions instead of multimethods but there is one big advantage to multimethods: the branches of multimethods can be extended in downstream files. The branches of `cond` expressions cannot. This means that multimethods can be used to solve The Expression Problem in Clojure (if we ignore the restriction of using static types).
--   Why use the visitor pattern in object-oriented languages? Isn't this equivalent to using a switch statement?
-    -   It is not. It dispatches a behavior function in constant time, unlike a switch statement.
--   In languages with support for Sum types, like Rust/Scala, is there a need for the visitor pattern?
-    -   Probably not, you can use pattern matching instead.
+- Why use a multimethod in Clojure? Isn't this equivalent to using a pattern-matching function?
+  - There's no such thing as native pattern-matching functionality in Clojure. At least, not in the way it exists in typed functional languages like OCaml or Haskell. The closest thing is `cond` or `condp`.
+  - You could use these functions instead of multimethods but there is one big advantage to multimethods: the branches of multimethods can be extended in downstream files. The branches of `cond` expressions cannot. This means that multimethods can be used to solve The Expression Problem in Clojure (if we ignore the restriction of using static types).
+- Why use the visitor pattern in object-oriented languages? Isn't this equivalent to using a switch statement?
+  - It is not. It dispatches a behavior function in constant time, unlike a switch statement.
+- In languages with support for Sum types, like Rust/Scala, is there a need for the visitor pattern?
+  - Probably not, you can use pattern matching instead.
 
 ## Footnotes
 

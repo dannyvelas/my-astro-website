@@ -5,22 +5,25 @@ publishedDate: 2024-03-16
 description: 'Some reflection on the APL language after trying it out a little bit'
 author: 'Daniel Velasquez'
 tags: ["apl"]
+public: true
 ---
 
 When I was in college, I took a parallel computing class. One of the projects of this class was to was to write a C program that computed a given generation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), using parallelism via [OpenMP](https://www.openmp.org/). My solution was about 117 lines of code.
 
-Two years ago, I came across a crazy language called [APL](https://en.wikipedia.org/wiki/APL_(programming_language)). I was drawn to it after watching [this video](https://www.youtube.com/watch?v=a9xAKttWgP4) which demonstrates how one could compute a given generation of Conway's Game of Life, in only one line of APL code. This was interesting to me. For a long time, I had waited for a chance to learn some APL and play around with it.
+Two years ago, I came across a crazy language called [APL](https://en.wikipedia.org/wiki/APL_\(programming_language\)). I was drawn to it after watching [this video](https://www.youtube.com/watch?v=a9xAKttWgP4) which demonstrates how one could compute a given generation of Conway's Game of Life, in only one line of APL code. This was interesting to me. For a long time, I had waited for a chance to learn some APL and play around with it.
 
 Finally, at the end of 2023, I had an opportunity to do so by solving some problems from [Advent of Code (AOC) 2023](https://adventofcode.com/2023) in APL<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
 
 As I learned APL, I noted down the qualities that I liked about it, as well as the qualities that I didn't like about it.
 
 These are some of the qualities that I liked about APL:
+
 - An emphasis on functional programming
 - An emphasis on programming via a REPL, while still allowing a way to invoke the interpreter on an arbitrary file
 - A language server client available in Visual Studio Code
 
 These are some of the qualities that I didn't like about APL:
+
 - Not being mutually intelligible with popular languages
 - Some ambiguity in order-of-operations
 - Extensive use of combinatory logic
@@ -31,7 +34,7 @@ I will reflect on these points in this post.
 
 Before I started, I understood that coding in APL would be somewhat similar to coding in a functional language. I've had some experience with functional languages already. I also already solved some problems of AOC 2022 in Clojure. So, I figured that I was already equipped to have a relatively easy time learning APL. I thought that the only thing that might make APL a bit more difficult, is that I would have to learn how to type the glyphs. However, I was wrong. Typing the glyphs was easy. Writing idiomatic APL programs was very hard.
 
-Writing APL was difficult for me because in APL, (and array languages in general), it is much more uncomfortable to write iteration logic. In a functional language, if you can't figure out how to apply a function to transform some data, you could instead write your own function which iterates through the data by using recursion. This function would be like an equivalent to a for loop in an imperative language. In contrast, in an array language, one _must_ write algorithms as a chain of functions that transform the input of the function into some desired output. In other words, array languages force you to think only in terms of transformations, not iterations. If you tried to do iteration through recursion in an array language, you would end up with a pretty long and complicated program.
+Writing APL was difficult for me because in APL, (and array languages in general), it is much more uncomfortable to write iteration logic. In a functional language, if you can't figure out how to apply a function to transform some data, you could instead write your own function which iterates through the data by using recursion. This function would be like an equivalent to a for loop in an imperative language. In contrast, in an array language, one *must* write algorithms as a chain of functions that transform the input of the function into some desired output. In other words, array languages force you to think only in terms of transformations, not iterations. If you tried to do iteration through recursion in an array language, you would end up with a pretty long and complicated program.
 
 I liked this about APL because it made me realize that it could be a good medium to sharpen my functional programming skills. It doesn't have an easy escape hatch to resort to imperative thinking.
 
@@ -65,7 +68,7 @@ If APL were more mutually intelligible, I believe that it would be more popular 
 
 I believe that the majority of popular languages are, to a certain degree, [mutually intelligible](https://en.wikipedia.org/wiki/Mutual_intelligibility) with other popular languages. In other words, people who have been taught to write and read a subset of popular languages can often read and (sometimes, or to a limited degree) write a distinct subset of popular languages. Popular languages are almost not mutually intelligible with APL at all. In other words, people who have been taught to write and read popular languages will likely not be able to read APL and vice versa.
 
-I believe that APL isn't mutually intelligible with popular languages because, unlike popular languages, APL uses symbols for built-in function calls. 
+I believe that APL isn't mutually intelligible with popular languages because, unlike popular languages, APL uses symbols for built-in function calls.
 
 Languages often come with functions that the developer can use for common tasks. When I was solving the first problem of AOC 2022 in Clojure, I used the `map`, `partition-by`, and `reduce` functions, among others, which were provided by the Clojure runtime. In popular languages like Clojure, to call one of these functions, a developer must use the English name of this function. For example, if I wanted to use the `map` function in Clojure to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `(map inc v)`.
 
@@ -100,6 +103,7 @@ When I tried to solve this problem in APL, I realized that partitioning works di
 To create this binary array, I created an array of 0s with the same size as `file`, and set an index `i` to be 1 if the length of `file[i]` was non-empty. In my opinion, this is less elegant than the equivalent Clojure code. It felt like I had to jump through way more mental hoops to get to the same behavior. I didn't understand why APL designers hadn't changed `Partition` to be simpler and accept a function instead of a boolean array. After learning more about APL, I feel like I now understand why.
 
 APL has this signature for `Partition` because it has an elegant way for callers to use it. You could write the same expression above in idiomatic APL like so:
+
 ```apl
 ((0≠≢¨)⊆⊢)file
 ```
