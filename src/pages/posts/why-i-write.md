@@ -20,7 +20,7 @@ I started writing because I realized that its benefits outweigh its costs:
 - Writing helps me remember my learnings better.
 - I like documenting.
 - When I'm older, I'll be able to see what my younger self was thinking and feeling by looking back at my writings.
-- When I'm older, I'll be able to re-teach myself about some of the things that I've forgotten about by looking back at my writings.
+- When I'm older, I'll be able to relearn some of the things that I've forgotten about by looking back at my writings.
 - It's good to practice the skill of expressing myself clearly and concisely.
 
 In this post, I'll expand on these reasons that I have to write.
@@ -58,11 +58,11 @@ I use [an app to track my time](https://toggl.com/) and [an app to track my spen
 
 Writing is very similar, I collect data about my thoughts and put them on paper. This gives me the ability to analyze my current thoughts. This also allows me to analyze the changes in my thoughts and personality as a function of time.
 
-## Re-teaching when I'm older
+## Relearning when I'm older
 
 I've realized that many of the subjects that I once knew when I was younger, quietly and slowly fade from my mind. At first, I'll forget only the details. After some time, I'll forget entire concepts if I'm not actively studying the subject.
 
-Writing about things I learn feels kind of like keeping the high-school or college notebooks of classes you enjoyed. There's a fair chance I'll never look back at some writings after a five or ten-year period. But, on the chance that I do, it would be nice to get surprised by the things I knew back then and re-learn them, maybe even rekindle interest in those things.
+Writing about things I learn feels kind of like keeping the high-school or college notebooks of classes you enjoyed. There's a fair chance I'll never look back at some writings after a five or ten-year period. But, on the chance that I do, it would be nice to get surprised by the things I knew back then and relearn them, maybe even rekindle interest in those things.
 
 ## Good to practice expressing yourself
 
