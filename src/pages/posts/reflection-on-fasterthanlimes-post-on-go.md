@@ -99,6 +99,6 @@ I've heard on some occasions from different people that Go is a "nicer C." It ma
 After reading this post, I came to realize that this is not true. Go's philosophy of favoring simplicity over lower-level control and accuracy throws a wrench into that analogy. The Go team seems to have two goals that are at odds:
 
 - Making a simple and intuitive language.
-- Making it an expressive language that gives the programmer full access to all the gory details of the messy world that their software
+- Making it an expressive language that gives the programmer full access to all the gory details of the messy world that their software.
 
 It seems to me like the Go team simply gives higher value to the first one than the second. I think a good testament to this is that Rob Pike, a big figure in the design and development of Go, [retrospectively realized](https://youtu.be/yE5Tpp2BSGw?si=JN3az8j80xm9mqza) that he would have added arbitrary-precision integers to the language. This is certainly a stance that prefers simplicity and protection over low-level control and performance.
