@@ -5,6 +5,7 @@ publishedDate: 2024-02-14
 description: 'Why I chose to use the Astro framework to make this website'
 author: 'Daniel Velasquez'
 tags: ["web-frameworks"]
+publish: true
 ---
 
 This is the third time I'm making my blogging website. I know, embarrassing right? How hard could it be to make something as simple as a blogging website? What is this, the 90s?
@@ -19,9 +20,9 @@ Note, that I could simply have created my own tool to generate this blog. But I 
 
 ## Why not Wix and Wordpress
 
-Before I get started, I'll note that I won't write about non-technical website builders like Wix or Wordpress here, I'll only talk about client-side web frameworks. This is for a few reasons. 
+Before I get started, I'll note that I won't write about non-technical website builders like Wix or Wordpress here, I'll only talk about client-side web frameworks. This is for a few reasons.
 
-The biggest reason is that I feel like frameworks allow me to customize my blog much more. I've used both Wix and Wordpress on separate occasions (albeit to a limited extent) and on both occasions I found that their templates and UI are quite rigid. On both occasions, I spent hours trying to make what seemed like a small change so that I could have the exact design that I had in mind. I realized that in most cases, I could settle and have a variation of the design I had in mind, but it was very difficult to get to the exact design that I had in mind. This bothered me. 
+The biggest reason is that I feel like frameworks allow me to customize my blog much more. I've used both Wix and Wordpress on separate occasions (albeit to a limited extent) and on both occasions I found that their templates and UI are quite rigid. On both occasions, I spent hours trying to make what seemed like a small change so that I could have the exact design that I had in mind. I realized that in most cases, I could settle and have a variation of the design I had in mind, but it was very difficult to get to the exact design that I had in mind. This bothered me.
 
 The second biggest reason is cost. I could be wrong about this one (I haven't done proper research). But, I feel like if I were to use Wix or Wordpress I might have to spend money to do some of the things that I could code up in web frameworks for free. I also feel like hosting outside of Wix or Wordpress tends to be cheaper. For example, I am using Netlify for hosting right now and it is totally free.
 
@@ -44,8 +45,9 @@ The last reason is laziness. I realize that I could probably become a Wix/Wordpr
 The first time I tried was in 2020. At that point, I had just learned Elm and I was obsessed with purely functional programming. I had also already written the entire front end of an app for a startup that I was working at in Elm. So, it seemed natural to just use Elm for a basic blogging website.
 
 Let's see how it stacks up against the criteria above:
+
 | Criteria                     | Pass | Fail |
-|----------------------------- |----- |----- |
+| ---------------------------- | ---- | ---- |
 | Ability to create posts list | x    |      |
 | Dynamic routes               | x    |      |
 | Markdown support             |      | x    |
@@ -54,7 +56,7 @@ Let's see how it stacks up against the criteria above:
 
 Since Elm was designed to be used for building single-page applications, I believe one could use it to create a page with a list of posts. I know for a fact it has support for dynamic routes.
 
-However, Elm, at least the way that I was using it, had a lot of drawbacks. 
+However, Elm, at least the way that I was using it, had a lot of drawbacks.
 
 First of all, at the time I was writing my site in Elm (and I believe this is still the case at the time of writing), Elm was only a language, not a framework. So this meant that I had to write a `Main.elm` file with a bunch of boilerplate routing logic that normally comes included in a framework.
 
@@ -86,8 +88,9 @@ After this headache, I realized I should use a static site generator. I went to 
 `ssg` is cool because it's only 180 lines of shell code, auto-includes a header and footer on every page, translates `.md` files to `.html`, and generates a nifty `sitemap.xml` file.
 
 Criteria-wise it's better than my Elm approach:
+
 | Criteria                     | Pass | Fail |
-|----------------------------- |----- |----- |
+| ---------------------------- | ---- | ---- |
 | Ability to create posts list | /    |      |
 | Dynamic routes               |      | x    |
 | Markdown support             | x    |      |
@@ -103,18 +106,18 @@ On the bright side, what it did, it did well. So I was actually able to publish 
 ## Current attempt: Astro
 
 Finally, I found Astro. I like Astro because it meets all the criteria:
+
 - I can create my list of posts with [globbing](https://docs.astro.build/en/tutorial/5-astro-api/1/).
 - It has support for [dynamic routing](https://docs.astro.build/en/guides/routing/#dynamic-routes).
-- I can use it to write [posts in Markdown](https://docs.astro.build/en/tutorial/2-pages/2/). 
+- I can use it to write [posts in Markdown](https://docs.astro.build/en/tutorial/2-pages/2/).
 - It has [support for tailwind](https://docs.astro.build/en/guides/integrations-guide/tailwind/#_top).
 - It was [built for content-driven sites](https://docs.astro.build/en/concepts/why-astro/#content-driven), not Single Page applications.
-
 
 ## Honorable mentions
 
 Aside from Astro, I believe there are other static site generators that I could have used that equally get the job done.
 
-The main tool I would have used instead of Astro would have been to use [SvelteKit](https://kit.svelte.dev/) in [SSG mode](https://kit.svelte.dev/docs/glossary#ssg). I have experience building a full application with Svelte and I've liked it quite a lot. I believe Svelte would have worked well for my case. The only reason I chose Astro over Svelte is that Astro was built with a focus on static site generation, whereas SvelteKit was developed with a feature of allowing static site generating, giving primary focus instead to server side generation. This piece of information might be minor or insignificant. But, it made me worry that as a result, in very specific cases SvelteKit might have more small bugs or more of an awkward API than Astro. 
+The main tool I would have used instead of Astro would have been to use [SvelteKit](https://kit.svelte.dev/) in [SSG mode](https://kit.svelte.dev/docs/glossary#ssg). I have experience building a full application with Svelte and I've liked it quite a lot. I believe Svelte would have worked well for my case. The only reason I chose Astro over Svelte is that Astro was built with a focus on static site generation, whereas SvelteKit was developed with a feature of allowing static site generating, giving primary focus instead to server side generation. This piece of information might be minor or insignificant. But, it made me worry that as a result, in very specific cases SvelteKit might have more small bugs or more of an awkward API than Astro.
 
 [NextJS](https://nextjs.org/) would probably also work. But like SvelteKit, its main use case is server-side rendering, not static site generation. So it might lack some optimizations that Astro has. Also, I like SvelteKit more than NextJS because it seems to me to be simpler and smaller.
 
