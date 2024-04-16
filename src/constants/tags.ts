@@ -1,12 +1,14 @@
 // these are the url-friendly tags
 const tags = [
   "design-patterns",
+  "programming-languages",
   "writing",
   "clojure",
   "polymorphism",
   "web-frameworks",
   "career",
   "apl",
+  "go",
 ];
 
 // by default, a url-friendly tag will be converted to a user-friendly tag by doing replace(/-/g, " ").
@@ -14,6 +16,7 @@ const tags = [
 const _tagToPrettyName: Record<string, string> = {
   apl: "APL",
   clojure: "Clojure",
+  go: "Go",
 };
 
 export const getTags = () => structuredClone(tags);
