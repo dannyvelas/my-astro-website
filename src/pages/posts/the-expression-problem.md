@@ -3,7 +3,14 @@ title: 'The Expression Problem'
 date: 2023-11-01
 description: 'An explanation on what The Expression Problem is, how to solve it,
   and how to not solve it'
-tags: [ "design-patterns" ]
+tags:
+  [
+    "design-patterns",
+    "programming-languages",
+    "clojure",
+    "ocaml",
+    "haskell"
+  ]
 publish: true
 layout: ../../layouts/BlogLayout.astro
 
@@ -66,7 +73,7 @@ We will show many different non-solutions to modeling this problem. Some approac
 
 ## Non-solution: using sum types in a functional language
 
-For our first approach, we will model this problem using a functional language using sum types. We will see at the end if this approach satisfies all four criteria for solving The Expression Problem.
+For our first approach, we will model this problem using a functional language, OCaml, using sum types. We will see at the end if this approach satisfies all four criteria for solving The Expression Problem.
 
 ### Base package
 
