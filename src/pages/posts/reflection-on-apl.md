@@ -1,11 +1,12 @@
 ---
-layout: "../../layouts/BlogLayout.astro"
 title: 'Reflection on APL'
 publishedDate: 2024-03-16
 description: 'Some reflection on the APL language after trying it out a little bit'
 author: 'Daniel Velasquez'
-tags: ["apl"]
+tags: [ "apl" ]
 publish: true
+layout: ../../layouts/BlogLayout.astro
+
 ---
 
 When I was in college, I took a parallel computing class. One of the projects of this class was to was to write a C program that computed a given generation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), using parallelism via [OpenMP](https://www.openmp.org/). My solution was about 117 lines of code.
