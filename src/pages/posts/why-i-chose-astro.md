@@ -1,6 +1,6 @@
 ---
 title: 'Why I chose Astro for this site'
-publishedDate: 2024-02-14
+date: 2024-02-14
 description: 'Why I chose to use the Astro framework to make this website'
 tags: [ "web-frameworks" ]
 publish: true

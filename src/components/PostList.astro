@@ -5,7 +5,7 @@ import _ from "lodash/fp";
 const { posts } = Astro.props;
 
 const years = _.flow(
-  _.map((x) => ({ ...x, date: newDateET(x.frontmatter.publishedDate) })),
+  _.map((x) => ({ ...x, date: newDateET(x.frontmatter.date) })),
   _.groupBy((post) => post.date.getFullYear()),
   _.values,
   _.map((posts) => ({

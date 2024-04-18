@@ -1,6 +1,6 @@
 ---
 title: 'Reflection on APL'
-publishedDate: 2024-03-16
+date: 2024-03-16
 description: 'Some reflection on the APL language after trying it out a little bit'
 tags: [ "apl" ]
 publish: true
