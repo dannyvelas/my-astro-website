@@ -3,7 +3,6 @@ title: 'The dream job'
 publishedDate: 2024-02-25
 description: 'Some thoughts I had about what having a "dream" job means, whether
   it makes sense to pursue it'
-author: 'Daniel Velasquez'
 tags: [ "career" ]
 publish: true
 layout: ../../layouts/BlogLayout.astro

@@ -2,7 +2,6 @@
 title: 'Why I write'
 publishedDate: 2024-03-20
 description: 'The reasons that I have started writing'
-author: 'Daniel Velasquez'
 tags: [ "writing" ]
 publish: true
 layout: ../../layouts/BlogLayout.astro

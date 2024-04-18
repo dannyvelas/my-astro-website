@@ -3,7 +3,6 @@ title: 'The Expression Problem'
 publishedDate: 2023-11-01
 description: 'An explanation on what The Expression Problem is, how to solve it,
   and how to not solve it'
-author: 'Daniel Velasquez'
 tags: [ "design-patterns", "clojure", "polymorphism" ]
 publish: true
 layout: ../../layouts/BlogLayout.astro

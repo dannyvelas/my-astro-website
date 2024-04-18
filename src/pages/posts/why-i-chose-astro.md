@@ -2,7 +2,6 @@
 title: 'Why I chose Astro for this site'
 publishedDate: 2024-02-14
 description: 'Why I chose to use the Astro framework to make this website'
-author: 'Daniel Velasquez'
 tags: [ "web-frameworks" ]
 publish: true
 layout: ../../layouts/BlogLayout.astro

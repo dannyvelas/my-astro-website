@@ -2,7 +2,6 @@
 title: 'Bad reasons for being an entrepreneur'
 publishedDate: 2024-02-20
 description: 'Some bad reasons as to why one should be an entrepreneur'
-author: 'Daniel Velasquez'
 tags: [ "career" ]
 publish: true
 layout: ../../layouts/BlogLayout.astro

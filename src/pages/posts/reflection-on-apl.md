@@ -2,7 +2,6 @@
 title: 'Reflection on APL'
 publishedDate: 2024-03-16
 description: 'Some reflection on the APL language after trying it out a little bit'
-author: 'Daniel Velasquez'
 tags: [ "apl" ]
 publish: true
 layout: ../../layouts/BlogLayout.astro
