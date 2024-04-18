@@ -24,7 +24,7 @@ As I was working on my compiler I realized that I needed some way to recursively
 
 Before explaining what the visitor pattern is, [Nystrom writes about why we need it](https://craftinginterpreters.com/representing-code.html#the-expression-problem). He writes that each language has a certain "grain" to it. Functional languages make it easy to add functions (behaviors), and object-oriented languages make it easy to add classes (representations). If you try to extend representations in functional languages or behaviors in object-oriented languages...well, good luck. It's not so easy to do. This is The Expression Problem.
 
-Back then I had pressing deadlines so I didn't really delve deep on what this really meant. It's not that intuitive. If you search StackOverflow overflow for The Expression Problem, you'll find [answers that are outright wrong about what it is](https://stackoverflow.com/a/22180495/11587741).
+Back then I had pressing deadlines so I didn't really delve deep into what this really meant. It's not that intuitive. If you search StackOverflow overflow for The Expression Problem, you'll find [answers that are outright wrong about what it is](https://stackoverflow.com/a/22180495/11587741).
 
 I always remained curious in the back of my mind about it. Recently, I had some extra time on my hands so I decided to take a crack at understanding it. One of the best ways for me to learn things is to document them as a way to teach others. So, that's what this article is: it's me explaining to you what The Expression Problem is.
 
@@ -64,7 +64,7 @@ This problem statement comes with a restriction: whenever we add a new mode, the
 
 This problem statement comes with one more restriction: we should use language features that don't require separate compilation.
 
-We will show many different non-solutions to modeling this problem. Some approaches will be in a functional language, others will be in an object-oriented language. We will measure each approach against four criteria to gauge its effectiveness in solving The Expression Problem. These criteria are based on the criteria from [Dr. Ralf Laemmel's lecture on The Expression Problem](https://www.youtube.com/watch?v=FWW87fvBKJg). The more criteria an approach satisfies, the closer it is at solving the problem. If an approach satisfies all criteria, the approach effectively solves The Expression Problem. The four criteria are:
+We will show many different non-solutions to modeling this problem. Some approaches will be in a functional language, others will be in an object-oriented language. We will measure each approach against four criteria to gauge its effectiveness in solving The Expression Problem. These criteria are based on the criteria from [Dr. Ralf Laemmel's lecture on The Expression Problem](https://www.youtube.com/watch?v=FWW87fvBKJg). The more criteria an approach satisfies, the closer it is to solving the problem. If an approach satisfies all criteria, the approach effectively solves The Expression Problem. The four criteria are:
 
 1. Is it easy to add new behaviors in downstream packages without modifying the base package?
 2. Is it easy to add new representations in downstream packages without modifying the base package?
@@ -437,7 +437,7 @@ Notice that the `accept` method of the `Picture` class must have an argument of 
 
 ### Base package
 
-In Clojure we can define our `Mode` types as records, and our functionalities as methods:
+In Clojure, we can define our `Mode` types as records, and our functionalities as methods:
 
 ```clojure
 (defrecord Prose)
@@ -674,7 +674,7 @@ The Expression Problem is about discovering some way to have code that is open f
 
 I've learned that this problem may not even be worth solving. It is nice in concept to be able to write code that won't get modified. But, realistically speaking, developers of growing projects will almost always need to make code changes to base packages because of constantly changing business requirements and environmental factors. This might seem like a bad thing. But it's really not. It is the job of good developers to write code that is adaptable to change. As Eli Bendersky writes in his post, constant change in a codebase can be a sign of health.
 
-So, while The Expression Problem might be nice to solve in concept, in practice, there doesn't seem to be any usable solution. And, that's not a bad thing. Even if there were a solution, I believe that codebases that were able to use this solution may not be any better than equivalent codebases that don't.
+So, while The Expression Problem might be nice to solve in concept, in practice, there doesn't seem to be any usable solution. And, that's not a bad thing. Even if there were a solution, I believe that codebases that are able to use this solution may not be any better than equivalent codebases that don't.
 
 ## Q+A with myself as I studied this topic
 

@@ -29,9 +29,9 @@ In this post, I'll expand on these reasons that I have to write.
 
 I often feel like I want to explore and document the ideas that I have. I like to explore ideas a little bit by thinking about them when I'm doing monotonous tasks or when I have some free time. Exploring these ideas via thinking is nice but can only get me so far. Often, I'll get to a point where I'll get distracted by something else or confused or bored. So, the exploration will end there.
 
-Writing feels like a tool that I can use to help organize and structure my thoughts. This added structure helps me understand my ideas better. In structuring my thoughts, I'll often realize that my ideas have logical holes. If I put in effort to making the content that I write accessible, I'll often realize that I thought I knew something, but in reality I did not.
+Writing feels like a tool that I can use to help organize and structure my thoughts. This added structure helps me understand my ideas better. In structuring my thoughts, I'll often realize that my ideas have logical holes. If I put in effort to making the content that I write accessible, I'll often realize that I thought I knew something, but in reality, I did not.
 
-To fix the logical holes and learn the things that I thought that I knew, I often need to do additional research. With this research, I'll often realize that I'm wrong about something, which I appreciate. Other times, I'm able to add nuance to my ideas. Sometimes, I'll even get new ideas as a result.
+To fix the logical holes and learn the things that I thought I knew, I often need to do additional research. With this research, I'll often realize that I'm wrong about something, which I appreciate. Other times, I'm able to add nuance to my ideas. Sometimes, I'll even get new ideas as a result.
 
 ## Writing helps me remember my learnings better
 
