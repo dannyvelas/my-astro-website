@@ -3,8 +3,6 @@ const tags = [
   "design-patterns",
   "programming-languages",
   "writing",
-  "clojure",
-  "polymorphism",
   "web-frameworks",
   "career",
   "apl",
@@ -15,7 +13,6 @@ const tags = [
 // the tags that are an exception to this rule are saved in this variable
 const _tagToPrettyName: Record<string, string> = {
   apl: "APL",
-  clojure: "Clojure",
   go: "Go",
 };
 

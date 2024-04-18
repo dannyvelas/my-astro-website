@@ -2,7 +2,7 @@
 title: 'Reflection on APL'
 date: 2024-03-16
 description: 'Some reflection on the APL language after trying it out a little bit'
-tags: [ "apl" ]
+tags: [ "apl", "programming-languages" ]
 publish: true
 layout: ../../layouts/BlogLayout.astro
 

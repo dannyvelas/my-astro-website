@@ -3,7 +3,7 @@ title: 'The Expression Problem'
 date: 2023-11-01
 description: 'An explanation on what The Expression Problem is, how to solve it,
   and how to not solve it'
-tags: [ "design-patterns", "clojure", "polymorphism" ]
+tags: [ "design-patterns" ]
 publish: true
 layout: ../../layouts/BlogLayout.astro
 
