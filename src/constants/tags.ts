@@ -1,10 +1,11 @@
 // these are the url-friendly tags
 const tags = [
   "design-patterns",
+  "haskell",
   "programming-languages",
   "writing",
   "clojure",
-  "polymorphism",
+  "ocaml",
   "web-frameworks",
   "career",
   "apl",
@@ -16,6 +17,8 @@ const tags = [
 const _tagToPrettyName: Record<string, string> = {
   apl: "APL",
   clojure: "Clojure",
+  ocaml: "OCaml",
+  haskell: "Haskell",
   go: "Go",
 };
 
