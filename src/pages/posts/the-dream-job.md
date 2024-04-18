@@ -1,11 +1,12 @@
 ---
-layout: "../../layouts/BlogLayout.astro"
 title: 'The dream job'
-publishedDate: 2024-02-25
-description: 'Some thoughts I had about what having a "dream" job means, whether it makes sense to pursue it'
-author: 'Daniel Velasquez'
-tags: ["career"]
+date: 2024-02-25
+description: 'Some thoughts I had about what having a "dream" job means, whether
+  it makes sense to pursue it'
+tags: [ "career" ]
 publish: true
+layout: ../../layouts/BlogLayout.astro
+
 ---
 
 A friend of mine recently put me on to [a podcast called Cortex](https://www.relay.fm/cortex). The hosts of this show are two entrepreneurs who discuss, among other things, entrepreneurship. Some of their discussions have made me re-think the idea of a "dream job", as well as what my "dream job" would be.

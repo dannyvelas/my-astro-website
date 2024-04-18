@@ -1,11 +1,11 @@
 ---
-layout: "../../layouts/BlogLayout.astro"
 title: 'Bad reasons for being an entrepreneur'
-publishedDate: 2024-02-20
+date: 2024-02-20
 description: 'Some bad reasons as to why one should be an entrepreneur'
-author: 'Daniel Velasquez'
-tags: ["career"]
+tags: [ "career" ]
 publish: true
+layout: ../../layouts/BlogLayout.astro
+
 ---
 
 For a long time, almost every day after work, I would spend hours trying to build my own income-generating business. I sacrificed time with my girlfriend, personal interests, time talking to family, etc. in doing so. I did this because I thought that the only job that would suit me was being an entrepreneur. I had several reasons:

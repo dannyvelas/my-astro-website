@@ -1,11 +1,11 @@
 ---
-layout: "../../layouts/BlogLayout.astro"
 title: 'Why I chose Astro for this site'
-publishedDate: 2024-02-14
+date: 2024-02-14
 description: 'Why I chose to use the Astro framework to make this website'
-author: 'Daniel Velasquez'
-tags: ["web-frameworks"]
+tags: [ "web-frameworks" ]
 publish: true
+layout: ../../layouts/BlogLayout.astro
+
 ---
 
 This is the third time I'm making my blogging website. I know, embarrassing right? How hard could it be to make something as simple as a blogging website? What is this, the 90s?

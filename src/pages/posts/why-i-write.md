@@ -1,11 +1,11 @@
 ---
-layout: "../../layouts/BlogLayout.astro"
 title: 'Why I write'
-publishedDate: 2024-03-20
+date: 2024-03-20
 description: 'The reasons that I have started writing'
-author: 'Daniel Velasquez'
-tags: ["writing"]
+tags: [ "writing" ]
 publish: true
+layout: ../../layouts/BlogLayout.astro
+
 ---
 
 Recently, I've been trying to get better at writing down my thoughts. It's funny to me that I'm doing this because I didn't think that I would ever care about writing. There are several reasons I have for not writing:
