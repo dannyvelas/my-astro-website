@@ -3,16 +3,14 @@ title: 'The Expression Problem'
 date: 2023-11-01
 description: 'An explanation on what The Expression Problem is, how to solve it,
   and how to not solve it'
-tags:
-  [
-    "design-patterns",
-    "programming-languages",
-    "clojure",
-    "ocaml",
-    "haskell"
-  ]
 publish: true
 layout: ../../layouts/BlogLayout.astro
+tags:
+  - design-patterns
+  - programming-languages
+  - clojure
+  - ocaml
+  - haskell
 
 ---
 
@@ -259,7 +257,7 @@ Unfortunately, it is difficult to add a new class. If we were to add a `Picture`
 
 This approach resembles the approach where we used pattern-matching functions. As such, this approach similarly does not solve The Expression Problem. This approach made it easier to add behaviors in downstream packages and simultaneously made it harder to add representations.
 
-There's another concern with this approach; the behavior functions in this solution have a performance issue that the pattern matching functions don't have. The behavior functions here have a time complexity of O(n) to find the branch that corresponds to the input mode. If we have `n` modes, a behavior function will need to execute `n` checks before it finds the branch that corresponds to the last mode. This can be very slow for large `n`. In contrast, a pattern-matching function will dispatch the branch corresponding to a mode in constant time, as long as its argument is a sum type.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
+There's another concern with this approach; the behavior functions in this solution have a performance issue that the pattern-matching functions don't have. The behavior functions here have a time complexity of O(n) to find the branch that corresponds to the input mode. If we have `n` modes, a behavior function will need to execute `n` checks before it finds the branch that corresponds to the last mode. This can be very slow for large `n`. In contrast, a pattern-matching function will dispatch the branch corresponding to a mode in constant time, as long as its argument is a sum type.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
 
 This solution is also different from the pattern-matching solution in that it sacrifices static-type safety. As we develop our program and add Mode classes, we may occasionally forget to add a new branch to every control statement. In this case, our compiler won't be able to tell us. We'll simply get a runtime ArgumentException.
 

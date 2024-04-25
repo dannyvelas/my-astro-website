@@ -2,9 +2,10 @@
 title: 'Bad reasons for being an entrepreneur'
 date: 2024-02-20
 description: 'Some bad reasons as to why one should be an entrepreneur'
-tags: [ "career" ]
 publish: true
 layout: ../../layouts/BlogLayout.astro
+tags:
+  - career
 
 ---
 
