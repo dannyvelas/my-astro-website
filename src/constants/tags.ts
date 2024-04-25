@@ -24,6 +24,7 @@ const _tagToPrettyName: Record<string, string> = {
   go: "Go",
 };
 
-export const getTags = async () => structuredClone(tags);
+export const getTags = () => structuredClone(tags);
+
 export const tagToPrettyName = (tag: string): string =>
   _tagToPrettyName[tag] || tag.replace(/-/g, " ");
