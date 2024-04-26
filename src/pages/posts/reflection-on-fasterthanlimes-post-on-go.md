@@ -3,9 +3,11 @@ title: "Reflection on fasterthanlime's post on Go"
 date: 2024-04-16
 description: "I reflect on fasterthanlime's post on Go: \"I want off Mr.
   Golang's Wild Ride\""
-tags: [ "programming-languages", "go" ]
 publish: true
 layout: ../../layouts/BlogLayout.astro
+tags:
+  - programming-languages
+  - go
 
 ---
 
@@ -35,7 +37,7 @@ It seems like overall, Amos feels like Windows support for the Go's file API was
 
 Amos goes on to give an example of a file API that provides good support for both Unix and Windows file operations, the Rust file API.
 
-## My reaction
+### My reaction
 
 I see where Amos is coming from. Yes, Go's `os` package, the file API that Amos is referring to, is Unix-centric. It's declared proudly in the [first line of the package description](https://pkg.go.dev/os):
 
@@ -59,7 +61,7 @@ In another example, Amos shows that Go's `path/filepath.Ext` function doesn't qu
 
 Amos gives two other examples of how Go's `Ext` function doesn't work in the way they expect. In the first example, Amos says that `Ext` returns `.txt\bar` as the extension for the input `C:\foo.txt\bar` on Unix. But, this seems fine to me. Rust does the same thing in a Unix environment. In the second example, Amos writes that Go is unable to give a different extension for `"/foo."` and `"/foo"`. But, I could not replicate this. To me, [this gives consistent behavior](https://go.dev/play/p/Ch1d6YmucL5) with Rust as well. Go returns `"."` instead of `Some("")` and `""` instead of `None`. But these are semantically equivalent in the Go API. Go consistently uses the empty string as a path to represent `None`. It also consistently includes the `.` character in the extensions it returns.
 
-## My reaction
+### My reaction
 
 My immediate reaction to the first two examples is that these are tiny imperfections that I don't care about. Sure, maybe using `strings` for Unix file paths isn't perfectly compliant. But, does it really matter? After all, even the native `ls` command doesn't function properly when you have files without UTF-8 characters! The return value for the second example seems not a fault of Go, but rather the result of an authoritative spec of what constitutes a file extension. These examples seem a bit contrived.
 

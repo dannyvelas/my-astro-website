@@ -2,9 +2,10 @@
 title: 'Why I write'
 date: 2024-03-20
 description: 'The reasons that I have started writing'
-tags: [ "writing" ]
 publish: true
 layout: ../../layouts/BlogLayout.astro
+tags:
+  - writing
 
 ---
 
