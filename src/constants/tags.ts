@@ -22,6 +22,7 @@ const _tagToPrettyName: Record<string, string> = {
   ocaml: "OCaml",
   haskell: "Haskell",
   go: "Go",
+  typescript: "Typescript",
 };
 
 export const getTags = () => structuredClone(tags);
