@@ -31,4 +31,4 @@ However, I've come to notice that jq is much more than just a way to easily inte
 
 Shockingly enough, someone even made a [jq interpreter in jq](https://github.com/wader/jqjq/tree/master)!
 
-Because of the nature of my role, I've had to use jq extensively. Interestingly enough, I've used it more as a scripting language to transform JSON streams, rather than as a means to quickly query JSON objects. Many of the jq scripts I've written vary in length from 10 to 30 lines of code. Through this experience, I've grown to appreciate jq as a language and admire some of its features. In the future, I'll write more about these individual features in detail.
+Because of the nature of my role, I've had to use jq extensively. I've used it more as a scripting language to transform JSON streams, rather than as a means to quickly query JSON objects. Many of the jq scripts I've written vary in length from 10 to 30 lines of code. Through this experience, I've grown to appreciate jq as a language and admire some of its features. In the future, I'll write more about these individual features in detail.
