@@ -11,7 +11,7 @@ tags:
 
 Lately, I've been thinking about how different languages allow you to implement streams. In this note, I'll talk about how Go implements streams.
 
-The code in this post can be found [on github](http://localhost:4321/posts/streams-in-go).
+The code in this post can be found [on github](https://github.com/dannyvelas/go-streams).
 
 ## Definition
 
