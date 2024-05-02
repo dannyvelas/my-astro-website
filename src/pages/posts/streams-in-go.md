@@ -139,7 +139,7 @@ You could run both programs like so:
 
 ```sh
 go build -o main main.go
-cat largefile.txt | ./main
+cat bigfile.txt | ./main
 ```
 
 ### `io` Writers and Readers vs Channels
