@@ -14,21 +14,22 @@ When I was in college, I took a parallel computing class. One of the projects of
 
 Two years ago, I came across a crazy language called [APL](https://en.wikipedia.org/wiki/APL_\(programming_language\)). I was drawn to it after watching [this video](https://www.youtube.com/watch?v=a9xAKttWgP4) which demonstrates how one could compute a given generation of Conway's Game of Life, in only one line of APL code. This was interesting to me. For a long time, I had waited for a chance to learn some APL and play around with it.
 
-Finally, at the end of 2023, I had an opportunity to do so by solving some problems from [Advent of Code (AOC) 2023](https://adventofcode.com/2023) in APL<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
+Finally, at the end of 2023, I had an opportunity to do so by solving some problems from [Advent of Code (AOC) 2023](https://adventofcode.com/2023) in APL.
 
 As I learned APL, I noted down the qualities that I liked about it, as well as the qualities that I didn't like about it.
 
-These are some of the qualities that I liked about APL:
+These are some things that I liked about APL:
 
-- An emphasis on functional programming
-- An emphasis on programming via a REPL, while still allowing a way to invoke the interpreter on an arbitrary file
-- A language server client available in Visual Studio Code
+- It has an emphasis on functional programming
+- It has an emphasis on programming via a REPL, while still allowing a way to invoke the interpreter on an arbitrary file
+- It has a certain elegance when solving array-like problems
 
-These are some of the qualities that I didn't like about APL:
+These are some things that I didn't like about APL:
 
-- Not being mutually intelligible with popular languages
-- Some ambiguity in order-of-operations
-- Extensive use of combinatory logic
+- It has an emphasis on combinatory logic
+- It has some ambiguity in order-of-operations
+
+These are some things that I thought were interesting about APL:
 
 I will reflect on these points in this post.
 
@@ -50,47 +51,7 @@ I started with Dyalog's distribution of APL and at first, I was worried that I w
 
 I think scripting is the extent to which all APLs support writing code in files. I don't think there is support for writing a full APL program across multiple files that import each other as modules. In any case, for my limited purposes, I'm glad that I can write APL scripts and check them into source control.
 
-## A language server client
-
-Recently, I believe there has been a shift in the popular perspective of what makes a good programming language. Before, the qualities of a good programming language were thought to reside only within the performance and semantics of the language. Now, people are giving more importance to the tooling around that language.
-
-I believe that a big reason this shift in perspective happened was the release of Go. Go was one of the first big languages to ship with a suite of tools to <a href="https://en.wikipedia.org/wiki/Go_\(programming_language\)#Tools">test, analyze, format, refactor, and build code</a>. These tools proved very useful to developers. [gofmt](https://pkg.go.dev/cmd/gofmt) for example, was cited as [one of the best parts of Go](https://go.dev/talks/2012/splash.article#TOC_17.), even though it's not in the language.
-
-Now that this shift has happened, new languages need to ship with good tooling, and existing languages need to add good tooling if they want to remain relevant, liked, and used. At the very minimum, every language must have [a language server](https://en.wikipedia.org/wiki/Language_Server_Protocol) to help guide developers in writing their code, with code completion and error reporting.
-
-At first, I thought that APL would be too old-school to have [a language server that integrates with a hip, new editor like Visual Studio code](https://marketplace.visualstudio.com/items?itemName=OptimaSystems.vscode-apl-language-client). But, I was wrong. It's there and it seems like a step in the right direction for adoption and user productivity.
-
-## Mutual intelligibility of APL
-
-Despite its beauty, APL is a pretty obscure language that is seldom heard of, let alone used, [among the majority of developers](https://survey.stackoverflow.co/2023/#technology-most-popular-technologies).
-
-At first, it seemed strange to me that such an interesting and concise language could be so overlooked. But, as I thought about it more, I came to believe that there is a reason for APL's lack of popularity. I believe the biggest reason APL is unpopular is that it's not mutually intelligible with the most popular and conventional languages used by developers.
-
-If APL were more mutually intelligible, I believe that it would be more popular and successful.
-
-I believe that the majority of popular languages are, to a certain degree, [mutually intelligible](https://en.wikipedia.org/wiki/Mutual_intelligibility) with other popular languages. In other words, people who have been taught to write and read a subset of popular languages can often read and (sometimes, or to a limited degree) write a distinct subset of popular languages. Popular languages are almost not mutually intelligible with APL at all. In other words, people who have been taught to write and read popular languages will likely not be able to read APL and vice versa.
-
-I believe that APL isn't mutually intelligible with popular languages because, unlike popular languages, APL uses symbols for built-in function calls.
-
-Languages often come with functions that the developer can use for common tasks. When I was solving the first problem of AOC 2022 in Clojure, I used the `map`, `partition-by`, and `reduce` functions, among others, which were provided by the Clojure runtime. In popular languages like Clojure, to call one of these functions, a developer must use the English name of this function. For example, if I wanted to use the `map` function in Clojure to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `(map inc v)`.
-
-APL also has a runtime that provides functions that the developer can use. In APL, the functions equivalent to the ones that I mentioned above are: `Each`, `Partition`, and `Reduce`, respectively. However, in APL, to call these functions, you don't use their English names. You use a symbol that represents that function. For example, if I wanted to use the `Each` function in APL to take a vector `v` and return a new vector with every element incremented by 1, I would do this: `+∘1¨v`<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>. In this APL expression, the glyph `¨` represents the `Each` function. Similarly, `⊆` represents `Partition` and `/` represents `Reduce`.
-
-Since APL uses symbols to invoke built-in functions, its source code will look very concise compared to popular languages. However, this is a trade-off. If a developer were to read a function call that uses the English name of the function, this English name would provide context to the developer about what that function is doing. The same isn't the case with symbols. If a non-Clojure developer were to see this Clojure expression out-of-context: `(partition-by empty? coll)`, I believe they would be able to somewhat detect that the `partition-by` function probably takes some collection as input and partitions it based on some criteria. In contrast, if a non-APL developer were to see the equivalent APL expression, out-of-context: `((0≠≢¨)⊆⊢)coll`, I don't think they would be able to gather much meaningful insight.
-
-## Order of operations seems a bit ambiguous at times
-
-Since APL uses infix notation for function calls, I ran into a subtle problem that made learning the language a little bit more difficult.
-
-For the most part, APL has a very simple order of operations that I appreciate. APL evaluates expressions from right to left. For the most part, every function in between two operands will take as little as possible from its left side and as much as possible from its right side.
-
-This works well for functions that need one or two inputs at most before producing a terminal value. Consider this simple APL expression: `f⍋3⍴1 2`, where `f` is a user-defined function: `{⊃⍵}`. This expression will be evaluated as: `(f⍋(3⍴1 2))`.
-
-In the case that a function, needs three inputs to produce a terminal value, things get more tricky. For example, consider the following APL expression which makes use of the [`Stencil` (`⌺`)](https://help.dyalog.com/latest/index.htm#Language/Primitive%20Operators/Stencil.htm) function: `f⌺1⊢1 2`.
-
-This expression seems to have a very similar structure to the expression I presented earlier: `<user-defined-function> <glyph> <number> <glyph> <number> <number>`. However, this expression will have a different evaluation order. This expression will evaluate like so: `(f⌺1)(⊢(1 2))`. Since `Stencil` is a function that takes two arguments and returns a function, it will bind tightly to `f` and `1`. The fact that the evaluation order is different in these two expressions is confusing and can hurt readability.<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>
-
-## Extensive use of combinatory logic
+## Emphasis on combinatory logic
 
 [The first problem of Advent of Code 2022](https://adventofcode.com/2022/day/1), asks you to read a file. There are two kinds of lines in the file, lines containing nothing but a numeric string, and empty lines. The first part of the problem is to create a nested array where adjoining lines of numeric strings are grouped together.
 
@@ -102,30 +63,38 @@ When I tried to solve this problem in APL, I realized that partitioning works di
 ({0≠≢⍵}¨file)⊆file
 ```
 
-To create this binary array, I created an array of 0s with the same size as `file`, and set an index `i` to be 1 if the length of `file[i]` was non-empty. In my opinion, this is less elegant than the equivalent Clojure code. It felt like I had to jump through way more mental hoops to get to the same behavior. I didn't understand why APL designers hadn't changed `Partition` to be simpler and accept a function instead of a boolean array. After learning more about APL, I feel like I now understand why.
+To create this binary array, I created an array of 0s with the same size as `file`, and set an index `i` to be 1 if the length of `file[i]` was non-empty.
 
-APL has this signature for `Partition` because it has an elegant way for callers to use it. You could write the same expression above in idiomatic APL like so:
+The APL code that I wrote above is in `dfn` style. I learned later that there's another way to write the same code, using tacit style:
 
 ```apl
 ((0≠≢¨)⊆⊢)file
 ```
 
-This expression expands to `((0≠≢¨)file)⊆file`, which in turn expands to: `({0≠≢⍵}¨file)⊆file` (my original attempt). The idiomatic APL expression works because APL supports [tacit programming](https://xpqz.github.io/learnapl/tacit.html). It has a set of rules for how a string of functions within parentheses will expand to form a composition of function applications. This is combinatory logic. This particular rule is formally called the [`Φ` combinator](https://raw.githubusercontent.com/codereport/Content/main/Publications/Combinatory_Logic_and_Combinators_in_Array_Languages.pdf).
-
-I can appreciate that there is a concise way to call `Partition`. I like that the left part of it almost syntactically resembles the Clojure example of calling `partition-by`. `(0≠≢¨)` kind of looks like a lambda function that returns a bool value.
-
-Ultimately, APL's choice of making combinatory logic the idiomatic way to use `Partition` seems overly complicated. Instead of learning about all the different combinators, how to use them in APL, and debugging tacit functions, it seems much easier to just pass in a function and call it a day.
+This expression expands to `((0≠≢¨)file)⊆file`, which in turn expands to: `({0≠≢⍵}¨file)⊆file` (my original attempt). These are some of the rules of APL's [tacit programming](https://xpqz.github.io/learnapl/tacit.html). There are many more rules. Each rule dictates how a given string of functions will expand to form a composition of function applications. These rules  are formally called combinatory logic. The particular rule that I used in the example above is called the [`Φ` combinator](https://raw.githubusercontent.com/codereport/Content/main/Publications/Combinatory_Logic_and_Combinators_in_Array_Languages.pdf).
 
 `Partition` is no exception. Other functions work much the same way. For example, to filter an array in APL, instead of calling a `Filter` function using a function that returns a bool value as an argument, you have to use the `Replicate` function and pass in a binary array. Similarly, to make this idiomatic, you'd need to use combinatory logic.
 
+The cool thing about tacit programming in APL is that it can lead to more concise code. In the example I showed above, using tacit programming allowed me to remove duplication; I only had to use the `file` variable once.
+
+In the APL community, it seems like tacit style is almost always preferred when possible. And, I have mixed feelings about this. On one hand, I recognize that it's interesting. It felt like learning a new way to think about things. On the other hand, it feels like code golf. Since `dfn` style is the more intuitive way to write APL, I often found myself writing code in `dfn` style first, and then re-writing it to tacit style. This started to feel backward because tacit style feels less readable. It almost felt like I was encrypting my code just so that I could conform with the preferred APL style.
+
+## Order of operations seems a bit ambiguous at times
+
+Since APL uses infix notation for function calls, I ran into a subtle problem that made learning the language a little bit more difficult.
+
+For the most part, APL has a very simple order of operations that I appreciate. APL evaluates expressions from right to left. For the most part, every function in between two operands will take as little as possible from its left side and as much as possible from its right side.
+
+This works well for functions that need one or two inputs at most before producing a terminal value. Consider this simple APL expression: `f⍋3⍴1 2`, where `f` is a user-defined function: `{⊃⍵}`. This expression will be evaluated as: `(f⍋(3⍴1 2))`.
+
+In the case that a function, needs three inputs to produce a terminal value, things get more tricky. For example, consider the following APL expression which makes use of the [`Stencil` (`⌺`)](https://help.dyalog.com/latest/index.htm#Language/Primitive%20Operators/Stencil.htm) function: `f⌺1⊢1 2`.[^1]
+
+This expression seems to have a very similar structure to the expression I presented earlier: `<user-defined-function> <glyph> <number> <glyph> <number> <number>`. However, this expression will have a different evaluation order. This expression will evaluate like so: `(f⌺1)(⊢(1 2))`. Since `Stencil` is a function that takes two arguments and returns a function, it will bind tightly to `f` and `1`. The fact that the evaluation order is different in these two expressions is confusing and can hurt readability.[^2]
+
 ## Conclusion
 
-I enjoyed learning APL and plan to continue learning and writing it from time to time to help me improve my problem-solving skills. I may venture to try out another array language, [BQN](https://mlochbaum.github.io/BQN/), to see if it keeps the things I liked about APL while removing some of the things that I didn't like about it.
+Even though there were some things that I didn't like about APL, overall I enjoyed it. I plan to continue learning and writing it from time to time to help me improve my problem-solving skills. I also may venture to try out other array languages like [BQN](https://mlochbaum.github.io/BQN/).
 
-## Footnotes
+[^1]: A friend who read this post told me that this post has an error. They told me that the APL glyph for the `Stencil` function was rendering as "not found" because of the font I'm using. Funnily enough, when I checked, it was rendering perfectly! It just so happens that the glyph for the `Stencil` function visually looks similar to the Unicode glyph that is often used to represent "not found" (□).
 
-<sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> From here on, when I say "APL", I'm referring to Dyalog APL using "dfn style".
-
-<sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> Of course, in APL, there is a much more idiomatic way to do this: `v + 1`. However, for this example, I wanted to demonstrate the `Each` function.
-
-<sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> You could avoid the order-of-operations ambiguity in the second example by wrapping the first part in parenthesis: `(f⌺1)⊢1 2`. At this point, a newcomer may realize that they can simplify the expression to `(f⌺1)1 2`. Unfortunately, this form is not idiomatic APL. Idiomatic APL seems to be more about terseness than readability for newcomers. Since `(f⌺1)1 2` is 8 characters and `f⌺1⊢1 2` is 7, a newcomer might be more likely to see `f⌺1⊢1 2` over `(f⌺1)1 2`.
+[^2]: You could avoid the order-of-operations ambiguity in the second example by wrapping the first part in parenthesis: `(f⌺1)⊢1 2`. At this point, a newcomer may realize that they can simplify the expression to `(f⌺1)1 2`. Unfortunately, this form is not idiomatic APL. Idiomatic APL seems to be more about terseness than readability for newcomers. Since `(f⌺1)1 2` is 8 characters and `f⌺1⊢1 2` is 7, a newcomer might be more likely to see `f⌺1⊢1 2` over `(f⌺1)1 2`.

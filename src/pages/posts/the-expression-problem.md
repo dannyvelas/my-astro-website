@@ -85,20 +85,20 @@ Per this approach, the natural next step would be to use pattern-matching functi
 
 ```ocaml
 let load = function
-| Prose ->       ;; prose load behavior
-| Whiteboard ->  ;; whiteboard load behavior 
-| Spreadsheet -> ;; spreadsheet load behavior
+| Prose ->       (* prose load behavior *)
+| Whiteboard ->  (* whiteboard load behavior  *)
+| Spreadsheet -> (* spreadsheet load behavior *)
 
 
 let edit = function
-| Prose ->       ;; prose edit behavior
-| Whiteboard ->  ;; whiteboard edit behavior 
-| Spreadsheet -> ;; spreadsheet edit behavior
+| Prose ->       (* prose edit behavior *)
+| Whiteboard ->  (* whiteboard edit behavior  *)
+| Spreadsheet -> (* spreadsheet edit behavior *)
 
 let save = function
-| Prose ->       ;; prose save behavior
-| Whiteboard ->  ;; whiteboard save behavior 
-| Spreadsheet -> ;; spreadsheet save behavior
+| Prose ->       (* prose save behavior *)
+| Whiteboard ->  (* whiteboard save behavior  *)
+| Spreadsheet -> (* spreadsheet save behavior *)
 ```
 
 ### Extending behaviors
@@ -107,19 +107,19 @@ Now that we've established an idea of what the base package looks like, let's se
 
 ```ocaml
 let export = function
-| BasePackage.Prose ->       ;; prose export behavior
-| BasePackage.Whiteboard ->  ;; whiteboard export behavior 
-| BasePackage.Spreadsheet -> ;; spreadsheet export behavior
+| BasePackage.Prose ->       (* prose export behavior *)
+| BasePackage.Whiteboard ->  (* whiteboard export behavior  *)
+| BasePackage.Spreadsheet -> (* spreadsheet export behavior *)
 
 let format = function
-| BasePackage.Prose ->       ;; prose format behavior
-| BasePackage.Whiteboard ->  ;; whiteboard format behavior 
-| BasePackage.Spreadsheet -> ;; spreadsheet format behavior
+| BasePackage.Prose ->       (* prose format behavior *)
+| BasePackage.Whiteboard ->  (* whiteboard format behavior  *)
+| BasePackage.Spreadsheet -> (* spreadsheet format behavior *)
 
 let select = function
-| BasePackage.Prose ->       ;; prose select behavior
-| BasePackage.Whiteboard ->  ;; whiteboard select behavior 
-| BasePackage.Spreadsheet -> ;; spreadsheet select behavior
+| BasePackage.Prose ->       (* prose select behavior *)
+| BasePackage.Whiteboard ->  (* whiteboard select behavior  *)
+| BasePackage.Spreadsheet -> (* spreadsheet select behavior *)
 ```
 
 With this approach, our new package, which imports the base package, adds new behaviors to the base package. And, no new modifications to the base package were required.

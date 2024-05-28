@@ -1,6 +1,6 @@
 ---
 title: 'Why I write'
-date: 2024-03-20
+date: 2024-03-08
 description: 'The reasons that I have started writing'
 publish: true
 layout: ../../layouts/BlogLayout.astro
