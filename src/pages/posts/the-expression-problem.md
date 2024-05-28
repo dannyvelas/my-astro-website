@@ -655,7 +655,7 @@ instance Save Picture where
 
 ### Evaluation
 
-This approach solves all four criteria. We were able to add new behaviors by creating a new Typclass that is a subclass of the `Mode` Typeclass; we were able to add new representations by creating a new data type that implements the `Mode` Typeclass; And, we were able to do this without any type assertions or separate complication!
+This approach solves all four criteria. We were able to add new behaviors by creating a new Typeclass that is a subclass of the `Mode` Typeclass; we were able to add new representations by creating a new data type that implements the `Mode` Typeclass; And, we were able to do this without any type assertions or separate complication!
 
 | Criteria                   | Pass | Fail |
 | -------------------------- | ---- | ---- |
