@@ -42,4 +42,4 @@ Similar to Heroku, you can create a running instance of a database and make your
 
 In Dokku (and perhaps in Heroku as well), every app is bundled as a Docker image and executed as a Docker container. You can see all of your Dokku apps running as docker containers by running `docker ps -a` on your server. You can optionally bring your own Dockerfile if you need more fine-grained control of how to build your app and run it.
 
-In my next post, I will discuss how to setup Dokku.
+In my [next post](/posts/how-to-setup-dokku/), I will discuss how to setup Dokku.
