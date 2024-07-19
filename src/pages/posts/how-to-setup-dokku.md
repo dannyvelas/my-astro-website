@@ -19,7 +19,7 @@ For example, let's suppose we want to connect a repo to the Dokku remote origin 
 
 After you make Dokku a remote origin of your git repo, you can deploy your application to Dokku. You can deploy to Dokku by doing a git push that points to your Dokku remote origin. This is the command: `git push dokku:main`. Every time you have a new version of your local `main` branch, and you would like to push it to Dokku, you can issue that command.
 
-Finally, you likely want to make your application available over HTTPS by making it have SSL certificates. In my next post, I'll give instructions on how to set this up.
+Finally, you likely want to make your application available over HTTPS by making it have SSL certificates. [In my next post](/posts/how-to-setup-https-in-dokku/), I'll give instructions on how to set this up.
 
 [This is a very useful tutorial that I used](https://shellbear.me/blog/go-dokku-deployment) that has more detailed instructions on deploying an application.
 
