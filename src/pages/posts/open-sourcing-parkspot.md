@@ -1,6 +1,6 @@
 ---
-title: 'Open-sourcing parkspot'
-date: 2025-07-15 # orignally written 2025-01-20
+title: 'Open-Sourcing ParkSpot'
+date: 2025-07-15 # originally written 2025-01-20
 publish: true
 layout: ../../layouts/BlogLayout.astro
 tags:
