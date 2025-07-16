@@ -26,7 +26,7 @@ I'm glad I chose Go+SvelteKit because these tools ended being a joy to use. Both
 
 From Oct 2021 to July 2023 I started the journey of re-developing the backend from scratch. In the process, I probably re-wrote and re-factored my backend code like five or six times. Each time I learned why the new version is better organized, faster, or more correct.  Honestly, if I had more time these days, I would probably do another re-factor to make the code even better. I re-wrote the frontend code like three times. I also hired a designer to make nice and inuitive UI that would work for both desktop and mobile. After 1,842 commits and almost 10k lines of code between both repos, I migrated the residential community to use the new application and completely deprecated the PHP application.
 
-The best part is that users were totally unaffected. As far as the community was concerned. Even though I completely changed the app's codebase and database, to them it seemed like I just cleaned up the UI. I even made a landing page for ParkSpot you can check out [here](https://park-spot.co).
+The best part is that users were totally unaffected. Even though I completely changed the application's internals like the codebase and the database engine, users only noticed improvements to the UI.
 
 Today I decided to open-source the ParkSpot code. You are welcome to check out the codebase of [the ParkSpot backend](https://github.com/dannyvelas/parkspot-backend), the codebase for [the ParkSpot frontend](https://github.com/dannyvelas/parkspot-frontend), as well as the codebase for the [ParkSpot landing page](https://github.com/dannyvelas/parkspot-landing).
 
