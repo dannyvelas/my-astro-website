@@ -9,7 +9,7 @@ tags:
 
 ---
 
-I wrote recently about the fact that I open-sourced ParkSpot. This not is to reflect on what I would have done differently if I could build it again.
+I [wrote recently](/posts/open-sourcing-parkspot/) about the fact that I open-sourced ParkSpot. This note is to reflect on what I would have done differently if I could build it again.
 
 ## Add metrics from the very beginning
 
@@ -64,14 +64,14 @@ When I created ParkSpot, I had the choice of:
 - Paying for a server and hosting it from there (e.g. AWS EC2, GCP Compute, Azure VM, Digital Ocean Droplet, etc.)
 - Paying for an application hosting service and hosting it from there (e.g. Railway, Fly.io, AWS Elastic Beanstalk, Google App Engine, Heroku, etc.)
 
-I went for option #2 because it was cheaper than option #3 and I felt like I knew enough about servers to set up my own. Also, dokku helped a lot. I couldn't do the first option because I wanted ParkSpot to have as much uptime as possible. And, I knew that if I tried to host it from my apartment or office, downtime could be pretty likely because I don't have redundant a power supply or internet connections. And, it would be too expensive or annoying for me to set that up.
+I went for option #2 because it was cheaper than option #3 and I felt like I knew enough about servers to set up my own. Also, [dokku](/posts/what-is-dokku/) helped a lot. I couldn't do the first option because I wanted ParkSpot to have as much uptime as possible. And, I knew that if I tried to host it from my apartment or office, downtime could be pretty likely because I don't have redundant a power supply or internet connections. And, it would be too expensive or annoying for me to set that up.
 
 The problem with option #2 is that I'm responsible to make sure that:
 
 - The OS my VPS uses is updated
 - The packages installed on my OS are updated, including Dokku
 - The docker image that is used for my database is using the latest version of PostgreSQL
-- The plugins I'm using within Dokku are updated, like the Lets Encrypt plugin that makes sure I'm always using HTTPS and not HTTP
+- The plugins I'm using within Dokku are updated, like the [Lets Encrypt plugin](/posts/how-to-setup-https-in-dokku/) that makes sure I'm always using HTTPS and not HTTP
 - The data of my database is backed up
 
 In both option #2 and option #3 I'm responsible to make sure that:
