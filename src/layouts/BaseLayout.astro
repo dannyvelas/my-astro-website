@@ -8,24 +8,6 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<script>
-  // extract "from" property from URL query params, if it happens to exist
-  const params = new URL(window.location).searchParams;
-  const from = params.get("from");
-
-  // now that we've captured it, remove all url query params so that the URL looks nice and minimal again
-  window.history.replaceState(null, "", window.location.pathname);
-
-  fetch("/pageViews", {
-    method: "POST",
-    referrerPolicy: "same-origin",
-    body: JSON.stringify({
-      path: window.location.pathname,
-      referrer: from || document.referrer,
-    }),
-  });
-</script>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
