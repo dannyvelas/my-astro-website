@@ -13,13 +13,13 @@ I like writing, I don't love it. But, [for different reasons](/posts/why-i-write
 
 ## Different writing systems I tried
 
-For many years, I struggled with a system that I liked. I originally wrote using pen-and-paper. But, I didn't like this experience — it hurt my had after a while; I was very slow at it; my writing was often illegible; and, my notes were not easily searchable.
+For many years, I struggled with a system that I liked. I originally wrote using pen-and-paper. But, I didn't like this experience — it hurt my hand after a while; I was very slow at it; my writing was often illegible; and, my notes were not easily searchable.
 
-So, I eventually transitioned to writing notes in Markdown files on my computer[^1]. This definitely felt like a big step up from my pen-and-paper notes. But, it still felt like something was missing.
+So, I eventually transitioned to writing notes in Markdown files on my computer.[^1] This definitely felt like a big step up from my pen-and-paper notes. But, it still felt like something was missing.
 
-My Markdown notes were searchable, but I still had difficulty finding notes. Sometimes, I would spend a long time writing about a novel good idea, only to find that months ago, I had already written about the exact same idea. In these cases, I would have much preferred to realize that there had already been a note talking about a concept, so that I could expand on it, instead of essentially re-writing it.
+My Markdown notes were searchable, but I still had difficulty finding notes. Sometimes, I would spend a long time writing about a novel good idea, only to find that months ago, I had already written about the same exact idea. In these cases, I would have much preferred to find the original note so that I could expand on it, instead of essentially re-writing it.
 
-Also, sometimes I would create two notes that were related. But, I had no system where I could put some metadata on both notes that would indicate that they should be linked together.
+Also, sometimes I would create two notes that were related. But, I had no system to indicate that both notes should be linked together.
 
 I tried grouping notes into folders, where each folder represented a topic, but this only partially solved the problem. Some notes didn't seem to belong to any one folder because they touched upon multiple topics.
 
@@ -41,11 +41,11 @@ This is what my graph looks like on Obsidian:
 
 ![Obsidian graph](./images/obsidian-graph.png)
 
-Here, each white node is a note. And, each dark-gray node is a topic. The big yellow nodes are just topics that I've written a lot about[^2].
+Here, each white node is a note. And, each dark-gray node is a topic. The big yellow nodes are just topics that I've written a lot about.[^2]
 
 ## The Zettelkasten rabbit-hole
 
-If the Zettelkasten system sounds interesting to you, I encourage you to try it out for yourself. However, I also encourage you to try to gauge how far you want to go down the rabbit-hole. This is because there's about a million different ways you can create and configure one.
+If the Zettelkasten system sounds interesting to you, I encourage you to try it out for yourself. But beware, setting up a Zettelkasten can become a serious rabbit-hole. This is because there's about a million different ways you can create and configure one.
 
 A Google search for "Zettelkasten" will show you a sea of different websites/creators/products offering their own definitions and implementation recommendations. Some people follow a technical specification of a Zettelkasten system religiously. Other people only implement the parts they like. Some people use physical cards and link them together by using metadata on the back of those cards. Other people use software like [The Archive](https://zettelkasten.de/the-archive/), [Obsidian](https://obsidian.md/), [Roam Research](https://roamresearch.com/), [Org-roam (for Emacs)](https://www.orgroam.com/), [vimwiki](https://github.com/vimwiki/vimwiki), etc.
 
@@ -55,10 +55,10 @@ For some people, choosing the "best" Zettelkasten approach for them can be fun. 
 
 But, I'm not one of those people. I gauged that I only wanted a simple and small Zettelkasten system so I only did simple and small research to set up my own system and get just enough of my needs met. Nothing more.
 
-If you want to get started, I encourage you to also gauge how deep you want to go before settling on a system and getting to writing. It can be easy to accidentally go too deep.
+If you want to get started, I encourage you to also gauge how far you want to go down the rabbit-hole before settling on a system and getting to writing. It can be easy to accidentally go too deep.
 
 I personally [used this video](https://www.youtube.com/watch?v=E6ySG7xYgjY) to get started.
 
-[^1]: I chose to write notes in Markdown files for two reasons. One, I wanted to avoid vendor lock-in where my notes were only usable in one product. If that product were to become deprecated, I would be forced to migrate off. And, that would suck. Especially because some products make it near impossible to export all of your work in a format that is equivalently useful in another platform. Markdown files on the other hand are natively software-agnostic. So, I could edit them in VSCode or Vim or Notepad++ or whatever. Two, I wanted to have version-controlled notes. And, to me it seemed like using git on my file-system would be the best way to to do this.
+[^1]: I chose to write notes in Markdown files for two reasons. One, I wanted to avoid vendor lock-in where my notes were only usable in one product. If that product were to become deprecated, I would be forced to migrate off. And, that would be annoying to say the least. Especially because some products make it near impossible to export all of your work in a format that is equivalently useful in another platform. Markdown files on the other hand are natively software-agnostic. So, I could edit them in VSCode or Vim or Notepad++ or whatever. Two, I wanted to have version-controlled notes. And, to me it seemed like using git on my file-system would be the best way to to do this.
 
-[^2]: Actually, these are [Maps of Content or MOCs](https://obsidian.rocks/maps-of-content-effortless-organization-for-notes/). Really, this is just a fancy word for a topic that has been written about so much, that it has its own note that serves as an index or "jumping off point" that has links to all the notes that it connects to.
+[^2]: Actually, technically the yellow nodes are [Maps of Content or MOCs](https://obsidian.rocks/maps-of-content-effortless-organization-for-notes/). Really, this is just a fancy word for a topic that has been written about so much, that it has its own note that serves as an index or "jumping off point" that has links to all the notes that it connects to.
