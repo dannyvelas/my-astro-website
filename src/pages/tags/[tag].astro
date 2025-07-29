@@ -14,11 +14,14 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
+const filteredPosts = posts.filter((post) =>
+  post.frontmatter.tags?.includes(tag)
+);
 
 const title = `Posts about ${tagToPrettyName(tag)}`;
 ---
 
 <BaseLayout {title}>
   <h1 class="text-4xl font-extrabold text-gray-900 mb-4">{title}</h1>
-  <PostList posts={posts} />
+  <PostList posts={filteredPosts} />
 </BaseLayout>
