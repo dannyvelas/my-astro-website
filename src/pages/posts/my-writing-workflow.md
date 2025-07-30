@@ -17,7 +17,7 @@ For many years, I struggled with a system that I liked. I originally wrote using
 
 So, I eventually transitioned to writing notes in Markdown files on my computer.[^1] This definitely felt like a big step up from my pen-and-paper notes. But, it still felt like something was missing.
 
-My Markdown notes were searchable, but I still had difficulty finding notes. Sometimes, I would spend a long time writing about a novel good idea, only to find that months ago, I had already written about the same exact idea. In these cases, I would have much preferred to find the original note so that I could expand on it, instead of essentially re-writing it.
+My Markdown notes were searchable, but I still had difficulty finding notes. Sometimes, I would spend a long time writing about an idea, only to find that months ago, I had already written about the same exact idea. In these cases, I would have much preferred to find the original note so that I could expand on it, instead of essentially re-writing it.
 
 Also, sometimes I would create two notes that were related. But, I had no system to indicate that both notes should be linked together.
 
@@ -29,7 +29,7 @@ After discussing with a friend, he suggested I try using a [Zettelkasten](https:
 
 I've been using this system now for a few years and I'm pretty happy with it. Now that each note is one concept in my graph, it is much easier for me to navigate my notes. It's also much easier for me to find out whether I'd previously written about something. In cases where a concept that I was ready to write about already exists in my graph, I simply pivot to expand on that concept in a new note and then link both notes together.
 
-Also, I don't have to worry about folders anymore. All of my notes are all located in the same directory. If I ever want to see the notes that deal with a certain topic, I can use software to show me all the notes that are linked to that topic. If a note touches on multiple topics, I can just create one link from that note to each topic that it deals with.
+Also, I don't have to worry about folders anymore. All of my notes are located in the same directory. If I ever want to see the notes that deal with a certain topic, I can use software to show me all the notes that are linked to that topic. If a note touches on multiple topics, I can just create one link from that note to each topic that it deals with.
 
 The software that I use to see my graph and the notes related to a certain topic is [Obsidian](https://obsidian.md/). In Obsidian, if you're writing in a markdown file and want to link some text to another markdown file, all you have to do is wrap the text in double brackets, and insert the path to the other markdown file:
 
