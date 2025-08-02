@@ -1,6 +1,6 @@
 ---
 title: 'Making a Game Boy game'
-date: '2025-07-30'
+date: '2025-08-02'
 publish: true
 layout: ../../layouts/BlogLayout.astro
 tags:
@@ -33,7 +33,7 @@ The downside is that this hardware interface is *very* low-level. While [memory-
 
 In fact, the hardware interface is so complex that there's sometimes disagreement among different Game Boy tutorials and emulators on how certain code will run on a Game Boy. [Some Game Boy emulators allow you to use blocks 4 and 5 for background tiles, others don't](https://gbadev.net/tonc/regbg.html#ssec-map-subtle). Apparently, [most Game Boy tutorials give straight-up incorrect information about how the affine transformation matrix works](https://gbadev.net/tonc/affine.html?#about-this-page). I've even seen contradicting behavior on my own Game Boy hardware as what is documented online.[^3]
 
-Seem bad? Well, these are merely the basics. If you want your sprites to be able to occasionally misshape a little bit (like when getting hit), you're going to have to program matrix transformations that alter your sprites' affine parameters. You could alternatively use [a library that already has affine transformation logic](https://github.com/devkitPro/libtonc). But, nothing is for free. You might find yourself debugging code that looks like this:
+Seem bad? Well, these are merely the basics. If you want your sprites to be able to occasionally misshape a little bit (like when getting hit), you're going to have to program matrix transformations that alter your sprites' affine parameters. You could alternatively use [a library that already has affine transformation logic](https://github.com/devkitPro/libtonc). But, nothing is for free. You might find yourself debugging code that looks like [this](https://github.com/devkitPro/libtonc/blob/ccc03fa321e56f51aed5e2ee1d6e3df3d1cbc803/src/tonc_obj_affine.c#L111):
 
 ```c
 void obj_rotscale_ex(OBJ_ATTR *obj, OBJ_AFFINE *oaff, const AFF_SRC_EX *asx)
