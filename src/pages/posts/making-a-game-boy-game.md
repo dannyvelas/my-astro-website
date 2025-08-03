@@ -81,7 +81,7 @@ These are the things that I'd like to add before I can call the game done:
 - A high score on the top-right that increments as the dinosaur progresses.
 - A "GAME OVER" screen that allows the player to re-start after getting hit.
 
-I will keep this website updated as I progress!
+I will keep this website updated as I progress! You can find [the source code on Github](https://github.com/dannyvelas/dino-game-gba).
 
 In the future I suspect that I will be able to iterate much faster because I now have a much better grasp on the Game Boy hardware interface. A future project will be to re-create [flappy bird](https://en.wikipedia.org/wiki/Flappy_Bird).
 
