@@ -17,7 +17,7 @@ I figured that I could spend the first week or so of my development making this 
 
 ha...ha...no. I was dead wrong. Game Boy development was a zillion times more involved and low-level than I thought it would be. Just creating this basic, 2D, black-and-white, pixel-art dinosaur game was surprisingly challenging.
 
-<aside class="prose border-l-4 border-slate-300 bg-slate-50 text-slate-600 italic rounded-md pl-4 py-2 my-4">
+<aside class="prose border-l-4 border-slate-300 bg-slate-50 text-slate-600 rounded-md pl-4 py-2 my-4">
   In this article, when I say Game Boy, I'm specifically referring to the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance">Game Boy Advance (GBA)</a> because this is the specific console that I am most familiar with. But, all of this information also applies to the other consoles from the GBA line — namely the <a href="https://en.wikipedia.org/wiki/Game_Boy_Advance_SP">Advance SP</a> and the <a href="https://en.wikipedia.org/wiki/Game_Boy_Micro">Micro</a>. Most of this information applies to the consoles from the original Game Boy line, as well as the Game Boy Color.
 </aside>
 
