@@ -27,7 +27,7 @@ The Game Boy is an embedded system: hardware that runs code under tight resource
 
 Fortunately, the Game Boy comes with two things that make development easier: an interface to talk directly to its hardware, and hardware logic to help you paint the screen, produce audio, detect input, and more.
 
-This **hardware interface** has some rather nifty tricks up its sleeve.  For example, if you naïvely tried to wipe the screen by setting every single pixel, the CPU is so slow [that this could take up to 10 frames to finish](https://gbadev.net/tonc/bitmaps.html?highlight=bitmap#complications-of-bitmap-modes). Luckily, the hardware interface lets you paint the screen using "tiles" — a far more efficient approach that dramatically reduces time and memory usage. The Game Boy hardware will even assemble your sprites for you. So, you don't have to write meticulous logic to paint them on the screen pixel-by-pixel or tile-by-tile.
+This **hardware interface** has some rather nifty tricks up its sleeve. For example, if you naïvely tried to wipe the screen by setting every single pixel, the CPU is so slow [that this could take up to 10 frames to finish](https://gbadev.net/tonc/bitmaps.html?highlight=bitmap#complications-of-bitmap-modes). Luckily, the hardware interface lets you paint the screen using "tiles" — a far more efficient approach that dramatically reduces time and memory usage. The Game Boy hardware will even assemble your sprites for you. So, you don't have to write meticulous logic to paint them on the screen pixel-by-pixel or tile-by-tile.
 
 Also, the hardware interface is **memory-mapped**, meaning that from the programmer's perspective, to set background settings, display something, or play a sound, all you have to do is set a value at the right memory address, which is pretty nice and simple.
 
@@ -81,7 +81,7 @@ These are the things that I'd like to add before I can call the game done:
 - A high score on the top-right that increments as the dinosaur progresses.
 - A "GAME OVER" screen that allows the player to re-start after getting hit.
 
-I will keep this website updated as I progress! You can find [the source code on Github](https://github.com/dannyvelas/dino-game-gba).
+I will keep this website updated as I progress! You can find [the source code on GitHub](https://github.com/dannyvelas/dino-game-gba).
 
 In the future I suspect that I will be able to iterate much faster because I now have a much better grasp on the Game Boy hardware interface. A future project will be to re-create [flappy bird](https://en.wikipedia.org/wiki/Flappy_Bird).
 
@@ -91,4 +91,4 @@ In the future I suspect that I will be able to iterate much faster because I now
 
 [^3]: It's true. I've been following [an amazing tutorial to develop on the Game Boy Advance](https://gbadev.net/tonc/intro.html). But, I ran into an issue that isn't documented there, or to the best of my knowledge anywhere online. All the LLMs I asked were stumped (or hallucinating). In my hardware, I noticed that whenever I tried to put a color at the first index of a palette bank `p` where `p > 0`, the pixels that referenced that index would never actually display that color. They would only display the color located at the very first index of the very first palette bank (the transparency color). In essence, this seems to suggest that tutorials are wrong when they say that you have 16 usable color-indexes in each palette bank. I think you only really have 15, since the first index of each bank is reserved for transparency.
 
-[^4]: Recent advances in Compiler technology have made it so that now you might be able to get away without touching assembly when developing for the original Game Boy or the Game Boy Color. For example, [SDCC](https://sdcc.sourceforge.net/) is a C compiler that specializes in targeting microprocessors, even strange ones like the `Sharp LR35902`, which is the one used in these consoles. But historically speaking, using assembly has been the norm.
+[^4]: Recent advances in compiler technology have made it so that now you might be able to get away without touching assembly when developing for the original Game Boy or the Game Boy Color. For example, [SDCC](https://sdcc.sourceforge.net/) is a C compiler that specializes in targeting microprocessors, even strange ones like the `Sharp LR35902`, which is the one used in these consoles. But historically speaking, using assembly has been the norm.
