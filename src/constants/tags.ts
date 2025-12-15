@@ -22,6 +22,7 @@ const _tagToPrettyName: Record<string, string> = {
   ocaml: "OCaml",
   haskell: "Haskell",
   go: "Go",
+  rust: "Rust",
   typescript: "TypeScript",
   parkspot: "ParkSpot",
   gameboy: "Game Boy"
