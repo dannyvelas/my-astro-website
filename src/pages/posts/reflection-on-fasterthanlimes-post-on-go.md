@@ -8,6 +8,7 @@ layout: ../../layouts/BlogLayout.astro
 tags:
   - programming-languages
   - go
+  - rust
 
 ---
 
