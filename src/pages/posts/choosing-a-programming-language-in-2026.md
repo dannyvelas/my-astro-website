@@ -1,5 +1,5 @@
 ---
-title: 'Choosing a programming language'
+title: 'Choosing a programming language in 2026'
 date: '2026-01-06'
 publish: true
 layout: ../../layouts/BlogLayout.astro
@@ -28,6 +28,7 @@ Some caveats:
   - Aiming for a general purpose language.
   - Specifically targeting a computer or server environment, not embedded, mobile, or front-end.
 - This flowchart ignores domain-specific cases where one language is the de-facto standard. Like for example, in competitive programming C++ is the standard. But, that's not mentioned here.
+- This flowchart obviously over-simplifies differences between languages. For example, there are many differences between Zig and Nim aside from the fact Zig allows you to have more low-level control. To name one difference, they have entirely different meta-programming approaches. I just tried to label the salient or most obvious difference.
 - If you're not optimizing to necessarily use the right tool for the job, and instead are optimizing for fun and learning, ignore this chart! Choosing a technology solely for fun/learning can be a valid use-case.
 
 ```mermaid
@@ -53,7 +54,7 @@ flowchart TD
   shipFastQuestion --> |Yes| JS/TS/Python 
   messyDomain --> |What does HKT stand for?| functionalQuestion{"Do you like functional programming?"}
   functionalQuestion --> |Not really...| expressivePowerOrPopularity{"Expressive power or Veteran status? Pick one."}
-  expressivePowerOrPopularity --> |Expressive Power| V
+  expressivePowerOrPopularity --> |Expressive Power| V["V (GC)"]
   expressivePowerOrPopularity --> |Veteran status| Go
   functionalQuestion --> |I do!| lispQuestion{How do you feel about Lisp?}
   lispQuestion --> |Eh| concurrencyVsProcessing{Great concurrency or raw processing speed, pick one}
