@@ -44,6 +44,7 @@ Umami is a lightweight open source analytics tool. Privacy-focused, no cookies b
 | Fly.io | Free tier includes 3 shared VMs + small Postgres. More CLI-driven. | Good. Config lives in `fly.toml` in your repo. Deploy with `fly deploy`. |
 | Render | Free web service tier exists but spins down after inactivity — will drop events during cold starts. Not recommended. | Moderate. Supports a `render.yaml` blueprint file, but less mature than Fly.io. |
 | VPS + Docker | Rent a VPS (Oracle Cloud always-free tier, or Hetzner at ~€4/mo), run Umami and Postgres as Docker containers via `docker-compose`. Most control, no platform lock-in. Umami ships an official `docker-compose.yml`. | Best. `docker-compose.yml` is fully declarative. Pair with Terraform/OpenTofu to provision the VPS itself. Entire setup lives in git. |
+| Homelab k3s cluster (starcommand) | Deploy Umami as a Kubernetes manifest (`services/umami.yml`) to the existing k3s cluster. No new infra needed — Traefik handles routing, Grafana is already running. Requires the homelab to be publicly reachable (port forwarding + DDNS). | Best. IaC is already fully solved by starcommand. Adding Umami is just a `kubectl apply`. |
 
 Covers: 1, 4, 5, 8, 10, 11, 12, 13, 14
 Doesn't cover: 2, 3, 6 (no heatmaps), 7, 9, 15
@@ -141,6 +142,10 @@ Regardless of which path you take, the client-side tracking is the same. Events 
 
 ### Recommendation
 
-**Start with self-hosted Umami (Option A)** — lowest effort path that keeps data on your own infrastructure. It won't give you heatmaps or scroll depth, but covers the core metrics well.
+**If you have your homelab (starcommand) publicly reachable:** deploy Umami there as a k8s manifest. Zero new infra, IaC already solved, $0 forever. Just add a `<script>` tag to `BaseLayout.astro`. Tradeoff: analytics go down when the homelab goes down.
 
-If you want full coverage (especially heatmaps and scroll depth), go with **Option B hand-rolled**, Path 1 (serverless) since that's closest to what this site already had. Add **Google Search Console** separately for search keyword data (item 15) — that requires Google verification regardless of which approach you use.
+**If you want something more reliable:** self-hosted Umami on Fly.io or VPS + Docker is the next best option. Covers the same metrics with better uptime guarantees.
+
+**If you want full coverage** (heatmaps, scroll depth, everything): go with Option B hand-rolled, Path 1 (serverless) — closest to what this site already had.
+
+Add **Google Search Console** separately for search keyword data (item 15) — that requires Google verification regardless of which approach you use.
