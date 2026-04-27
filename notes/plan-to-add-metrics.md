@@ -32,6 +32,7 @@ Constraints:
 ## Solutions
 
 ### Option A: Self-hosted Umami
+
 **Effort: medium | Cost: $0**
 
 Umami is a lightweight open source analytics tool. Privacy-focused, no cookies by default, GDPR-friendly. It's a separate deployment from the Astro site — you just add a `<script>` tag to `BaseLayout.astro` pointing at your Umami instance.
@@ -54,6 +55,7 @@ Tradeoff: No heatmaps. You manage the hosting infra.
 ---
 
 ### Option B: Hand-rolled
+
 **Effort: high | Cost: $0**
 
 Build your own event tracking pipeline. You own everything: the data, the schema, the dashboard. This site already had a partial implementation (a Netlify edge function posting page views to Supabase), so there's a head start.
