@@ -39,7 +39,7 @@ Here, I am linking to [[./path-to-other-note.md|another note]].
 
 This is what my graph looks like on Obsidian:
 
-![Obsidian graph](./images/obsidian-graph.png)
+![Obsidian graph](@images/obsidian-graph.png)
 
 Here, each white node is a note. And, each dark-gray node is a topic. The big yellow nodes are just topics that I've written a lot about.[^2]
 
